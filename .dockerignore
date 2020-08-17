@@ -1,0 +1,10 @@
+/.github/
+/bin/
+/infra/
+/ui/build/
+/ui/node_modules/
+.dockerignore
+.git
+.gitignore
+Dockerfile
+README.md
