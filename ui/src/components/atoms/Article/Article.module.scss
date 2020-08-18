@@ -1,0 +1,47 @@
+#article {
+  margin-top: 50px;
+
+  h3 {
+    font-size: 15px;
+  }
+
+  .card-body {
+    h3 {
+      font-weight: 300 !important;
+    }
+  }
+
+  .team-thumb {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    img {
+      transition: 0.5s 0.2s;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .team-hover {
+      &:hover {
+        opacity: 0.95;
+        transition-delay: 0.3s;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card-body h3 {
+    font-size: 10px !important;
+    margin: 0px;
+  }
+  #article {
+    margin-top: 10px;
+  }
+  .card-body {
+    padding: 5px !important;
+  }
+}

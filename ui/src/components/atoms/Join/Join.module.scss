@@ -1,0 +1,116 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+#join {
+  .container-join {
+    width: 100% !important;
+    background-color: #e5e5e5 !important;
+
+    .box {
+      width: 100%;
+      margin: 0 auto;
+      padding-top: 40px;
+      padding-bottom: 40px;
+
+      .join {
+        padding: 70px 0;
+        text-align: center;
+
+        .boxfit {
+          width: 17%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    font-weight: bold;
+  }
+
+  h1,
+  h2,
+  p {
+    text-align: center !important;
+    margin-bottom: 2px;
+    margin-top: 5px;
+  }
+
+  button {
+    margin: 0 auto;
+    background: rgb(146, 146, 236);
+    border-radius: 5px;
+    border: 0;
+    color: #f9f9f9;
+    font-size: inherit;
+    font-weight: normal;
+    padding: 10px 25px;
+    margin-top: 30px;
+    width: 100%;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(117, 117, 224);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1062px) {
+  #join {
+    .boxfit {
+      width: 30%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #join {
+    h1 {
+      font-size: 30px !important;
+    }
+
+    p {
+      font-size: 12px !important;
+    }
+  }
+}
+@media (max-width: 608px) {
+  #join {
+    h1 {
+      font-size: 25px !important;
+    }
+
+    p {
+      font-size: 10px !important;
+    }
+
+    .boxfit {
+      width: 40% !important;
+
+      a {
+        font-size: 11px !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+#title {
+  h1 {
+    font-weight: bolder;
+  }
+
+  h2 {
+    color: gray;
+    font-weight: bolder;
+    font-size: 23px;
+    margin-left: 3px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #title {
+    h1 {
+      font-size: 16px;
+    }
+
+    h2 {
+      font-size: 13px;
+    }
+  }
+}
+@media (max-width: 500px) {
+  #title {
+    h1,
+    h2 {
+      text-align: center !important;
+    }
+  }
+}
