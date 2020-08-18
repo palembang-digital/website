@@ -3,11 +3,11 @@ import Footer from "./components/atoms/Footer/Footer";
 import MemberCard from "./components/atoms/MemberCard/MemberCard";
 import Navbar from "./components/atoms/Navbar/Navbar";
 
-import s from "./assets/styles/team/index.module.scss";
 import TeamData from "./content/team.json";
+import s from "./assets/styles/team/index.module.scss";
 
 const Team = () => (
-  <div>
+  <>
     <Navbar />
     <div className={`${s["main-bg"]} ${s["p-8"]}`}>
       <div className={`${s["grid"]} ${s["grid-teams"]}`}>
@@ -24,7 +24,7 @@ const Team = () => (
       </div>
     </div>
     <Footer />
-  </div>
+  </>
 );
 
 export default Team;
