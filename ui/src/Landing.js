@@ -11,7 +11,7 @@ import Sponsor from "./components/atoms/Sponsor/Sponsor";
 import Visi from "./components/atoms/Visi/Visi";
 
 const Landing = () => (
-  <div>
+  <>
     <main style={{ backgroundColor: "#fafafa" }}>
       <Navbar />
       <Banner />
@@ -27,7 +27,7 @@ const Landing = () => (
       <Sponsor />
       <Footer />
     </main>
-  </div>
+  </>
 );
 
 export default Landing;
