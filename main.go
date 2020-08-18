@@ -9,12 +9,12 @@ import (
 )
 
 func main() {
-	log.Println("Starting application ...")
-
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
+
+	log.Printf("Starting application on port %s...", port)
 
 	fs := http.FileServer(pkger.Dir("/ui/build"))
 	http.Handle("/", fs)
