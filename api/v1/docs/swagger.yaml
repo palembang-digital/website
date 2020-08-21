@@ -1,0 +1,78 @@
+basePath: /api/v1
+definitions:
+  model.Event:
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+info:
+  contact:
+    email: support@palembangdigital.org
+    name: Palembang Digital
+    url: https://palembangdigital.org
+  description: API documentation for palembangdigital.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Palembang Digital API
+  version: 1.0.0
+paths:
+  /events:
+    get:
+      description: Get the list of events
+      operationId: list-events
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Event'
+            type: array
+      summary: List events
+      tags:
+      - events
+    post:
+      description: Create a new event
+      operationId: create-event
+      parameters:
+      - description: Create event
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/model.Event'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Event'
+      summary: Create a new event
+      tags:
+      - events
+  /events/{id}:
+    get:
+      description: Get an event by id
+      operationId: get-event
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Event'
+      summary: Get an event
+      tags:
+      - events
+swagger: "2.0"
