@@ -4,42 +4,49 @@ UI_PATH = ui
 all: init test build
 
 .PHONY: init
-init:
-	@echo "> Installing dependencies ..."
+init: init-ui init-server
+
+.PHONY: init-ui
+init-ui:
+	@echo "> Installing the UI dependencies ..."
+	@cd ${UI_PATH} && yarn
+
+.PHONY: init-server
+init-server:
+	@echo "> Installing the server dependencies ..."
 	@go mod tidy -v
 	@go get -v ./...
 	@go install github.com/swaggo/swag/cmd/swag
-	@cd ${UI_PATH} && yarn
 
 .PHONY: test
-test: ui-test server-test
+test: test-ui test-server
 
-.PHONY: ui-test
-ui-test:
+.PHONY: test-ui
+test-ui:
 	@echo "> Testing the UI source code ..."
 	@cd ${UI_PATH} && yarn test --coverage --watchAll=false
 
-.PHONY: server-test
-server-test:
+.PHONY: test-server
+test-server:
 	@echo "> Testing the server source code ..."
 	@go test -cover -coverprofile cover.out -race ./...
 	@go tool cover -func cover.out
 
 .PHONY: build
-build: ui-build server-build
+build: build-ui build-server
 
-.PHONY: ui-build
-ui-build:
+.PHONY: build-ui
+build-ui:
 	@echo "> Building the UI ..."
 	@cd ${UI_PATH} && rm -rf build && yarn build
 
-.PHONY: server-build
-server-build: gen-swagger
+.PHONY: build-server
+build-server: gen-swagger
 	@echo "> Building the server binary ..."
 	@rm -rf bin && go build -o bin/patal .
 
-.PHONY: ui-lint-fix
-ui-lint-fix:
+.PHONY: lint-ui
+lint-ui:
 	@echo "> Linting the UI source code ..."
 	@cd ${UI_PATH} && yarn lint
 

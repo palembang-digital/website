@@ -4,8 +4,8 @@ import "github.com/kelseyhightower/envconfig"
 
 // Config stores the application configurations.
 type Config struct {
-	Port        string `envconfig:"PORT" default:"8080`
-	UIBuildPath string `envconfig:"UI_BUILD_PATH" default:"ui/build`
+	Port        string `envconfig:"PORT" default:"8080"`
+	UIBuildPath string `envconfig:"UI_BUILD_PATH" default:"ui/build"`
 
 	Database DatabaseConfig
 }
