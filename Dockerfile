@@ -8,9 +8,7 @@ FROM golang:1.14-alpine as go-builder
 WORKDIR /src
 COPY . .
 COPY --from=node-builder /src/ui/build ./ui/build
-RUN go install github.com/markbates/pkger/cmd/pkger
-RUN pkger
-RUN go build -o bin/patal main.go
+RUN go build -o bin/patal .
 
 FROM alpine:3.12
 COPY --from=node-builder /src/ui/build ./ui/build

@@ -1,84 +1,106 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"net/http"
-	"os"
-	"path/filepath"
 	"time"
 
-	"github.com/gorilla/mux"
-	"github.com/markbates/pkger"
+	"github.com/asaskevich/govalidator"
+	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/jmoiron/sqlx"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+	_ "github.com/lib/pq"
+	echoSwagger "github.com/swaggo/echo-swagger"
+
+	"github.com/palembang-digital/website/api/v1"
+	_ "github.com/palembang-digital/website/api/v1/docs"
+	"github.com/palembang-digital/website/pkg/services"
 )
 
+// @title Palembang Digital API
+// @version 1.0.0
+// @description API documentation for palembangdigital.org
+
+// @contact.name Palembang Digital
+// @contact.url https://palembangdigital.org
+// @contact.email support@palembangdigital.org
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @BasePath /api/v1
+
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
+	log.Println("Reading the configuration from environment variables ...")
+	cfg, err := ReadConfig()
+	if err != nil {
+		panic(err)
 	}
 
-	log.Printf("Starting application on port %s...", port)
+	log.Println("Migrating the database ...")
+	m, err := migrate.New(cfg.Database.MigrationsPath, cfg.Database.URL)
+	if err != nil {
+		panic(err)
+	}
+	if err := m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
+		panic(err)
+	}
 
-	router := mux.NewRouter()
-	router.HandleFunc("/-/ping", ping)
+	log.Println("Initializing the database connection ...")
+	db, err := sqlx.Connect(cfg.Database.Driver, cfg.Database.URL)
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
 
-	ui := uiHandler{staticPath: "./ui/build", indexPath: "index.html"}
-	router.PathPrefix("/").Handler(ui)
+	log.Println("Initializing services ...")
+	eventsService := services.NewEventsService(db)
 
-	server := &http.Server{
-		Handler:      router,
-		Addr:         "0.0.0.0:" + port,
+	log.Println("Initializing the web server ...")
+	e := echo.New()
+	e.Pre(middleware.RemoveTrailingSlash())
+	e.Use(middleware.Recover())
+
+	e.Validator = &requestValidator{}
+
+	// Utility endpoints
+	e.GET("/docs/api/v1/index.html", echoSwagger.WrapHandler)
+	e.GET("/docs/api/v1/doc.json", echoSwagger.WrapHandler)
+	e.GET("/docs/api/v1/*", echoSwagger.WrapHandler)
+	e.GET("/ping", ping)
+
+	// Serve API
+	api := api.NewAPI(eventsService)
+	api.Register(e.Group("/api/v1", middleware.Logger()))
+
+	// Serve UI
+	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+		Root:  cfg.UIBuildPath,
+		HTML5: true,
+	}))
+
+	// Start server
+	s := &http.Server{
+		Addr:         "0.0.0.0:" + cfg.Port,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Fatal(server.ListenAndServe())
+	e.Logger.Fatal(e.StartServer(s))
+}
+
+type requestValidator struct{}
+
+func (rv *requestValidator) Validate(i interface{}) (err error) {
+	_, err = govalidator.ValidateStruct(i)
+	return
 }
 
 // ping write pong to http.ResponseWriter.
-func ping(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("pong"))
-}
-
-// uiHandler implements the http.Handler interface, so we can use it
-// to respond to HTTP requests. The path to the static directory and
-// path to the index file within that static directory are used to
-// serve the UI in the given static directory.
-type uiHandler struct {
-	indexPath  string
-	staticPath string
-}
-
-// ServeHTTP inspects the URL path to locate a file within the static dir
-// on the UI handler. If a file is found, it will be served. If not, the
-// file located at the index path on the SPA handler will be served. This
-// is suitable behavior for serving an SPA (single page application).
-func (h uiHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// get the absolute path to prevent directory traversal
-	path, err := filepath.Abs(r.URL.Path)
-	if err != nil {
-		// if we failed to get the absolute path respond with a 400 bad request
-		// and stop
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	// prepend the path with the path to the static directory
-	path = filepath.Join(h.staticPath, path)
-
-	// check whether a file exists at the given path
-	_, err = os.Stat(path)
-	if os.IsNotExist(err) {
-		// file does not exist, serve index.html
-		http.ServeFile(w, r, filepath.Join(h.staticPath, h.indexPath))
-		return
-	} else if err != nil {
-		// if we got an error (that wasn't that the file doesn't exist) stating the
-		// file, return a 500 internal server error and stop
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	// otherwise, use http.FileServer to serve the static dir
-	http.FileServer(pkger.Dir("/ui/build")).ServeHTTP(w, r)
+func ping(c echo.Context) error {
+	return c.String(http.StatusOK, "pong")
 }
