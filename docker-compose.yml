@@ -1,6 +1,16 @@
 version: "3"
 services:
-  db:
+  website:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://patal:patal@postgresql:5432/patal?sslmode=disable
+    links:
+      - postgresql
+
+  postgresql:
     image: bitnami/postgresql:12
     ports:
       - 5432:5432
