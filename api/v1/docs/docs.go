@@ -49,7 +49,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/model.Event"
+                                "$ref": "#/definitions/models.Event"
                             }
                         }
                     }
@@ -72,7 +72,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.Event"
+                            "$ref": "#/definitions/models.Event"
                         }
                     }
                 ],
@@ -80,7 +80,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Event"
+                            "$ref": "#/definitions/models.Event"
                         }
                     }
                 }
@@ -110,7 +110,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/model.Event"
+                            "$ref": "#/definitions/models.Event"
                         }
                     }
                 }
@@ -118,14 +118,25 @@ var doc = `{
         }
     },
     "definitions": {
-        "model.Event": {
+        "models.Event": {
             "type": "object",
             "properties": {
+                "created_at": {
+                    "type": "string",
+                    "example": "2020-04-21T00:00:00Z"
+                },
                 "id": {
                     "type": "integer"
                 },
+                "image_url": {
+                    "type": "string"
+                },
                 "title": {
                     "type": "string"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2020-04-21T00:00:00Z"
                 }
             }
         }

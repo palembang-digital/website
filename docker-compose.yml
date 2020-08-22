@@ -1,0 +1,10 @@
+version: "3"
+services:
+  db:
+    image: bitnami/postgresql:12
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_DATABASE=patal
+      - POSTGRESQL_USERNAME=patal
+      - POSTGRESQL_PASSWORD=patal

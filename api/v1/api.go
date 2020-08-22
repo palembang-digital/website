@@ -1,14 +1,22 @@
 package api
 
-import "github.com/labstack/echo/v4"
+import (
+	"github.com/labstack/echo/v4"
+
+	"github.com/palembang-digital/website/pkg/services"
+)
 
 // API can register a set of endpoints in a router and handle
 // them using the provided storage.
-type API struct{}
+type API struct {
+	eventsService services.EventsService
+}
 
 // NewAPI returns an initialized API type.
-func NewAPI() *API {
-	return &API{}
+func NewAPI(eventsService services.EventsService) *API {
+	return &API{
+		eventsService: eventsService,
+	}
 }
 
 // Register the API's endpoints in the given router.

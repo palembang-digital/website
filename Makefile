@@ -22,7 +22,8 @@ ui-test:
 .PHONY: server-test
 server-test:
 	@echo "> Testing the server source code ..."
-	@go test -v ./...
+	@go test -cover -coverprofile cover.out -race ./...
+	@go tool cover -func cover.out
 
 .PHONY: build
 build: ui-build server-build
@@ -35,7 +36,7 @@ ui-build:
 .PHONY: server-build
 server-build: gen-swagger
 	@echo "> Building the server binary ..."
-	@rm -rf bin && go build -o bin/patal main.go
+	@rm -rf bin && go build -o bin/patal .
 
 .PHONY: ui-lint-fix
 ui-lint-fix:

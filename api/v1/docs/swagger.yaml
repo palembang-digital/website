@@ -1,10 +1,18 @@
 basePath: /api/v1
 definitions:
-  model.Event:
+  models.Event:
     properties:
+      created_at:
+        example: "2020-04-21T00:00:00Z"
+        type: string
       id:
         type: integer
+      image_url:
+        type: string
       title:
+        type: string
+      updated_at:
+        example: "2020-04-21T00:00:00Z"
         type: string
     type: object
 info:
@@ -30,7 +38,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/model.Event'
+              $ref: '#/definitions/models.Event'
             type: array
       summary: List events
       tags:
@@ -44,14 +52,14 @@ paths:
         name: event
         required: true
         schema:
-          $ref: '#/definitions/model.Event'
+          $ref: '#/definitions/models.Event'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Event'
+            $ref: '#/definitions/models.Event'
       summary: Create a new event
       tags:
       - events
@@ -71,7 +79,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Event'
+            $ref: '#/definitions/models.Event'
       summary: Get an event
       tags:
       - events
