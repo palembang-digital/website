@@ -58,7 +58,7 @@ func (api *API) getEvent(c echo.Context) error {
 // @ID create-event
 // @Produce json
 // @Param event body models.Event true "Create event"
-// @Success 200 {object} models.Event
+// @Success 201 {object} models.Event
 // @Router /events [post]
 func (api *API) createEvent(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -69,7 +69,7 @@ func (api *API) createEvent(c echo.Context) error {
 	}
 
 	if err := c.Validate(event); err != nil {
-		return err
+		return c.JSON(http.StatusBadRequest, err)
 	}
 
 	newEvent, err := api.eventsService.CreateEvent(ctx, *event)
@@ -77,5 +77,27 @@ func (api *API) createEvent(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, newEvent)
+	return c.JSON(http.StatusCreated, newEvent)
+}
+
+// Delete an event
+// @Summary Delete an event
+// @Description Delete an event by id
+// @Tags events
+// @ID delete-event
+// @Produce plain
+// @Param id path int true "Event ID"
+// @Success 204 {string} string ""
+// @Router /events/{id} [delete]
+func (api *API) deleteEvent(c echo.Context) error {
+	ctx := c.Request().Context()
+
+	idString := c.Param("id")
+	id, _ := strconv.ParseInt(idString, 10, 64)
+
+	if err := api.eventsService.DeleteEvent(ctx, id); err != nil {
+		return err
+	}
+
+	return c.String(http.StatusNoContent, "")
 }

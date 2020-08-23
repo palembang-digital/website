@@ -74,7 +74,7 @@ func main() {
 	e.GET("/ping", ping)
 
 	// Serve API
-	api := api.NewAPI(eventsService)
+	api := api.NewAPI(eventsService, cfg.AdminUsername, cfg.AdminPassword)
 	api.Register(e.Group("/api/v1", middleware.Logger()))
 
 	// Serve UI

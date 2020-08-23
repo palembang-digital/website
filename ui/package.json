@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
@@ -11,8 +12,12 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "ahooks": "^2.5.0",
+    "antd": "^4.5.4",
+    "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "lazysizes": "^5.2.2",
+    "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -33,6 +38,7 @@
     "eject": "react-scripts eject",
     "lint": "lint-staged"
   },
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -9,6 +9,8 @@ definitions:
         type: integer
       image_url:
         type: string
+      registration_url:
+        type: string
       title:
         type: string
       updated_at:
@@ -56,14 +58,33 @@ paths:
       produces:
       - application/json
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           schema:
             $ref: '#/definitions/models.Event'
       summary: Create a new event
       tags:
       - events
   /events/{id}:
+    delete:
+      description: Delete an event by id
+      operationId: delete-event
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+      summary: Delete an event
+      tags:
+      - events
     get:
       description: Get an event by id
       operationId: get-event

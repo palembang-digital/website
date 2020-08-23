@@ -7,6 +7,9 @@ type Config struct {
 	Port        string `envconfig:"PORT" default:"8080"`
 	UIBuildPath string `envconfig:"UI_BUILD_PATH" default:"ui/build"`
 
+	AdminUsername string `envconfig:"ADMIN_USERNAME" default:"admin"`
+	AdminPassword string `envconfig:"ADMIN_PASSWORD" default:"admin"`
+
 	Database DatabaseConfig
 }
 

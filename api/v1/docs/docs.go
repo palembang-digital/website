@@ -77,8 +77,8 @@ var doc = `{
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
+                    "201": {
+                        "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/models.Event"
                         }
@@ -114,6 +114,34 @@ var doc = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "Delete an event by id",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "events"
+                ],
+                "summary": "Delete an event",
+                "operationId": "delete-event",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Event ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
             }
         }
     },
@@ -129,6 +157,9 @@ var doc = `{
                     "type": "integer"
                 },
                 "image_url": {
+                    "type": "string"
+                },
+                "registration_url": {
                     "type": "string"
                 },
                 "title": {
