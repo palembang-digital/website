@@ -29,7 +29,7 @@ test-ui:
 .PHONY: test-server
 test-server:
 	@echo "> Testing the server source code ..."
-	@go test -cover -coverprofile cover.out -race ./...
+	@go test -cover -covermode atomic -coverprofile cover.out -race ./...
 	@go tool cover -func cover.out
 
 .PHONY: build
