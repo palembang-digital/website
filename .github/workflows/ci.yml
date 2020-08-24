@@ -22,6 +22,13 @@ jobs:
         go-version: '1.14'
     - name: Test server
       run: make test-server
+    - name: Publish test coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./cover.out
+        flags: server
+        name: server-coverage
 
   build-push-docker-image:
     runs-on: ubuntu-latest
