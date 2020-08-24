@@ -1,5 +1,7 @@
 # PalembangDigital.org
 
+[![codecov](https://codecov.io/gh/palembang-digital/website/branch/master/graph/badge.svg)](https://codecov.io/gh/palembang-digital/website)
+
 This repository contains source code for Palembang Digital's website.
 
 ## Getting Started
