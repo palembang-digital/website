@@ -8,6 +8,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '14'
+    - name: Install UI dependencies
+      run: make init-ui
     - name: Test UI
       run: make test-ui
 
@@ -27,7 +29,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set tag
       id: tags
-      run: echo ::set-output name=tag::${GITHUB_REF:10}
+      run: echo ::set-output name=tag::${GITHUB_SHA}
     - name: Login to hub.docker.com
       uses: azure/docker-login@v1
       with:
