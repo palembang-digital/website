@@ -12,6 +12,13 @@ jobs:
       run: make init-ui
     - name: Test UI
       run: make test-ui
+    - name: Publish UI's test coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ./ui/coverage
+        flags: ui
+        name: ui-coverage
 
   test-server:
     runs-on: ubuntu-latest
@@ -22,7 +29,7 @@ jobs:
         go-version: '1.14'
     - name: Test server
       run: make test-server
-    - name: Publish test coverage
+    - name: Publish server's test coverage
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
