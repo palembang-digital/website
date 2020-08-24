@@ -7,7 +7,7 @@ jobs:
   deploy-app:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: Login to Heroku Container Registry
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
