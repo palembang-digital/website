@@ -1,10 +1,10 @@
 # Working with the React UI
 
-This file explains how to work with the React-based PalembangDigital UI.
+This file explains how to work with the React-based Palembang Digital UI.
 
 ## Introduction
 
-The [React-based](https://reactjs.org/) PalembangDigital UI was bootstrapped using [Create React App](https://github.com/facebook/create-react-app), a popular toolkit for generating React application setups. You can find general information about Create React App on [their documentation site](https://create-react-app.dev/).
+The [React-based](https://reactjs.org/) Palembang Digital UI was bootstrapped using [Create React App](https://github.com/facebook/create-react-app), a popular toolkit for generating React application setups. You can find general information about Create React App on [their documentation site](https://create-react-app.dev/).
 
 ## Development environment
 
@@ -23,15 +23,15 @@ Yarn consults the `package.json` and `yarn.lock` files for dependencies to insta
 
 ## Running a local development server
 
-You can start a development server for the React UI outside of a running PalembangDigital server by running:
+You can start a development server for the React UI outside of a running Palembang Digital server by running:
 
     yarn start
 
 This will open a browser window with the React app running on http://localhost:3000/. The page will reload if you make edits to the source code. You will also see any lint errors in the console.
 
-Due to a `"proxy": "http://localhost:8080"` setting in the `package.json` file, any API requests from the React UI are proxied to `localhost` on port `8080` by the development server. This allows you to run a normal PalembangDigital server to handle API requests, while iterating separately on the UI.
+Due to a `"proxy": "http://localhost:8080"` setting in the `package.json` file, any API requests from the React UI are proxied to `localhost` on port `8080` by the development server. This allows you to run a normal Palembang Digital server to handle API requests, while iterating separately on the UI.
 
-    [browser] ----> [localhost:3000 (dev server)] --(proxy API requests)--> [localhost:8080 (PalembangDigital)]
+    [browser] ----> [localhost:3000 (dev server)] --(proxy API requests)--> [localhost:8080 (Palembang Digital)]
 
 ## Running tests
 
@@ -55,7 +55,7 @@ We use [lint-staged](https://github.com/okonet/lint-staged) for the linter. To d
 
     yarn lint
 
-This is also available via the `ui-lint-fix` target in the main PalembangDigital `Makefile`.
+This is also available via the `ui-lint-fix` target in the main Palembang Digital `Makefile`.
 
 ## Building the app for production
 
@@ -63,12 +63,12 @@ To build a production-optimized version of the React app to a `build` subdirecto
 
     yarn build
 
-**NOTE:** You will likely not need to do this directly. Instead, this is taken care of by the `build` target in the main PalembangDigital `Makefile` when building the full binary.
+**NOTE:** You will likely not need to do this directly. Instead, this is taken care of by the `build` target in the main Palembang Digital `Makefile` when building the full binary.
 
-## Integration into PalembangDigital
+## Integration into Palembang Digital
 
-To build a PalembangDigital binary that includes a compiled-in version of the production build of the React app, change to the root of the repository and run:
+To build a Palembang Digital binary that includes a compiled-in version of the production build of the React app, change to the root of the repository and run:
 
     make build
 
-This installs npm dependencies via Yarn, builds a production build of the React app, and then finally compiles in all web assets into the PalembangDigital binary.
+This installs npm dependencies via Yarn, builds a production build of the React app, and then finally compiles in all web assets into the Palembang Digital binary.

@@ -58,7 +58,17 @@ class Footer extends React.Component {
               </Col>
             </Row>
             <hr></hr>
-            <p>Palembang Digital © 2020</p>
+            <Row>
+              <Col lg="6" className={s["alamat"]}>
+                <p>
+                  Graha Edukasi, Jl. MP. Mangkunegara No.5, Bukit sangkal, Kec.
+                  Kalidoni, Kota Palembang, Sumatera Selatan, 30114
+                </p>
+              </Col>
+              <Col lg="6" className={s["copyright"]}>
+                <p>Palembang Digital &copy; {new Date().getFullYear()}</p>
+              </Col>
+            </Row>
           </Container>
         </div>
       </div>

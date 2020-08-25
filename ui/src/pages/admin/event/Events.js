@@ -1,6 +1,6 @@
 import React from "react";
 import { navigate } from "@reach/router";
-import useRequest from "@ahooksjs/use-request";
+import { useRequest } from "ahooks";
 import axios from "axios";
 import { Avatar, Button, Divider, Modal, Space, Table } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
