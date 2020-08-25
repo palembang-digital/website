@@ -21,10 +21,12 @@
       background-color: #e5e5e5;
       width: 100%;
 
-      p {
-        text-align: center;
+      .alamat {
+        text-align: left;
       }
-
+      .copyright {
+        text-align: right;
+      }
       hr {
         margin-top: 40px;
         padding-bottom: 20px;
@@ -65,7 +67,6 @@
   #footer {
     .kontak {
       width: 100%;
-
       .footer {
         .cp {
           a {
@@ -96,5 +97,17 @@
         font-size: 11px;
       }
     }
+  }
+}
+
+@media (max-width: 990px) {
+  .kontak p {
+    font-size: 12px;
+  }
+  p {
+    text-align: center;
+  }
+  .copyright p {
+    text-align: center;
   }
 }

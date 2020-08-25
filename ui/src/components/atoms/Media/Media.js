@@ -15,6 +15,7 @@ function MediaList() {
     "https://i.ibb.co/Rb7QG24/KAGANGA.pngswNPj",
     "https://i.ibb.co/jr7KJMj/INFOSEMPURNA.png",
     "https://i.ibb.co/KXk4NsJ/SUARASUMSEL.png",
+    "https://i.ibb.co/19VkYyp/Sonora-2017.png",
   ];
 
   return (
