@@ -1,7 +1,6 @@
 package api
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -70,7 +69,6 @@ func (api *API) createEvent(c echo.Context) error {
 	}
 
 	if err := c.Validate(event); err != nil {
-		log.Println(err)
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

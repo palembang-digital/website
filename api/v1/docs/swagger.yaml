@@ -11,6 +11,12 @@ definitions:
         type: string
       registration_url:
         type: string
+      scheduled_end:
+        example: "2020-04-21T00:00:00Z"
+        type: string
+      scheduled_start:
+        example: "2020-04-21T00:00:00Z"
+        type: string
       title:
         type: string
       updated_at:

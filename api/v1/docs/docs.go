@@ -162,6 +162,14 @@ var doc = `{
                 "registration_url": {
                     "type": "string"
                 },
+                "scheduled_end": {
+                    "type": "string",
+                    "example": "2020-04-21T00:00:00Z"
+                },
+                "scheduled_start": {
+                    "type": "string",
+                    "example": "2020-04-21T00:00:00Z"
+                },
                 "title": {
                     "type": "string"
                 },

@@ -3,32 +3,32 @@ import { navigate } from "@reach/router";
 import { useRequest } from "ahooks";
 import { Helmet } from "react-helmet";
 import { CloudinaryContext } from "cloudinary-react";
-import { Avatar, Button, Form, Input, Modal, Space, Typography } from "antd";
+import {
+  Avatar,
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  Modal,
+  Space,
+  Typography,
+} from "antd";
 
 import { openUploadWidget } from "../../../utils/CloudinaryService";
 
+const { RangePicker } = DatePicker;
 const { Title } = Typography;
 
 const CreateEvent = () => {
   const [event, setEvent] = useState({});
 
-  const beginUpload = (tag) => {
-    const uploadOptions = {
-      cloudName: "patal",
-      tags: [tag],
-      uploadPreset: "patal_unsigned_preset",
-      maxFiles: 1,
-    };
+  const eventValid = (event) => {
+    return event.title && event.image_url && event.registration_url;
+  };
 
-    openUploadWidget(uploadOptions, (error, result) => {
-      if (!error) {
-        if (result.event === "success") {
-          setEvent({ ...event, image_url: result.info.secure_url });
-        }
-      } else {
-        alert(error);
-      }
-    });
+  const onScheduledTimeChanged = (value) => {
+    value[0] && setEvent({ ...event, scheduled_start: value[0].format() });
+    value[1] && setEvent({ ...event, scheduled_end: value[1].format() });
   };
 
   const { run: createEvent } = useRequest(
@@ -49,8 +49,23 @@ const CreateEvent = () => {
     }
   );
 
-  const eventValid = (event) => {
-    return event.title && event.image_url;
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "patal",
+      tags: [tag],
+      uploadPreset: "patal_unsigned_preset",
+      maxFiles: 1,
+    };
+
+    openUploadWidget(uploadOptions, (error, result) => {
+      if (!error) {
+        if (result.event === "success") {
+          setEvent({ ...event, image_url: result.info.secure_url });
+        }
+      } else {
+        alert(error);
+      }
+    });
   };
 
   return (
@@ -90,6 +105,20 @@ const CreateEvent = () => {
             onChange={(e) =>
               setEvent({ ...event, registration_url: e.target.value })
             }
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Scheduled Time"
+          name="scheduled_time"
+          rules={[
+            { required: true, message: "Please input the scheduled time!" },
+          ]}
+        >
+          <RangePicker
+            showTime={{ format: "HH:mm" }}
+            format="YYYY-MM-DD HH:mm"
+            onOk={onScheduledTimeChanged}
           />
         </Form.Item>
 

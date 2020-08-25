@@ -22,7 +22,9 @@ const Events = () => {
             {events &&
               events
                 .sort((a, b) =>
-                  new Date(a.created_at) - new Date(b.created_at) ? -1 : 1
+                  new Date(a.scheduled_start) - new Date(b.scheduled_start)
+                    ? -1
+                    : 1
                 )
                 .slice(0, 3)
                 .map((event, index) => (
