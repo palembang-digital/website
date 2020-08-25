@@ -1,12 +1,35 @@
 import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import { useRequest } from "ahooks";
-import { Button, Form, Input, Modal, Typography } from "antd";
+import { Helmet } from "react-helmet";
+import { CloudinaryContext } from "cloudinary-react";
+import { Avatar, Button, Form, Input, Modal, Space, Typography } from "antd";
+
+import { openUploadWidget } from "../../../utils/CloudinaryService";
 
 const { Title } = Typography;
 
 const CreateEvent = () => {
   const [event, setEvent] = useState({});
+
+  const beginUpload = (tag) => {
+    const uploadOptions = {
+      cloudName: "patal",
+      tags: [tag],
+      uploadPreset: "patal_unsigned_preset",
+      maxFiles: 1,
+    };
+
+    openUploadWidget(uploadOptions, (error, result) => {
+      if (!error) {
+        if (result.event === "success") {
+          setEvent({ ...event, image_url: result.info.secure_url });
+        }
+      } else {
+        alert(error);
+      }
+    });
+  };
 
   const { run: createEvent } = useRequest(
     (event) => ({
@@ -31,55 +54,64 @@ const CreateEvent = () => {
   };
 
   return (
-    <Form name="basic" labelCol={{ span: 4 }} wrapperCol={{ span: 8 }}>
-      <Form.Item>
-        <Title level={3}>Create event</Title>
-      </Form.Item>
+    <>
+      <Helmet>
+        <script
+          src="https://widget.cloudinary.com/v2.0/global/all.js"
+          type="text/javascript"
+        ></script>
+      </Helmet>
 
-      <Form.Item
-        label="Title"
-        name="title"
-        rules={[{ required: true, message: "Please input the title!" }]}
-      >
-        <Input
-          onChange={(e) => setEvent({ ...event, title: e.target.value })}
-        />
-      </Form.Item>
+      <CloudinaryContext cloudName="patal"></CloudinaryContext>
 
-      <Form.Item
-        label="Image URL"
-        name="image_url"
-        rules={[{ required: true, message: "Please input the image URL!" }]}
-      >
-        <Input
-          onChange={(e) => setEvent({ ...event, image_url: e.target.value })}
-        />
-      </Form.Item>
+      <Form name="basic" labelCol={{ span: 4 }} wrapperCol={{ span: 8 }}>
+        <Form.Item>
+          <Title level={3}>Create event</Title>
+        </Form.Item>
 
-      <Form.Item
-        label="Registration URL"
-        name="registration_url"
-        rules={[
-          { required: true, message: "Please input the registration URL!" },
-        ]}
-      >
-        <Input
-          onChange={(e) =>
-            setEvent({ ...event, registration_url: e.target.value })
-          }
-        />
-      </Form.Item>
-
-      <Form.Item wrapperCol={{ offset: 4 }}>
-        <Button
-          type="primary"
-          htmlType="submit"
-          onClick={() => eventValid(event) && createEvent(event)}
+        <Form.Item
+          label="Title"
+          name="title"
+          rules={[{ required: true, message: "Please input the title!" }]}
         >
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+          <Input
+            onChange={(e) => setEvent({ ...event, title: e.target.value })}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Registration URL"
+          name="registration_url"
+          rules={[
+            { required: true, message: "Please input the registration URL!" },
+          ]}
+        >
+          <Input
+            onChange={(e) =>
+              setEvent({ ...event, registration_url: e.target.value })
+            }
+          />
+        </Form.Item>
+
+        <Form.Item label="Image" name="image">
+          <Space size="middle">
+            <Avatar shape="square" size={128} src={event.image_url} />
+
+            <Button onClick={() => beginUpload()}>Upload Image</Button>
+          </Space>
+        </Form.Item>
+
+        <Form.Item wrapperCol={{ offset: 4 }}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={() => eventValid(event) && createEvent(event)}
+          >
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </>
   );
 };
 
