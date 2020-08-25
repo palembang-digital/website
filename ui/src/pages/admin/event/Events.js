@@ -68,11 +68,26 @@ const Events = () => {
       ),
     },
     {
+      title: "Scheduled Time",
+      dataIndex: "id",
+      defaultSortOrder: "descend",
+      sorter: (a, b) =>
+        new Date(a.scheduled_start) - new Date(b.scheduled_start),
+      render: (text, record) => (
+        <ul>
+          <li>
+            Start: {moment(record.scheduled_start).format("YYYY-MM-DD HH:mm")}
+          </li>
+          <li>
+            End: {moment(record.scheduled_end).format("YYYY-MM-DD HH:mm")}
+          </li>
+        </ul>
+      ),
+    },
+    {
       title: "Created At",
       dataIndex: "created_at",
       render: (text) => text && moment(text, "YYYY-MM-DDTHH:mm.SSZ").fromNow(),
-      defaultSortOrder: "descend",
-      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
     },
     {
       title: "Updated At",

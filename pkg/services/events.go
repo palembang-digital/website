@@ -33,6 +33,8 @@ func (s *eventsService) ListEvents(ctx context.Context) ([]models.Event, error) 
 			, title
 			, image_url
 			, registration_url
+			, scheduled_start
+			, scheduled_end
 			, created_at
 			, updated_at
 		FROM events`
@@ -52,6 +54,8 @@ func (s *eventsService) GetEvent(ctx context.Context, id int64) (models.Event, e
 			, title
 			, image_url
 			, registration_url
+			, scheduled_start
+			, scheduled_end
 			, created_at
 			, updated_at
 		FROM events
@@ -66,10 +70,10 @@ func (s *eventsService) GetEvent(ctx context.Context, id int64) (models.Event, e
 }
 
 func (s *eventsService) CreateEvent(ctx context.Context, event models.Event) (models.Event, error) {
-	query := "INSERT INTO events (title, image_url, registration_url) VALUES ($1, $2, $3) RETURNING id"
+	query := "INSERT INTO events (title, image_url, registration_url, scheduled_start, scheduled_end) VALUES ($1, $2, $3, $4, $5) RETURNING id"
 
 	var id int64
-	if err := s.db.QueryRowxContext(ctx, query, event.Title, event.ImageURL, event.RegistrationURL).Scan(&id); err != nil {
+	if err := s.db.QueryRowxContext(ctx, query, event.Title, event.ImageURL, event.RegistrationURL, event.ScheduledStart, event.ScheduledEnd).Scan(&id); err != nil {
 		return models.Event{}, fmt.Errorf("insert new event: %s", err)
 	}
 
