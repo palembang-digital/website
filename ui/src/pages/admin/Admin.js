@@ -6,6 +6,8 @@ import CreateEvent from "./event/CreateEvent";
 import "antd/dist/antd.css";
 // import { Layout, Menu, Breadcrumb } from "antd";
 const Layout = loadable(() => import("antd/es/layout"));
+const Menu = loadable(() => import("antd/es/menu"));
+const Breadcrumb = loadable(() => import("antd/es/breadcrumb"));
 
 // const { Header, Content, Footer } = Layout;
 const Header = loadable(() => import("antd/es/layout").then((c) => c.Header));

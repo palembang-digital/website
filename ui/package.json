@@ -41,8 +41,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "lint-staged",
-    "deploy": "react-scripts build && serve -s build",
-    "deploy:compressed": "react-scripts build && terser --compress --mangle -- build/static/js/*.js && serve -s build"
+    "build-start": "react-scripts build && serve -s build",
+    "build-start:compressed": "react-scripts build && terser --compress --mangle -- build/static/js/*.js && serve -s build"
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {
