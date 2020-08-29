@@ -12,7 +12,7 @@ output "palembang_digital_app_url" {
 }
 
 resource "heroku_addon" "palembang_digital_db" {
-  app  = "${heroku_app.palembang_digital_app.name}"
+  app  = heroku_app.palembang_digital_app.name
   plan = "heroku-postgresql:hobby-dev"
 }
 
@@ -29,7 +29,16 @@ output "palembang_digital_staging_app_url" {
   value = "https://${heroku_app.palembang_digital_staging_app.name}.herokuapp.com"
 }
 
+resource "heroku_domain" "palembang_digital_staging_domain" {
+  app      = heroku_app.palembang_digital_staging_app.name
+  hostname = "staging.palembangdigital.org"
+}
+
+output "palembang_digital_staging_cname" {
+  value = heroku_domain.palembang_digital_staging_domain.cname
+}
+
 resource "heroku_addon" "palembang_digital_staging_db" {
-  app  = "${heroku_app.palembang_digital_staging_app.name}"
+  app  = heroku_app.palembang_digital_staging_app.name
   plan = "heroku-postgresql:hobby-dev"
 }
