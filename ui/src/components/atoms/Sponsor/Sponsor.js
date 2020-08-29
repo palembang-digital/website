@@ -1,30 +1,31 @@
 import React from "react";
 import "lazysizes";
 
-import agt from "../../../assets/images/sponsors/AGT.png";
-import myo from "../../../assets/images/sponsors/myo.png";
-import sh from "../../../assets/images/sponsors/sh.png";
 import s from "./Sponsor.module.scss";
 
 function Sponsor() {
   const names = [
     {
-      url: sh,
+      url:
+        "https://res.cloudinary.com/patal/image/upload/v1598716749/patal/sponsors/sriwijaya_host.png",
       link: "https://sriwijayahost.id",
     },
     {
-      url: myo,
+      url:
+        "https://res.cloudinary.com/patal/image/upload/v1598716749/patal/sponsors/my_office.png",
       link: "https://my-office.co.id",
     },
     {
-      url: agt,
+      url:
+        "https://res.cloudinary.com/patal/image/upload/v1598716749/patal/sponsors/andalas_global_teknologi.png",
       link: "https://agt.co.id/",
     },
   ];
+
   return (
     <div className={s["sponsor-container"]}>
-      {names.map((name) => (
-        <div className={`${s["sponsor"]} `}>
+      {names.map((name, i) => (
+        <div key={i} className={`${s["sponsor"]} `}>
           <a href={name.link} target="_blank" rel="noopener noreferrer">
             <img
               data-src={name.url}

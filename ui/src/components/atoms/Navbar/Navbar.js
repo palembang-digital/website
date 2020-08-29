@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
-import { Link } from "react-scroll";
+import loadable from "@loadable/component";
 import { Link as RouterLink } from "@reach/router";
+import { Link } from "react-scroll";
 
 import s from "./Navbar.module.scss";
-import logo from "../../../assets/logo.png";
+
+const Collapse = loadable(() => import("reactstrap/es/Collapse"));
+const Navbar = loadable(() => import("reactstrap/es/Navbar"));
+const NavbarToggler = loadable(() => import("reactstrap/es/NavbarToggler"));
+const Nav = loadable(() => import("reactstrap/es/Nav"));
+const NavItem = loadable(() => import("reactstrap/es/NavItem"));
 
 const NavbarDefault = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +27,11 @@ const NavbarDefault = () => {
     <div id={s["topNav"]}>
       <Navbar color="light" className={s["topNav"]} light expand="md">
         <RouterLink to="/">
-          <img alt="Palembang Digital" src={logo} width="50px" />
+          <img
+            alt="Palembang Digital"
+            src={`https://res.cloudinary.com/dmtvswpik/image/upload/c_scale,h_50/v1598693277/patal-assets/logo_iapkkg.png`}
+            width="50px"
+          />
         </RouterLink>
 
         <NavbarToggler onClick={toggle} />

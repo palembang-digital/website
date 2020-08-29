@@ -1,14 +1,18 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import loadable from "@loadable/component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import {
   faInstagram,
   faWhatsapp,
   faYoutubeSquare,
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelopeSquare } from "@fortawesome/free-solid-svg-icons";
+
 import s from "./Footer.module.scss";
+
+const Container = loadable(() => import("reactstrap/es/Container"));
+const Row = loadable(() => import("reactstrap/es/Row"));
+const Col = loadable(() => import("reactstrap/es/Col"));
 
 class Footer extends React.Component {
   render() {

@@ -1,10 +1,14 @@
 import React from "react";
-import Footer from "./components/atoms/Footer/Footer";
-import MemberCard from "./components/atoms/MemberCard/MemberCard";
-import Navbar from "./components/atoms/Navbar/Navbar";
+import loadable from "@loadable/component";
 
 import TeamData from "./content/team.json";
 import s from "./assets/styles/team/index.module.scss";
+
+const Footer = loadable(() => import("./components/atoms/Footer/Footer"));
+const MemberCard = loadable(() =>
+  import("./components/atoms/MemberCard/MemberCard")
+);
+const Navbar = loadable(() => import("./components/atoms/Navbar/Navbar"));
 
 const Team = () => (
   <>

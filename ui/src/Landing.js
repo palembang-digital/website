@@ -1,4 +1,5 @@
 import React from "react";
+
 import About from "./components/atoms/About/About";
 import Banner from "./components/atoms/Banner/Banner";
 import Events from "./components/atoms/Events/Events";

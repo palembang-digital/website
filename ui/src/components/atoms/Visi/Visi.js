@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import s from "./Visi.module.scss";
 
 const Visi = ({ judul, konten1 }) => {
@@ -13,7 +14,7 @@ const Visi = ({ judul, konten1 }) => {
           paddingRight: 15,
         }}
       >
-        <p>{konten1}</p>
+        {konten1}
       </div>
     </div>
   );
