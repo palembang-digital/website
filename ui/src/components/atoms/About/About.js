@@ -1,7 +1,11 @@
 import React from "react";
-import { Container } from "reactstrap";
-import Title from "../Title/Title";
+import loadable from "@loadable/component";
+// import { Container } from "reactstrap";
+// import Title from "../Title/Title";
 import s from "./About.module.scss";
+
+const Container = loadable(() => import("reactstrap/es/Container"));
+const Title = loadable(() => import("../Title/Title"));
 
 const About = () => {
   return (

@@ -1,6 +1,11 @@
 import React from "react";
+import loadable from "@loadable/component";
 import MediaStyles from "./Media.module.scss";
-import { Row, Col } from "reactstrap";
+// import { Row, Col } from "reactstrap";
+import "lazysizes";
+
+const Row = loadable(() => import("reactstrap/es/Row"));
+const Col = loadable(() => import("reactstrap/es/Col"));
 
 function MediaList() {
   const names = [
@@ -15,7 +20,7 @@ function MediaList() {
     "https://i.ibb.co/Rb7QG24/KAGANGA.pngswNPj",
     "https://i.ibb.co/jr7KJMj/INFOSEMPURNA.png",
     "https://i.ibb.co/KXk4NsJ/SUARASUMSEL.png",
-    "https://i.ibb.co/19VkYyp/Sonora-2017.png",
+    "https://res.cloudinary.com/dmtvswpik/image/upload/c_scale,h_87/v1598693789/patal-assets/media-coverages/Sonora-2017_p4adon.png",
   ];
 
   return (
@@ -25,10 +30,15 @@ function MediaList() {
         <Row
           className={`${MediaStyles["overflow"]} ${MediaStyles["box"]} ${MediaStyles["center-margin"]}`}
         >
-          {names.map((name) => (
-            <Col className={MediaStyles["img"]}>
+          {names.map((name, i) => (
+            <Col key={i} className={MediaStyles["img"]}>
               <div>
-                <img src={name} width="100px" alt="logo_sponsor" />
+                <img
+                  className="lazyload"
+                  data-src={name}
+                  width="100px"
+                  alt="logo_sponsor"
+                />
               </div>
             </Col>
           ))}

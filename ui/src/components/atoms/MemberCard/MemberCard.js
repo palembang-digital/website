@@ -8,7 +8,12 @@ const MemberCard = ({ name, job, imageUrl, links }) => {
   const renderLinks = () =>
     Object.keys(links).length > 0 ? (
       Object.keys(links).map((key) => (
-        <a href={links[key]} target="_blank" rel="noopener noreferrer">
+        <a
+          key={key}
+          href={links[key]}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img alt={key} src={require(`../../../assets/icons/${key}.svg`)} />
         </a>
       ))

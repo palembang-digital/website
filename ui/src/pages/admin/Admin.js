@@ -1,5 +1,5 @@
-import React from "react";
-import { Router, navigate } from "@reach/router";
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Events from "./event/Events";
 import CreateEvent from "./event/CreateEvent";
 import "antd/dist/antd.css";
@@ -12,8 +12,8 @@ const Admin = () => {
     <Layout theme="light">
       <Header>
         <Menu theme="dark" mode="horizontal">
-          <Menu.Item key="1" onClick={() => navigate("/admin/events")}>
-            Events
+          <Menu.Item key="1">
+            <Link to="/admin/events">Events</Link>
           </Menu.Item>
         </Menu>
       </Header>
@@ -28,8 +28,16 @@ const Admin = () => {
           style={{ background: "#fff", padding: "24px", minHeight: "280px" }}
         >
           <Router>
-            <Events path="/events" />
-            <CreateEvent path="/events/create" />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                <Route exact path="/admin/events" component={Events} />
+                <Route
+                  exact
+                  path="/admin/events/create"
+                  component={CreateEvent}
+                />
+              </Switch>
+            </Suspense>
           </Router>
         </Layout>
       </Content>

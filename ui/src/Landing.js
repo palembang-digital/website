@@ -1,14 +1,16 @@
 import React from "react";
-import About from "./components/atoms/About/About";
-import Banner from "./components/atoms/Banner/Banner";
-import Events from "./components/atoms/Events/Events";
-import Footer from "./components/atoms/Footer/Footer";
-import Join from "./components/atoms/Join/Join";
-import Media from "./components/atoms/Media/Media";
-import Misi from "./components/atoms/Visi/Misi";
-import Navbar from "./components/atoms/Navbar/Navbar";
-import Sponsor from "./components/atoms/Sponsor/Sponsor";
-import Visi from "./components/atoms/Visi/Visi";
+import loadable from "@loadable/component";
+
+const About = loadable(() => import("./components/atoms/About/About"));
+const Banner = loadable(() => import("./components/atoms/Banner/Banner"));
+const Events = loadable(() => import("./components/atoms/Events/Events"));
+const Footer = loadable(() => import("./components/atoms/Footer/Footer"));
+const Join = loadable(() => import("./components/atoms/Join/Join"));
+const Media = loadable(() => import("./components/atoms/Media/Media"));
+const Misi = loadable(() => import("./components/atoms/Visi/Misi"));
+const Navbar = loadable(() => import("./components/atoms/Navbar/Navbar"));
+const Sponsor = loadable(() => import("./components/atoms/Sponsor/Sponsor"));
+const Visi = loadable(() => import("./components/atoms/Visi/Visi"));
 
 const Landing = () => (
   <>

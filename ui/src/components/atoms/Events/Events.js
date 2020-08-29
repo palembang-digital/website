@@ -1,9 +1,13 @@
 import React from "react";
+import loadable from "@loadable/component";
 import { useRequest } from "ahooks";
-import { Container, Row, Col } from "reactstrap";
-import Article from "../Article/Article";
-import Title from "../Title/Title";
 import s from "./Events.module.scss";
+
+const Container = loadable(() => import("reactstrap/es/Container"));
+const Row = loadable(() => import("reactstrap/es/Row"));
+const Col = loadable(() => import("reactstrap/es/Col"));
+const Article = loadable(() => import("../Article/Article"));
+const Title = loadable(() => import("../Title/Title"));
 
 const Events = () => {
   const { data: events } = useRequest("/api/v1/events");

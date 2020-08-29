@@ -13,7 +13,7 @@ const Visi = ({ judul, konten1 }) => {
           paddingRight: 15,
         }}
       >
-        <p>{konten1}</p>
+        {konten1}
       </div>
     </div>
   );

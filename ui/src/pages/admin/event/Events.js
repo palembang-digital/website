@@ -1,9 +1,17 @@
 import React from "react";
-import { navigate } from "@reach/router";
+import { Link } from "react-router-dom";
 import { useRequest } from "ahooks";
 import axios from "axios";
-import { Avatar, Button, Divider, Modal, Space, Table } from "antd";
+import loadable from "@loadable/component";
+
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+
+const Avatar = loadable(() => import("antd/es/avatar"));
+const Button = loadable(() => import("antd/es/button"));
+const Divider = loadable(() => import("antd/es/divider"));
+const Modal = loadable(() => import("antd/es/modal"));
+const Space = loadable(() => import("antd/es/space"));
+const Table = loadable(() => import("antd/es/table"));
 
 const moment = require("moment");
 
@@ -109,8 +117,8 @@ const Events = () => {
 
   return (
     <>
-      <Button type="link" onClick={() => navigate("/admin/events/create")}>
-        Create event
+      <Button type="link">
+        <Link to="/admin/events/create">Create event</Link>
       </Button>
       <Divider />
       <Table rowKey="id" dataSource={events} columns={columns} />
