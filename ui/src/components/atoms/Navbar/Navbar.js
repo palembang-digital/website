@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import loadable from "@loadable/component";
-// import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 import { Link } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "@reach/router";
 
 import s from "./Navbar.module.scss";
-// import logo from "../../../assets/logo.png";
 
 const Collapse = loadable(() => import("reactstrap/es/Collapse"));
 const Navbar = loadable(() => import("reactstrap/es/Navbar"));

@@ -1,10 +1,8 @@
 import React from "react";
 import loadable from "@loadable/component";
-// import { Container, Row, Col } from "reactstrap";
 import "lazysizes";
 
 import s from "./Banner.module.scss";
-import logo from "../../../assets/logo.png";
 
 const Container = loadable(() => import("reactstrap/es/Container"));
 const Row = loadable(() => import("reactstrap/es/Row"));
