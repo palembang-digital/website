@@ -1,14 +1,13 @@
 import React from "react";
 import loadable from "@loadable/component";
-// import { Container, Row, Col } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import {
   faInstagram,
   faWhatsapp,
   faYoutubeSquare,
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelopeSquare } from "@fortawesome/free-solid-svg-icons";
+
 import s from "./Footer.module.scss";
 
 const Container = loadable(() => import("reactstrap/es/Container"));

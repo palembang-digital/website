@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import loadable from "@loadable/component";
-import { Link } from "react-scroll";
 import { Link as RouterLink } from "@reach/router";
+import { Link } from "react-scroll";
 
 import s from "./Navbar.module.scss";
 

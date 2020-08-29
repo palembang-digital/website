@@ -1,29 +1,27 @@
 import React from "react";
 import "lazysizes";
 
-// import agt from "../../../assets/images/sponsors/AGT.png";
-// import myo from "../../../assets/images/sponsors/myo.png";
-// import sh from "../../../assets/images/sponsors/sh.png";
 import s from "./Sponsor.module.scss";
 
 function Sponsor() {
   const names = [
     {
       url:
-        "https://res.cloudinary.com/dmtvswpik/image/upload/v1598698556/patal-assets/sponsors/sh_pj2oer.png",
+        "https://res.cloudinary.com/patal/image/upload/v1598716749/patal/sponsors/sriwijaya_host.png",
       link: "https://sriwijayahost.id",
     },
     {
       url:
-        "https://res.cloudinary.com/dmtvswpik/image/upload/v1598698556/patal-assets/sponsors/myo_l00lkn.png",
+        "https://res.cloudinary.com/patal/image/upload/v1598716749/patal/sponsors/my_office.png",
       link: "https://my-office.co.id",
     },
     {
       url:
-        "https://res.cloudinary.com/dmtvswpik/image/upload/v1598698556/patal-assets/sponsors/AGT_icvmoj.png",
+        "https://res.cloudinary.com/patal/image/upload/v1598716749/patal/sponsors/andalas_global_teknologi.png",
       link: "https://agt.co.id/",
     },
   ];
+
   return (
     <div className={s["sponsor-container"]}>
       {names.map((name, i) => (

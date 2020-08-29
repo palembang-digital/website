@@ -1,7 +1,6 @@
 import React from "react";
 import loadable from "@loadable/component";
-// import { Container } from "reactstrap";
-// import Title from "../Title/Title";
+
 import s from "./About.module.scss";
 
 const Container = loadable(() => import("reactstrap/es/Container"));

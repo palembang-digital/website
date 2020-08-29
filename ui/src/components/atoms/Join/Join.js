@@ -1,4 +1,5 @@
 import React from "react";
+
 import s from "./Join.module.scss";
 
 class Join extends React.Component {

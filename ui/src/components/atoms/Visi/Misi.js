@@ -1,4 +1,5 @@
 import React from "react";
+
 import s from "./Visi.module.scss";
 
 const Misi = () => {

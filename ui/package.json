@@ -33,7 +33,9 @@
   "devDependencies": {
     "husky": ">=4",
     "lint-staged": ">=10",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "serve": "^11.3.2",
+    "terser": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,8 +1,8 @@
 import React from "react";
 import loadable from "@loadable/component";
 import PropTypes from "prop-types";
+
 import s from "./Title.module.scss";
-// import { Container } from "reactstrap";
 
 const Container = loadable(() => import("reactstrap/es/Container"));
 

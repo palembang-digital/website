@@ -1,7 +1,6 @@
 import React from "react";
 import loadable from "@loadable/component";
 import PropTypes from "prop-types";
-// import { Card, CardImg, CardBody, CardTitle } from "reactstrap";
 
 import s from "./Article.module.scss";
 
