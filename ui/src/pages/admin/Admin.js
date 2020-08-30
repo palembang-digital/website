@@ -1,18 +1,11 @@
 import React from "react";
-import loadable from "@loadable/component";
 import { Router, Link } from "@reach/router";
 import Events from "./event/Events";
 import CreateEvent from "./event/CreateEvent";
 import "antd/dist/antd.css";
-// import { Layout, Menu, Breadcrumb } from "antd";
-const Layout = loadable(() => import("antd/es/layout"));
-const Menu = loadable(() => import("antd/es/menu"));
-const Breadcrumb = loadable(() => import("antd/es/breadcrumb"));
+import { Layout, Menu, Breadcrumb } from "antd";
 
-// const { Header, Content, Footer } = Layout;
-const Header = loadable(() => import("antd/es/layout").then((c) => c.Header));
-const Content = loadable(() => import("antd/es/layout").then((c) => c.Content));
-const Footer = loadable(() => import("antd/es/layout").then((c) => c.Footer));
+const { Header, Content, Footer } = Layout;
 
 const Admin = () => {
   return (
