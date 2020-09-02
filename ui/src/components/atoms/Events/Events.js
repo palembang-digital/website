@@ -26,10 +26,12 @@ const Events = () => {
           <Row className={`${s["cp"]} ${s["col"]}`}>
             {events &&
               events
-                .sort((a, b) =>
-                  new Date(a.scheduled_start) - new Date(b.scheduled_start)
-                    ? -1
-                    : 1
+                .filter((event) => Date.now() < new Date(event.scheduled_start))
+                .sort(
+                  (a, b) =>
+                    Date.now() -
+                    new Date(b.scheduled_start) -
+                    (Date.now() - new Date(a.scheduled_start))
                 )
                 .slice(0, 3)
                 .map((event, index) => (
