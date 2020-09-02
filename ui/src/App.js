@@ -9,9 +9,11 @@ import Home from "./Home";
 const Team = loadable(() => import("./Team"));
 const Admin = loadable(() => import("./pages").then((c) => c.Admin));
 
-const App = () => {
-  ReactGA.initialize("UA-169186060-1");
+ReactGA.initialize("UA-169186060-1", {
+  testMode: process.env.NODE_ENV === "test",
+});
 
+const App = () => {
   const trackPageView = (location) => {
     ReactGA.pageview(location.pathname + location.search);
   };
