@@ -1,5 +1,6 @@
 import React from "react";
 import loadable from "@loadable/component";
+import { Helmet } from "react-helmet";
 
 import TeamData from "./content/team.json";
 import s from "./assets/styles/team/index.module.scss";
@@ -12,7 +13,12 @@ const Navbar = loadable(() => import("./components/atoms/Navbar/Navbar"));
 
 const Team = () => (
   <>
+    <Helmet>
+      <title>Team</title>
+    </Helmet>
+
     <Navbar />
+
     <div className={`${s["main-bg"]} ${s["p-8"]}`}>
       <div className={`${s["grid"]} ${s["grid-teams"]}`}>
         {TeamData.map((team, i) => (
@@ -27,6 +33,7 @@ const Team = () => (
         ))}
       </div>
     </div>
+
     <Footer />
   </>
 );
