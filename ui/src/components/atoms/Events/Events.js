@@ -23,7 +23,7 @@ const Events = () => {
               title="Kegiatan Patal"
             ></Title>
           </div>
-          <Row className={`${s["cp"]} ${s["col"]}`} xs="3">
+          <Row className={`${s["cp"]} ${s["col"]}`} xs="1" sm="1" md="3" xl="3">
             {events &&
               events
                 .filter((event) => Date.now() < new Date(event.scheduled_start))
