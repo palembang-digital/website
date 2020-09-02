@@ -2,16 +2,8 @@ import React from "react";
 import { Link } from "@reach/router";
 import { useRequest } from "ahooks";
 import axios from "axios";
-import loadable from "@loadable/component";
-
+import { Avatar, Button, Divider, Modal, Space, Table } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-
-const Avatar = loadable(() => import("antd/es/avatar"));
-const Button = loadable(() => import("antd/es/button"));
-const Divider = loadable(() => import("antd/es/divider"));
-const Modal = loadable(() => import("antd/es/modal"));
-const Space = loadable(() => import("antd/es/space"));
-const Table = loadable(() => import("antd/es/table"));
 
 const moment = require("moment");
 
@@ -76,13 +68,41 @@ const Events = () => {
       ),
     },
     {
+      title: "Upcoming / Past",
+      dataIndex: "id",
+      filters: [
+        {
+          text: "Upcoming",
+          value: "Upcoming",
+        },
+        {
+          text: "Past",
+          value: "Past",
+        },
+      ],
+      onFilter: (value, record) => {
+        if (value === "Upcoming")
+          return Date.now() < new Date(record.scheduled_start);
+        if (value === "Past")
+          return Date.now() > new Date(record.scheduled_start);
+      },
+      render: (text, record) =>
+        Date.now() < new Date(record.scheduled_start) ? "Upcoming" : "Past",
+    },
+    {
       title: "Scheduled Time",
       dataIndex: "id",
-      defaultSortOrder: "descend",
+      defaultSortOrder: "ascend",
       sorter: (a, b) =>
-        new Date(a.scheduled_start) - new Date(b.scheduled_start),
+        Date.now() -
+        new Date(a.scheduled_start) -
+        (Date.now() - new Date(b.scheduled_start)),
       render: (text, record) => (
         <ul>
+          <li>
+            Countdown:{" "}
+            {moment(record.scheduled_start, "YYYY-MM-DDTHH:mm.SSZ").fromNow()}
+          </li>
           <li>
             Start: {moment(record.scheduled_start).format("YYYY-MM-DD HH:mm")}
           </li>
