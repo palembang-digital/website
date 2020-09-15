@@ -101,3 +101,37 @@ func (api *API) deleteEvent(c echo.Context) error {
 
 	return c.String(http.StatusNoContent, "")
 }
+
+// Update an event
+// @Summary Update an event
+// @Description Update an event
+// @Tags events
+// @ID update-event
+// @Produce plain
+// @Param id path int true "Event ID"
+// @Param event body models.Event true "Update event"
+// @Success 201 {string} string ""
+// @Router /events/{id} [put]
+func (api *API) updateEvent(c echo.Context) error {
+	ctx := c.Request().Context()
+
+	idString := c.Param("id")
+	id, _ := strconv.ParseInt(idString, 10, 64)
+
+	event := new(models.Event)
+	if err := c.Bind(event); err != nil {
+		return err
+	}
+
+	if err := c.Validate(event); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+
+	event.ID = id
+	updatedEvent, err := api.eventsService.UpdateEvent(ctx, *event)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusCreated, updatedEvent)
+}

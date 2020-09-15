@@ -15,6 +15,7 @@ type EventsService interface {
 	GetEvent(ctx context.Context, id int64) (models.Event, error)
 	CreateEvent(ctx context.Context, event models.Event) (models.Event, error)
 	DeleteEvent(ctx context.Context, id int64) error
+	UpdateEvent(ctx context.Context, event models.Event) (models.Event, error)
 }
 
 type eventsService struct {
@@ -93,4 +94,19 @@ func (s *eventsService) DeleteEvent(ctx context.Context, id int64) error {
 	}
 
 	return nil
+}
+
+func (s *eventsService) UpdateEvent(ctx context.Context, event models.Event) (models.Event, error) {
+	query := `UPDATE events SET title=$1, image_url=$2, registration_url=$3, scheduled_start=$4, scheduled_end=$5 Where id=$6`
+
+	if _, err := s.db.ExecContext(ctx, query, event.Title, event.ImageURL, event.RegistrationURL, event.ScheduledStart, event.ScheduledEnd, event.ID); err != nil {
+		return models.Event{}, fmt.Errorf("Update event: %s", err)
+	}
+
+	Event, err := s.GetEvent(ctx, event.ID)
+	if err != nil {
+		return models.Event{}, fmt.Errorf("get event: %s", err)
+	}
+
+	return Event, nil
 }
