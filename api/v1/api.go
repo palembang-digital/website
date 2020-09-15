@@ -33,6 +33,7 @@ func (api *API) Register(g *echo.Group) {
 	g.GET("/events/:id", api.getEvent)
 	g.POST("/events", api.createEvent, middleware.BasicAuth(api.adminValidator))
 	g.DELETE("/events/:id", api.deleteEvent, middleware.BasicAuth(api.adminValidator))
+	g.PUT("/events/:id", api.updateEvent, middleware.BasicAuth(api.adminValidator))
 }
 
 func (api *API) adminValidator(username, password string, c echo.Context) (bool, error) {
