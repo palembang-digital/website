@@ -29,8 +29,8 @@ const Events = () => {
                 .sort(
                   (a, b) =>
                     Date.now() -
-                    new Date(b.scheduled_start) -
-                    (Date.now() - new Date(a.scheduled_start))
+                    new Date(a.scheduled_start) -
+                    (Date.now() - new Date(b.scheduled_start))
                 )
                 .slice(0, 3)
                 .map((event, index) => (
