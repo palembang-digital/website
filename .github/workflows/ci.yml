@@ -41,8 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-	 - name: build and push docker image
-		uses: docker/build-push-action@v1
+    - name: build and push docker image
+      uses: docker/build-push-action@v1
       with:  
         username: ${{ github.actor }}
         password: ${{ secrets.GHCR_TOKEN }}
