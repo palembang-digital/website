@@ -81,7 +81,7 @@ func TestAPI_createEvent(t *testing.T) {
 	api := NewAPI(mockEventsService, "", "")
 	if assert.NoError(t, api.createEvent(c)) {
 		assert.Equal(t, http.StatusCreated, rec.Code)
-		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\"}\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":0,\"title\":\"event-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\"}\n", rec.Body.String())
 	}
 }
 
@@ -102,31 +102,5 @@ func TestAPI_deleteEvent(t *testing.T) {
 	if assert.NoError(t, api.deleteEvent(c)) {
 		assert.Equal(t, http.StatusNoContent, rec.Code)
 		assert.Equal(t, "", rec.Body.String())
-	}
-}
-
-func TestAPI_updateEvent(t *testing.T) {
-	event := models.Event{
-		Title:           "event-update-1",
-		ImageURL:        "https://patal.com/event-1.png",
-		RegistrationURL: "https://patal.com/event-1",
-	}
-	eventJSON, _ := json.Marshal(event)
-
-	req := httptest.NewRequest(http.MethodPut, "/events/1", bytes.NewReader(eventJSON))
-	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
-	rec := httptest.NewRecorder()
-
-	e := echo.New()
-	e.Validator = &mockRequestValidator{}
-	c := e.NewContext(req, rec)
-
-	mockEventsService := &mocks.EventsService{}
-	mockEventsService.On("UpdateEvent", mock.Anything, event).Return(event, nil)
-
-	api := NewAPI(mockEventsService, "", "")
-	if assert.NoError(t, api.updateEvent(c)) {
-		assert.Equal(t, http.StatusCreated, rec.Code)
-		assert.Equal(t, "{\"id\":1,\"title\":\"event-update-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\"}\n", rec.Body.String())
 	}
 }
