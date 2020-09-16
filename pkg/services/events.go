@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/jmoiron/sqlx"
 
@@ -97,9 +98,9 @@ func (s *eventsService) DeleteEvent(ctx context.Context, id int64) error {
 }
 
 func (s *eventsService) UpdateEvent(ctx context.Context, event models.Event) (models.Event, error) {
-	query := `UPDATE events SET title=$1, image_url=$2, registration_url=$3, scheduled_start=$4, scheduled_end=$5 Where id=$6`
+	query := `UPDATE events SET title=$1, image_url=$2, registration_url=$3, scheduled_start=$4, scheduled_end=$5 , updated_at=$6 Where id=$7`
 
-	if _, err := s.db.ExecContext(ctx, query, event.Title, event.ImageURL, event.RegistrationURL, event.ScheduledStart, event.ScheduledEnd, event.ID); err != nil {
+	if _, err := s.db.ExecContext(ctx, query, event.Title, event.ImageURL, event.RegistrationURL, event.ScheduledStart, event.ScheduledEnd, time.Now(), event.ID); err != nil {
 		return models.Event{}, fmt.Errorf("Update event: %s", err)
 	}
 

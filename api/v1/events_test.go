@@ -130,7 +130,7 @@ func TestAPI_UpdateEvent(t *testing.T) {
 
 	api := NewAPI(mockEventsService, "", "")
 	if assert.NoError(t, api.updateEvent(c)) {
-		assert.Equal(t, http.StatusCreated, rec.Code)
+		assert.Equal(t, http.StatusOK, rec.Code)
 		assert.Equal(t, "{\"id\":1,\"title\":\"event-update-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\"}\n", rec.Body.String())
 	}
 }

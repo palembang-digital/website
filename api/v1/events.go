@@ -110,7 +110,7 @@ func (api *API) deleteEvent(c echo.Context) error {
 // @Produce plain
 // @Param id path int true "Event ID"
 // @Param event body models.Event true "Update event"
-// @Success 201 {string} string ""
+// @Success 200 {object} models.Event
 // @Router /events/{id} [put]
 func (api *API) updateEvent(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -133,5 +133,5 @@ func (api *API) updateEvent(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusCreated, updatedEvent)
+	return c.JSON(http.StatusOK, updatedEvent)
 }
