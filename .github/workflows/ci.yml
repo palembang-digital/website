@@ -41,19 +41,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set tag
-      id: tags
-      run: echo ::set-output name=tag::${GITHUB_SHA}
-    - name: Login to hub.docker.com
-      uses: azure/docker-login@v1
-      with:
-        login-server: https://index.docker.io/v1/
-        username: palembangdigital
-        password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-    - name: Build docker image
-      run: docker build -t palembangdigital/website:${{ steps.tags.outputs.tag }} .
-    - name: Push docker image
-      run: docker push palembangdigital/website:${{ steps.tags.outputs.tag }}
+    - name: build and push docker image
+      uses: docker/build-push-action@v1
+      with:  
+        username: ${{ github.actor }}
+        password: ${{ secrets.GHCR_TOKEN }}
+        registry: ghcr.io
+        tag_with_ref: true
+        tag_with_sha: true
 
   lighthouse:
     runs-on: ubuntu-latest
