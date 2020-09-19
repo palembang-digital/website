@@ -8,6 +8,7 @@ import Home from "./Home";
 
 const Team = loadable(() => import("./Team"));
 const Admin = loadable(() => import("./pages").then((c) => c.Admin));
+const PatalTV = loadable(() => import("./Pataltv"));
 
 ReactGA.initialize("UA-169186060-1", {
   testMode: process.env.NODE_ENV === "test",
@@ -29,8 +30,9 @@ const App = () => {
         <Router>
           <Home path="/" />
           <Team path="/patal-team" />
-
+          <PatalTV path="/patal-tv" />
           <Admin path="/admin/*" />
+          <Team path="/patal-team" />
         </Router>
 
         <Location children={(context) => trackPageView(context.location)} />

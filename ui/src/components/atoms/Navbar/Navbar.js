@@ -94,6 +94,15 @@ const NavbarDefault = () => {
                 Tim
               </RouterLink>
             </NavItem>
+            <NavItem
+              className={`${s["nav-item"]} ${
+                currentPath.startsWith("/patal-tv") ? s["active"] : ""
+              }`}
+            >
+              <RouterLink to="/patal-tv" className={s["NavLink"]}>
+                Patal TV
+              </RouterLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
