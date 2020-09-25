@@ -25,7 +25,7 @@ function Sponsor() {
   return (
     <div className={s["sponsor-container"]}>
       {names.map((name, i) => (
-        <div key={i} className={`${s["sponsor"]} `}>
+        <div key={i} className={s["sponsor"]}>
           <a href={name.link} target="_blank" rel="noopener noreferrer">
             <img
               data-src={name.url}
