@@ -31,10 +31,23 @@
     "typography-theme-fairy-gates": "^0.16.19"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/node-logger": "^6.0.21",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/preset-scss": "^1.0.2",
+    "@storybook/react": "^6.0.21",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.3.0",
     "husky": ">=4",
     "lint-staged": ">=10",
     "prettier": "^2.0.5",
+    "react-is": "^16.13.1",
+    "sass-loader": "^10.0.2",
     "serve": "^11.3.2",
+    "style-loader": "^1.2.1",
     "terser": "^5.2.1"
   },
   "scripts": {
@@ -44,7 +57,9 @@
     "eject": "react-scripts eject",
     "lint": "lint-staged",
     "build-start": "react-scripts build && serve -s build",
-    "build-start:compressed": "react-scripts build && terser --compress --mangle -- build/static/js/*.js && serve -s build"
+    "build-start:compressed": "react-scripts build && terser --compress --mangle -- build/static/js/*.js && serve -s build",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {
