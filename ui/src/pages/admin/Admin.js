@@ -1,9 +1,12 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
-import Events from "./event/Events";
-import CreateEvent from "./event/CreateEvent";
 import "antd/dist/antd.css";
 import { Layout, Menu, Breadcrumb } from "antd";
+
+import Events from "./event/Events";
+import CreateEvent from "./event/CreateEvent";
+import Organizations from "./organization/Organizations";
+import CreateOrganization from "./organization/CreateOrganization";
 
 const { Header, Content, Footer } = Layout;
 
@@ -14,6 +17,9 @@ const Admin = () => {
         <Menu theme="dark" mode="horizontal">
           <Menu.Item key="1">
             <Link to="/admin/events">Events</Link>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Link to="/admin/organizations">Organizations</Link>
           </Menu.Item>
         </Menu>
       </Header>
@@ -30,6 +36,11 @@ const Admin = () => {
           <Router>
             <Events path="/events" />
             <CreateEvent path="/events/create" />
+          </Router>
+
+          <Router>
+            <Organizations path="/organizations" />
+            <CreateOrganization path="/organizations/create" />
           </Router>
         </Layout>
       </Content>
