@@ -23,7 +23,7 @@ const Startup = () => {
   return (
     <>
       <Helmet>
-        <title>Organisasi</title>
+        <title>Startup</title>
       </Helmet>
 
       <div className={`${s["main-bg"]} ${s["p-8"]}`}>
