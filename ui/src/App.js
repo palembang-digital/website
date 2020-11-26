@@ -5,13 +5,21 @@ import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 
 import Home from "./Home";
+import { PublicLayout } from "./PublicLayout";
 
 const Team = loadable(() => import("./Team"));
 const Admin = loadable(() => import("./pages").then((c) => c.Admin));
+const Organization = loadable(() =>
+  import("./pages").then((c) => c.Organization)
+);
 
 ReactGA.initialize("UA-169186060-1", {
   testMode: process.env.NODE_ENV === "test",
 });
+
+const PublicRoute = ({ render, ...props }) => {
+  return render(props);
+};
 
 const App = () => {
   const trackPageView = (location) => {
@@ -26,11 +34,16 @@ const App = () => {
       />
 
       <LocationProvider>
-        <Router>
+        <Router primary={false}>
           <Home path="/" />
           <Team path="/patal-team" />
 
           <Admin path="/admin/*" />
+
+          <PublicRoute
+            path="/organizations"
+            render={PublicLayout(Organization)}
+          />
         </Router>
 
         <Location children={(context) => trackPageView(context.location)} />

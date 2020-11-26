@@ -59,6 +59,7 @@ func main() {
 
 	log.Println("Initializing services ...")
 	eventsService := services.NewEventsService(db)
+	organizationsService := services.NewOrganizationsService(db)
 
 	log.Println("Initializing the web server ...")
 	e := echo.New()
@@ -74,7 +75,7 @@ func main() {
 	e.GET("/ping", ping)
 
 	// Serve API
-	api := api.NewAPI(eventsService, cfg.AdminUsername, cfg.AdminPassword)
+	api := api.NewAPI(eventsService, organizationsService, cfg.AdminUsername, cfg.AdminPassword)
 	api.Register(e.Group("/api/v1", middleware.Logger()))
 
 	// Serve UI
