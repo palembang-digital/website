@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import s from "../../assets/styles/team/index.module.scss";
 import cardStyle from "../../components/atoms/MemberCard/MemberCard.module.scss";
 
-const OrganizationCard = ({ name, imageUrl }) => {
+const StartupCard = ({ name, imageUrl }) => {
   return (
     <div
       style={{ minHeight: "360px", justifyContent: "start" }}
@@ -17,8 +17,8 @@ const OrganizationCard = ({ name, imageUrl }) => {
   );
 };
 
-const Organization = () => {
-  const { data: organizations } = useRequest("/api/v1/organizations");
+const Startup = () => {
+  const { data: startups } = useRequest("/api/v1/startups");
 
   return (
     <>
@@ -28,22 +28,22 @@ const Organization = () => {
 
       <div className={`${s["main-bg"]} ${s["p-8"]}`}>
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontWeight: "bold" }}>Organisasi</h1>
+          <h1 style={{ fontWeight: "bold" }}>Startup</h1>
           <p>
-            Komunitas dan organisasi lokal yang kami dukung dan mendukung kami
-            kembali.
+            Perusahaan-perusahaan rintisan lokal yang harus kita ikuti sepak
+            terjangnya.
           </p>
         </div>
 
         <div className={`${s["grid"]} ${s["grid-teams"]}`}>
-          {organizations &&
-            organizations
+          {startups &&
+            startups
               .sort((a, b) => (a.name < b.name ? -1 : 1))
-              .map((organization, index) => (
+              .map((startup, index) => (
                 <div key={index} className={`${s["center-margin"]}`}>
-                  <OrganizationCard
-                    name={organization.name}
-                    imageUrl={organization.image_url}
+                  <StartupCard
+                    name={startup.name}
+                    imageUrl={startup.image_url}
                   />
                 </div>
               ))}
@@ -53,4 +53,4 @@ const Organization = () => {
   );
 };
 
-export default Organization;
+export default Startup;

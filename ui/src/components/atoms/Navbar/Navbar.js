@@ -67,6 +67,16 @@ const NavbarDefault = () => {
 
             <NavItem
               className={`${s["nav-item"]} ${
+                currentHref.includes("/startups") ? s["active"] : ""
+              }`}
+            >
+              <Link to="/startups" className={s["NavLink"]}>
+                Startup
+              </Link>
+            </NavItem>
+
+            <NavItem
+              className={`${s["nav-item"]} ${
                 currentHref.includes("/patal-team") ? s["active"] : ""
               }`}
             >
