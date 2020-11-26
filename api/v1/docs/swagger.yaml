@@ -38,6 +38,21 @@ definitions:
         example: "2020-04-21T00:00:00Z"
         type: string
     type: object
+  models.Startup:
+    properties:
+      created_at:
+        example: "2020-04-21T00:00:00Z"
+        type: string
+      id:
+        type: integer
+      image_url:
+        type: string
+      name:
+        type: string
+      updated_at:
+        example: "2020-04-21T00:00:00Z"
+        type: string
+    type: object
 info:
   contact:
     email: support@palembangdigital.org
@@ -200,4 +215,79 @@ paths:
       summary: Get an event
       tags:
       - organizations
+  /startups:
+    get:
+      description: Get the list of startups
+      operationId: list-startups
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Startup'
+            type: array
+      summary: List startups
+      tags:
+      - startups
+    post:
+      description: Create a new event
+      operationId: create-event
+      parameters:
+      - description: Create event
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/models.Startup'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Startup'
+      summary: Create a new event
+      tags:
+      - startups
+  /startups/{id}:
+    delete:
+      description: Delete an event by id
+      operationId: delete-event
+      parameters:
+      - description: Startup ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+      summary: Delete an event
+      tags:
+      - startups
+    get:
+      description: Get an event by id
+      operationId: get-event
+      parameters:
+      - description: Startup ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Startup'
+      summary: Get an event
+      tags:
+      - startups
 swagger: "2.0"

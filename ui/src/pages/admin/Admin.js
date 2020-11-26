@@ -7,6 +7,8 @@ import Events from "./event/Events";
 import CreateEvent from "./event/CreateEvent";
 import Organizations from "./organization/Organizations";
 import CreateOrganization from "./organization/CreateOrganization";
+import Startups from "./startup/Startups";
+import CreateStartup from "./startup/CreateStartup";
 
 const { Header, Content, Footer } = Layout;
 
@@ -20,6 +22,9 @@ const Admin = () => {
           </Menu.Item>
           <Menu.Item key="2">
             <Link to="/admin/organizations">Organizations</Link>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <Link to="/admin/startups">Startups</Link>
           </Menu.Item>
         </Menu>
       </Header>
@@ -41,6 +46,11 @@ const Admin = () => {
           <Router>
             <Organizations path="/organizations" />
             <CreateOrganization path="/organizations/create" />
+          </Router>
+
+          <Router>
+            <Startups path="/startups" />
+            <CreateStartup path="/startups/create" />
           </Router>
         </Layout>
       </Content>

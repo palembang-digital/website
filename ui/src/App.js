@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 
 import Home from "./Home";
 import { PublicLayout } from "./PublicLayout";
+import { Startup } from "./pages";
 
 const Team = loadable(() => import("./Team"));
 const Admin = loadable(() => import("./pages").then((c) => c.Admin));
@@ -44,6 +45,8 @@ const App = () => {
             path="/organizations"
             render={PublicLayout(Organization)}
           />
+
+          <PublicRoute path="/startups" render={PublicLayout(Startup)} />
         </Router>
 
         <Location children={(context) => trackPageView(context.location)} />

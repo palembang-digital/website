@@ -12,6 +12,7 @@ import (
 type API struct {
 	eventsService        services.EventsService
 	organizationsService services.OrganizationsService
+	startupsService      services.StartupsService
 
 	adminUsername string
 	adminPassword string
@@ -20,10 +21,12 @@ type API struct {
 // NewAPI returns an initialized API type.
 func NewAPI(eventsService services.EventsService,
 	organizationsService services.OrganizationsService,
+	startupsService services.StartupsService,
 	adminUsername, adminPassword string) *API {
 	return &API{
 		eventsService:        eventsService,
 		organizationsService: organizationsService,
+		startupsService:      startupsService,
 
 		adminUsername: adminUsername,
 		adminPassword: adminPassword,
@@ -43,6 +46,12 @@ func (api *API) Register(g *echo.Group) {
 	g.GET("/organizations/:id", api.getOrganization)
 	g.POST("/organizations", api.createOrganization, middleware.BasicAuth(api.adminValidator))
 	g.DELETE("/organizations/:id", api.deleteOrganization, middleware.BasicAuth(api.adminValidator))
+
+	// Startups API
+	g.GET("/startups", api.listStartups)
+	g.GET("/startups/:id", api.getStartup)
+	g.POST("/startups", api.createStartup, middleware.BasicAuth(api.adminValidator))
+	g.DELETE("/startups/:id", api.deleteStartup, middleware.BasicAuth(api.adminValidator))
 }
 
 func (api *API) adminValidator(username, password string, c echo.Context) (bool, error) {
