@@ -21,16 +21,34 @@ const Team = () => (
 
     <div className={`${s["main-bg"]} ${s["p-8"]}`}>
       <div className={`${s["grid"]} ${s["grid-teams"]}`}>
-        {TeamData.map((team, i) => (
-          <div key={i} className={`${s["center-margin"]}`}>
-            <MemberCard
-              name={team.name}
-              job={team.job}
-              imageUrl={team.imageUrl}
-              links={team.links || {}}
-            />
-          </div>
-        ))}
+        {TeamData.map((team, i) =>
+          team.status == "active" ? (
+            <div key={i} className={`${s["center-margin"]}`}>
+              <MemberCard
+                name={team.name}
+                job={team.job}
+                imageUrl={team.imageUrl}
+                status={team.status}
+                links={team.links || {}}
+              />
+            </div>
+          ) : null
+        )}
+      </div>
+      <div className={`${s["grid"]} ${s["grid-teams"]}`}>
+        {TeamData.map((team, i) =>
+          team.status == "alumni" ? (
+            <div key={i} className={`${s["center-margin"]}`}>
+              <MemberCard
+                name={`${team.name} (Alumni)`}
+                job={team.job}
+                imageUrl={team.imageUrl}
+                status={team.status}
+                links={team.links || {}}
+              />
+            </div>
+          ) : null
+        )}
       </div>
     </div>
 

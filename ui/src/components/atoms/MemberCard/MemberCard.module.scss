@@ -27,6 +27,20 @@
   &.card {
     @include card(360px, 420px);
 
+    .alumni-overlay-background {
+      width: 216px;
+      height: 216px;
+      border-radius: 100%;
+      background-size: cover;
+    }
+
+    .alumni-overlay {
+      background-color: rgba(50, 50, 50, 0.65);
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+    }
+
     .rounded-full {
       border-radius: 100%;
     }

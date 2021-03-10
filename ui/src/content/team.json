@@ -6,7 +6,8 @@
     "links": {
       "linkedin": "https://id.linkedin.com/in/joneten-saputra-913816105",
       "instagram": "https://www.instagram.com/jonetensaputra/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Sofian Hadiwijaya",
@@ -16,7 +17,8 @@
       "github": "https://github.com/sofianhw",
       "linkedin": "https://www.linkedin.com/in/sofianhw",
       "instagram": "https://www.instagram.com/sofianhw"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Arief Rahmansyah",
@@ -25,7 +27,8 @@
     "links": {
       "github": "https://github.com/ariefrahmansyah",
       "instagram": "https://www.instagram.com/ariefrahmansyah/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Faisal Morensya",
@@ -34,7 +37,8 @@
     "links": {
       "github": "https://github.com/lloistborn",
       "instagram": "https://www.instagram.com/morensya/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Novita Hidayati",
@@ -44,7 +48,8 @@
       "github": "https://github.com/hinovita",
       "linkedin": "www.linkedin.com/in/hinovitah",
       "instagram": "https://www.instagram.com/hi_novita/"
-    }
+    },
+    "status": "alumni"
   },
   {
     "name": "Roylisto Putra Pradana",
@@ -54,7 +59,8 @@
       "github": "https://github.com/tokanggit",
       "linkedin": "https://www.linkedin.com/in/roylisto/",
       "instagram": "https://www.instagram.com/roylisto/"
-    }
+    },
+    "status": "alumni"
   },
   {
     "name": "Salahudin Al Ayubi",
@@ -65,7 +71,8 @@
       "linkedin": "https://www.linkedin.com/in/salahudin-al-ayubi04/",
       "instagram": "https://www.instagram.com/salyubi/",
       "dribbble": "https://dribbble.com/salyubi"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Annisa Isma Abella",
@@ -75,7 +82,8 @@
       "github": "https://github.com/annisaaismaa",
       "linkedin": "https://www.linkedin.com/in/annisaaismaa",
       "instagram": "https://www.instagram.com/annisaaismaa/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Ahmad Emir Alfatah",
@@ -85,7 +93,8 @@
       "github": "https://github.com/aemiralfath",
       "linkedin": "https://www.linkedin.com/in/aemiralfath/",
       "instagram": "https://www.instagram.com/aemiralfath/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Deny Malyono",
@@ -93,7 +102,8 @@
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Malyono_ijhve9_tvcbm1.jpg",
     "links": {
       "github": "https://github.com/maximalyono"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Rezi Apriliansyah",
@@ -103,7 +113,8 @@
       "github": "https://github.com/apranta",
       "linkedin": "https://www.linkedin.com/in/rezi-apriliansyah/",
       "instagram": "https://www.instagram.com/usernamesalah/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Azhary Arliansyah",
@@ -113,13 +124,15 @@
       "github": "https://github.com/azhry",
       "linkedin": "https://www.linkedin.com/in/azhary-arliansyah",
       "instagram": "https://instagram.com/azharyarliansyah"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Ramanandha Pradana",
     "job": "Product Manager",
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/nandha_ypoaxm_usjqgp.jpg",
-    "links": {}
+    "links": {},
+    "status": "alumni"
   },
   {
     "name": "Rizqi Adi Surya",
@@ -130,7 +143,8 @@
       "linkedin": "https://www.linkedin.com/in/rizqiadisurya/",
       "instagram": "https://www.instagram.com/rizqiadisurya/",
       "dribbble": "https://dribbble.com/rizqiadisurya"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Shabrina Asmarani",
@@ -139,7 +153,8 @@
     "links": {
       "linkedin": "https://www.linkedin.com/in/shabrinaasmarani/",
       "instagram": "https://www.instagram.com/shabrinnaaa/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Riska T. Mardilah",
@@ -148,7 +163,8 @@
     "links": {
       "linkedin": "https://www.linkedin.com/in/riskaatm",
       "instagram": "https://www.instagram.com/riskaa.tm/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Rizky Putra",
@@ -157,7 +173,8 @@
     "links": {
       "github": "https://github.com/Hiraisin",
       "instagram": "https://www.instagram.com/rizky_pn/"
-    }
+    },
+    "status": "alumni"
   },
   {
     "name": "Misbahudin Munadi",
@@ -167,7 +184,8 @@
       "github": "https://github.com/Misbahudin04",
       "linkedin": "https://www.linkedin.com/in/misbahudin-munadi-0557461a0/",
       "instagram": "https://www.instagram.com/save_udin/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Muhammad Risky Ariyanto",
@@ -175,12 +193,14 @@
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/RizkyA_odyezh_ykbjzi.jpg",
     "links": {
       "instagram": "https://www.instagram.com/riskygpd_/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Friski Kasviko",
     "job": "Backend Developer",
-    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Friski_n9nqk0_edvxjc.jpg"
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Friski_n9nqk0_edvxjc.jpg",
+    "status": "active"
   },
   {
     "name": "Taufiqulhakim",
@@ -189,7 +209,8 @@
     "links": {
       "github": "https://github.com/taufik230301",
       "instagram": "https://www.instagram.com/taufiq_hakim23/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Nyayu Putri Aulia",
@@ -197,7 +218,8 @@
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704641/patal/teams/Nyayu_muqc9n_vudesv.jpg",
     "links": {
       "instagram": "https://www.instagram.com/puthauliaa/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Eko Muliyo",
@@ -206,7 +228,8 @@
     "links": {
       "github": "https://github.com/ekomuliyo",
       "instagram": "https://www.instagram.com/ekomuliyo/"
-    }
+    },
+    "status": "active"
   },
   {
     "name": "Nayaka Al Syahreal Kanaka",
@@ -214,6 +237,7 @@
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704637/patal/teams/alka_f09lra_rdscgw.jpg",
     "links": {
       "linkedin": "https://id.linkedin.com/in/alkanayaka"
-    }
+    },
+    "status": "active"
   }
 ]
