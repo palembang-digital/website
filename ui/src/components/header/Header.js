@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 import { Link } from "@reach/router";
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined } from "@ant-design/icons";
 import { Col, Menu, Popover, Row } from "antd";
 
 import Logo from "./Logo";
@@ -39,7 +39,7 @@ const Header = () => {
   const selectedKeys = useMemo(() => {
     if (typeof window !== "undefined") {
       const pathname = window.location.pathname;
-      const menuIndex = menuItems.findIndex(item => item.href === pathname);
+      const menuIndex = menuItems.findIndex((item) => item.href === pathname);
       return [menuIndex.toString()];
     }
   }, [menuItems]);
@@ -49,7 +49,9 @@ const Header = () => {
       {menuItems.map((item, idx) => (
         <Menu.Item key={idx}>
           {item.externalLink ? (
-            <a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a>
+            <a href={item.href} target="_blank" rel="noopener noreferrer">
+              {item.title}
+            </a>
           ) : (
             <Link to={item.href}>{item.title}</Link>
           )}
@@ -60,7 +62,10 @@ const Header = () => {
 
   return (
     <header id="header" className="container">
-      <Row align="middle" justify="space-between" style={{ flexFlow: 'nowrap', height: 96 }}>
+      <Row
+        align="middle"
+        justify="space-between"
+        style={{ flexFlow: "nowrap", height: 96 }}>
         <Col>
           <Logo />
         </Col>
@@ -72,11 +77,12 @@ const Header = () => {
               placement="bottomRight"
               trigger="click"
               content={navigation}
-              arrowPointAtCenter
-            >
-              <MenuOutlined style={{ fontSize: "20px" }}/>
+              arrowPointAtCenter>
+              <MenuOutlined style={{ fontSize: "20px" }} />
             </Popover>
-          ) : navigation}
+          ) : (
+            navigation
+          )}
         </Col>
       </Row>
     </header>
