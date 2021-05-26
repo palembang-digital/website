@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useSize } from "ahooks";
+import { BackTop } from "antd";
 
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
@@ -18,6 +19,7 @@ const PublicLayout = (Component) => {
 
   return (props) => (
     <SiteContext.Provider value={{ isMobile }}>
+      <BackTop />
       <Header />
       <Component {...props} />
       <Footer />

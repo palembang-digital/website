@@ -1,11 +1,18 @@
 import React from "react";
-import { Skeleton } from "antd";
+import { Col, Row } from "antd";
 
 const Landing = () => {
   return (
-    <div className="container">
-      <p>Landing page</p>
-      <Skeleton active />
+    <div>
+      <Row className="container" align="middle" justify="space-between">
+        <Col>
+          <h2>
+            Dari wong kito,
+            <br />
+            untuk wong kito!
+          </h2>
+        </Col>
+      </Row>
     </div>
   );
 };
