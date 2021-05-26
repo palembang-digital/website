@@ -17,6 +17,7 @@ const Startups = () => {
       <Helmet>
         <title>Startup</title>
       </Helmet>
+
       <div className="container">
         <Title className="center">Startup</Title>
         <Paragraph className="center" style={{ marginBottom: "40px" }}>
