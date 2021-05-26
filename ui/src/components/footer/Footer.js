@@ -1,13 +1,23 @@
 import React from "react";
-import { Layout } from "antd";
-
-const { Footer: AntFooter } = Layout;
+import { Col, Divider, Row } from "antd";
 
 const Footer = () => {
   return (
-    <AntFooter style={{ textAlign: "center" }}>
-      Palembang Digital &copy; {new Date().getFullYear()}
-    </AntFooter>
+    <footer id="footer" className="container">
+      <Divider />
+      <Row align="top" justify="space-between">
+        <Col>
+          <p>
+            Graha Edukasi, Jl. MP. Mangkunegara No.5, Bukit Sangkal,
+            <br />
+            Kec. Kalidoni, Kota Palembang, Sumatera Selatan, 30114
+          </p>
+        </Col>
+        <Col>
+          <p>Palembang Digital &copy; Hak Cipta {new Date().getFullYear()}</p>
+        </Col>
+      </Row>
+    </footer>
   );
 };
 
