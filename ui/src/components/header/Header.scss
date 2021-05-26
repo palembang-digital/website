@@ -1,0 +1,12 @@
+.header-menu {
+  border-bottom: 0px !important;
+}
+
+// Popover menu is only used for mobile
+.popover-menu {
+  width: 240px;
+
+  .ant-popover-inner-content {
+    padding: 0;
+  }
+}

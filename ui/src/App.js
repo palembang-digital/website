@@ -4,15 +4,10 @@ import { Location, LocationProvider, Router } from "@reach/router";
 import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 
-import Home from "./Home";
-import { PublicLayout } from "./PublicLayout";
-import { Startup } from "./pages";
+import PublicLayout from "./components/layouts/PublicLayout";
+import { About, Events, Landing, Organizations, Startups } from "./pages";
 
-const Team = loadable(() => import("./Team"));
 const Admin = loadable(() => import("./pages").then((c) => c.Admin));
-const Organization = loadable(() =>
-  import("./pages").then((c) => c.Organization)
-);
 
 ReactGA.initialize("UA-169186060-1", {
   testMode: process.env.NODE_ENV === "test",
@@ -22,11 +17,11 @@ const PublicRoute = ({ render, ...props }) => {
   return render(props);
 };
 
-const App = () => {
-  const trackPageView = (location) => {
-    ReactGA.pageview(location.pathname + location.search);
-  };
+const trackPageView = (location) => {
+  ReactGA.pageview(location.pathname + location.search);
+};
 
+const App = () => {
   return (
     <>
       <Helmet
@@ -35,18 +30,14 @@ const App = () => {
       />
 
       <LocationProvider>
-        <Router primary={false}>
-          <Home path="/" />
-          <Team path="/patal-team" />
+        <Router>
+          <PublicRoute path="/" render={PublicLayout(Landing)} />
+          <PublicRoute path="/events" render={PublicLayout(Events)} />
+          <PublicRoute path="/startups" render={PublicLayout(Startups)} />
+          <PublicRoute path="/organizations" render={PublicLayout(Organizations)} />
+          <PublicRoute path="/about" render={PublicLayout(About)} />
 
           <Admin path="/admin/*" />
-
-          <PublicRoute
-            path="/organizations"
-            render={PublicLayout(Organization)}
-          />
-
-          <PublicRoute path="/startups" render={PublicLayout(Startup)} />
         </Router>
 
         <Location children={(context) => trackPageView(context.location)} />
