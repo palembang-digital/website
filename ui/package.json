@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^7.1.2",
     "ahooks": "^2.5.0",
     "antd": "^4.5.4",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "cloudinary-core": "^2.11.2",
     "cloudinary-react": "^1.6.6",
     "moment": "^2.27.0",
