@@ -13,10 +13,10 @@ const Header = () => {
   const menuMode = isMobile ? "inline" : "horizontal";
 
   const menuItems = [
-    {
-      title: "Acara",
-      href: "/events",
-    },
+    // {
+    //   title: "Event",
+    //   href: "/events",
+    // },
     {
       title: "Startup",
       href: "/startups",
