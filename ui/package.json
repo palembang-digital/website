@@ -4,10 +4,6 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
-    "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-brands-svg-icons": "^5.14.0",
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.11",
     "@loadable/component": "^5.13.1",
     "@reach/router": "^1.3.4",
     "@testing-library/jest-dom": "^4.2.4",
@@ -16,23 +12,18 @@
     "ahooks": "^2.5.0",
     "antd": "^4.5.4",
     "axios": "^0.20.0",
-    "bootstrap": "^4.5.2",
     "cloudinary-core": "^2.11.2",
     "cloudinary-react": "^1.6.6",
-    "lazysizes": "^5.2.2",
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-ga": "^3.1.2",
     "react-helmet": "^6.1.0",
-    "react-scripts": "3.4.0",
-    "react-scroll": "^1.8.1",
-    "reactstrap": "^8.5.1",
-    "typography-theme-fairy-gates": "^0.16.19"
+    "react-scripts": "3.4.0"
   },
   "devDependencies": {
-    "husky": ">=4",
+    "husky": "^6.0.0",
     "lint-staged": ">=10",
     "prettier": "^2.0.5",
     "serve": "^11.3.2",
@@ -47,7 +38,7 @@
     "build-start": "react-scripts build && serve -s build",
     "build-start:compressed": "react-scripts build && terser --compress --mangle -- build/static/js/*.js && serve -s build"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "https://palembangdigital.org",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -63,12 +54,9 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --jsx-bracket-same-line --write"
+    ]
   }
 }
