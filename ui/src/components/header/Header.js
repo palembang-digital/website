@@ -18,6 +18,11 @@ const Header = () => {
     //   href: "/events",
     // },
     {
+      title: "Belajar",
+      href: "https://belajar.palembangdigital.org",
+      externalLink: true,
+    },
+    {
       title: "Startup",
       href: "/startups",
     },

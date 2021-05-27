@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-require("./assets/styles/index.scss");
+require("./assets/scss/index.scss");
 
 ReactDOM.render(<App />, document.getElementById("root"));
 
