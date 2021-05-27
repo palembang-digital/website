@@ -57,7 +57,7 @@ const Startups = () => {
               ))}
           </Row>
         ) : (
-          <Skeleton />
+          <Skeleton active />
         )}
       </div>
     </>

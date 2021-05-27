@@ -6,6 +6,7 @@ import Title from "../../components/title/Title";
 import SiteContext from "../../providers/site/SiteContext";
 import Contact from "./Contact";
 import Team from "./Team";
+import AboutPatal from "./AboutPatal";
 
 const { Paragraph } = Typography;
 
@@ -22,29 +23,7 @@ const About = () => {
       </Helmet>
 
       <div className="container">
-        <Row style={{ marginBottom: 10 }}>
-          <Col>
-            <Title title="Palembang Digital" subtitle="Tentang kami" />
-            <Paragraph>
-              Palembang Digital (Patal) adalah platform komunitas digital
-              pertama dari dan untuk seluruh masyarakat Sumatera Selatan.
-            </Paragraph>
-            <Paragraph>
-              Terbentuk untuk menjawab pertanyaan "dimana saja pelaku digital di
-              Sumatera Selatan?", Palembang Digital berusaha menjadi tempat bagi
-              siapapun yang ingin mengenal, belajar, dan berinteraksi dengan
-              ekosistem digital Sumatera Selatan. Bersama Palembang Digital,
-              kamu bisa belajar dan berbagi ilmu di bidang pemrograman, product
-              development, internet marketing, content creation, startup, AI dan
-              sebagainya.
-            </Paragraph>
-            <Paragraph style={{ fontSize: 18 }}>
-              <span role="img" aria-label="patal-in-emoji">
-                🇮🇩👨‍💻👩‍💻📱🎮🎥🦄🤖
-              </span>
-            </Paragraph>
-          </Col>
-        </Row>
+        <AboutPatal />
 
         <Row align="top" justify="space-between" gutter={[48, 8]}>
           <Col span={isMobile ? 24 : 12}>

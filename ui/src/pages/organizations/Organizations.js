@@ -57,7 +57,7 @@ const Organizations = () => {
               ))}
           </Row>
         ) : (
-          <Skeleton />
+          <Skeleton active />
         )}
       </div>
     </>
