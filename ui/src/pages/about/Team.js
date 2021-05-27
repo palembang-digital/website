@@ -66,7 +66,6 @@ const Team = () => {
                 )}
               </Row>
             </Card>
-            ,
           </Col>
         ))}
     </Row>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useRequest } from "ahooks";
-import { Button, Col, Image, Row, Statistic, Typography } from "antd";
+import { Button, Col, Row, Statistic, Typography } from "antd";
 import SiteContext from "../../providers/site/SiteContext";
 
 const { Paragraph, Text, Title } = Typography;
@@ -44,11 +44,10 @@ const Landing = () => {
           </Button>
         </Col>
         <Col span={isMobile ? 0 : 12} className="center">
-          <Image
-            width={300}
-            preview={false}
+          <img
             alt="Palembang Digital"
             src="https://res.cloudinary.com/patal/image/upload/v1622083241/patal/events/Artboard_1_300x_1_gz2rjw.png"
+            style={{ maxWidth: 300 }}
           />
         </Col>
       </Row>

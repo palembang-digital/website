@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useRequest } from "ahooks";
-import { Card, Col, Image, Row, Skeleton, Typography } from "antd";
+import { Card, Col, Row, Skeleton, Typography } from "antd";
 import { Helmet } from "react-helmet";
 
 import SiteContext from "../../providers/site/SiteContext";
@@ -42,11 +42,10 @@ const Startups = () => {
                     style={{ background: "transparent" }}
                     cover={
                       <div className="center">
-                        <Image
+                        <img
                           alt={startup.name}
                           src={startup.image_url}
                           width={200}
-                          preview={false}
                         />
                       </div>
                     }>
