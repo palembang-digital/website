@@ -1,25 +1,6 @@
 name: Continuous Integration
 on: push
 jobs:
-  test-ui:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14'
-    - name: Install UI dependencies
-      run: make init-ui
-    - name: Test UI
-      run: make test-ui
-    - name: Publish UI's test coverage
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        directory: ./ui/coverage
-        flags: ui
-        name: ui-coverage
-
   test-server:
     runs-on: ubuntu-latest
     steps:

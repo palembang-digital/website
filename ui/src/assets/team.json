@@ -1,0 +1,245 @@
+[
+  {
+    "name": "Joneten",
+    "job": "Chairman",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Joneten_b4jmzu_luarzo.jpg",
+    "links": {
+      "linkedin": "https://id.linkedin.com/in/joneten-saputra-913816105",
+      "instagram": "https://instagram.com/jonetensaputra"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Sofian Hadiwijaya",
+    "job": "Advisor / Patron",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/Sofian_d0idbk_ny2llg.jpg",
+    "links": {
+      "github": "https://github.com/sofianhw",
+      "linkedin": "https://www.linkedin.com/in/sofianhw",
+      "instagram": "https://instagram.com/sofianhw"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Arief Rahmansyah",
+    "job": "Technical Architect",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1622137911/patal/events/2020_s9xwvw.jpg",
+    "links": {
+      "github": "https://github.com/ariefrahmansyah",
+      "linkedin": "https://linkedin.com/in/ariefrahmansyah",
+      "instagram": "https://instagram.com/ariefrahmansyah",
+      "web": "https://ariefrahmansyah.dev"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Faisal Morensya",
+    "job": "Engineering Manager",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704639/patal/teams/Faisal_o9x0pl_nobe9n.jpg",
+    "links": {
+      "github": "https://github.com/lloistborn",
+      "instagram": "https://instagram.com/morensya"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Novita Hidayati",
+    "job": "Product Manager",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Novita_morxod_fkkvcq.jpg",
+    "links": {
+      "github": "https://github.com/hinovita",
+      "linkedin": "www.linkedin.com/in/hinovitah",
+      "instagram": "https://instagram.com/hi_novita"
+    },
+    "status": "alumni"
+  },
+  {
+    "name": "Roylisto Putra Pradana",
+    "job": "Facilitator",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/Roylisto_c6g42w_zhl66t.jpg",
+    "links": {
+      "github": "https://github.com/tokanggit",
+      "linkedin": "https://www.linkedin.com/in/roylisto",
+      "instagram": "https://instagram.com/roylisto"
+    },
+    "status": "alumni"
+  },
+  {
+    "name": "Salahudin Al Ayubi",
+    "job": "UI/UX Lead",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/Salahudin_ugeijp_a21lfa.jpg",
+    "links": {
+      "github": "https://github.com/salahudinalyb",
+      "linkedin": "https://www.linkedin.com/in/salahudin-al-ayubi04",
+      "instagram": "https://instagram.com/salyubi",
+      "dribbble": "https://dribbble.com/salyubi"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Annisa Isma Abella",
+    "job": "Event Management Lead",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704638/patal/teams/Annisa_iz4s8b_thn4vg.jpg",
+    "links": {
+      "github": "https://github.com/annisaaismaa",
+      "linkedin": "https://www.linkedin.com/in/annisaaismaa",
+      "instagram": "https://instagram.com/annisaaismaa"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Ahmad Emir Alfatah",
+    "job": "Student Partner Lead",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704638/patal/teams/Emir_mymzmg_mcj61z.jpg",
+    "links": {
+      "github": "https://github.com/aemiralfath",
+      "linkedin": "https://www.linkedin.com/in/aemiralfath",
+      "instagram": "https://instagram.com/aemiralfath"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Deny Malyono",
+    "job": "Site Reliability Engineer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Malyono_ijhve9_tvcbm1.jpg",
+    "links": {
+      "github": "https://github.com/maximalyono"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Rezi Apriliansyah",
+    "job": "Senior Backend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704641/patal/teams/Rezi_fz2dhk_jk8tnq.jpg",
+    "links": {
+      "github": "https://github.com/apranta",
+      "linkedin": "https://www.linkedin.com/in/rezi-apriliansyah",
+      "instagram": "https://instagram.com/usernamesalah"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Azhary Arliansyah",
+    "job": "Senior Frontend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Azhary_uolxtt_fsbebc.jpg",
+    "links": {
+      "github": "https://github.com/azhry",
+      "linkedin": "https://www.linkedin.com/in/azhary-arliansyah",
+      "instagram": "https://instagram.com/azharyarliansyah"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Ramanandha Pradana",
+    "job": "Product Manager",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/nandha_ypoaxm_usjqgp.jpg",
+    "links": {},
+    "status": "alumni"
+  },
+  {
+    "name": "Rizqi Adi Surya",
+    "job": "UI/UX Researcher",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704641/patal/teams/RizkiAdi_nl6rat_pgzqux.jpg",
+    "links": {
+      "github": "https://github.com/srizqiadisurya",
+      "linkedin": "https://www.linkedin.com/in/rizqiadisurya",
+      "instagram": "https://instagram.com/rizqiadisurya",
+      "dribbble": "https://dribbble.com/rizqiadisurya"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Shabrina Asmarani",
+    "job": "Copywriter",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/Shabrina_pf5tmt_krxxnv.jpg",
+    "links": {
+      "linkedin": "https://www.linkedin.com/in/shabrinaasmarani",
+      "instagram": "https://instagram.com/shabrinnaaa"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Riska T. Mardilah",
+    "job": "Student Partner",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704641/patal/teams/Riska_mvc7yo_ob4bds.jpg",
+    "links": {
+      "linkedin": "https://www.linkedin.com/in/riskaatm",
+      "instagram": "https://instagram.com/riskaa.tm"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Rizky Putra",
+    "job": "Backend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/RizkyP_sccirx_ww2eku.jpg",
+    "links": {
+      "github": "https://github.com/Hiraisin",
+      "instagram": "https://instagram.com/rizky_pn"
+    },
+    "status": "alumni"
+  },
+  {
+    "name": "Misbahudin Munadi",
+    "job": "Frontend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704643/patal/teams/Udin_hnzckv_knub1k.jpg",
+    "links": {
+      "github": "https://github.com/Misbahudin04",
+      "linkedin": "https://www.linkedin.com/in/misbahudin-munadi-0557461a0",
+      "instagram": "https://instagram.com/save_udin"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Muhammad Risky Ariyanto",
+    "job": "Content Writer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/RizkyA_odyezh_ykbjzi.jpg",
+    "links": {
+      "instagram": "https://instagram.com/riskygpd_"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Friski Kasviko",
+    "job": "Backend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Friski_n9nqk0_edvxjc.jpg",
+    "status": "active"
+  },
+  {
+    "name": "Taufiqulhakim",
+    "job": "Frontend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704643/patal/teams/Taufiq_yxx29j_tcfaj6.jpg",
+    "links": {
+      "github": "https://github.com/taufik230301",
+      "instagram": "https://instagram.com/taufiq_hakim23"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Nyayu Putri Aulia",
+    "job": "Graphic Designer & Social Media",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704641/patal/teams/Nyayu_muqc9n_vudesv.jpg",
+    "links": {
+      "instagram": "https://instagram.com/puthauliaa"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Eko Muliyo",
+    "job": "Frontend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704638/patal/teams/Eko_dhu74o_gplid4.jpg",
+    "links": {
+      "github": "https://github.com/ekomuliyo",
+      "instagram": "https://instagram.com/ekomuliyo"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Nayaka Al Syahreal Kanaka",
+    "job": "Video Editor",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704637/patal/teams/alka_f09lra_rdscgw.jpg",
+    "links": {
+      "linkedin": "https://id.linkedin.com/in/alkanayaka"
+    },
+    "status": "active"
+  }
+]
