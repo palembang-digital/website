@@ -31,7 +31,7 @@ const Medias = () => {
           Liputan Media
         </Title>
 
-        <Row align="middle" justify="center" gutter={[48, 48]}>
+        <Row align="middle" justify="center" gutter={[32, 48]}>
           {medias.map((media, idx) => (
             <Col key={idx} span={isMobile ? 12 : 4}>
               <img alt={media} src={media} height={"100%"} width={100} />

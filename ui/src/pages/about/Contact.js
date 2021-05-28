@@ -69,7 +69,7 @@ const Contact = () => {
         <img
           alt="Palembang Digital"
           src="https://res.cloudinary.com/patal/image/upload/v1622083241/patal/events/Artboard_1_300x_1_gz2rjw.png"
-          style={{ maxWidth: 300 }}
+          style={{ maxWidth: 280 }}
         />
       </Col>
     </Row>
