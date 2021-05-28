@@ -39,7 +39,7 @@
     "build-start": "react-scripts build && serve -s build",
     "build-start:compressed": "react-scripts build && terser --compress --mangle -- build/static/js/*.js && serve -s build"
   },
-  "proxy": "https://palembangdigital.org",
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },
