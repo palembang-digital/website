@@ -7,7 +7,9 @@ const Logo = () => (
   <Link to="/" id="logo">
     <img
       alt="Palembang Digital"
-      src="https://res.cloudinary.com/dmtvswpik/image/upload/c_scale,h_50/v1598693277/patal-assets/logo_iapkkg.png"
+      src="https://res.cloudinary.com/dmtvswpik/image/upload/c_scale,h_80/v1598693277/patal-assets/logo_iapkkg.png"
+      height={40}
+      width={40}
     />
   </Link>
 );

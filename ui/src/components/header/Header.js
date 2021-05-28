@@ -12,7 +12,7 @@ const Header = () => {
   const { isMobile } = useContext(SiteContext);
   const menuMode = isMobile ? "inline" : "horizontal";
 
-  const menuItems = [
+  const menuItems = useMemo(() => [
     // {
     //   title: "Event",
     //   href: "/events",
@@ -39,7 +39,7 @@ const Header = () => {
       href: "https://saweria.co/palembangdigital",
       externalLink: true,
     },
-  ];
+  ], []);
 
   const selectedKeys = useMemo(() => {
     if (typeof window !== "undefined") {

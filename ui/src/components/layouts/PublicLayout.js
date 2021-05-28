@@ -1,10 +1,12 @@
 import React, { useMemo } from "react";
+import loadable from "@loadable/component";
 import { useSize } from "ahooks";
 import { BackTop } from "antd";
 
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
 import SiteContext from "../../providers/site/SiteContext";
+
+const Header = loadable(() => import("../header/Header"));
+const Footer = loadable(() => import("../footer/Footer"));
 
 const RESPONSIVE_MOBILE_WIDTH = 768;
 
