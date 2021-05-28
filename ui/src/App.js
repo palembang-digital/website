@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import PublicLayout from "./components/layouts/PublicLayout";
 import { About, Events, Landing, Organizations, Startups } from "./pages";
 
-const Admin = loadable(() => import("./pages").then((c) => c.Admin));
+const Admin = loadable(() => import("./pages").then(c => c.Admin));
 
 ReactGA.initialize("UA-169186060-1", {
   testMode: process.env.NODE_ENV === "test",
