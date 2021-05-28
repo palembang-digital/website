@@ -16,8 +16,8 @@ const Footer = () => {
     <footer
       className="container"
       style={{ color: "#BFB5B5", paddingBottom: 48, paddingTop: 48 }}>
-      <Row align="top" justify={isMobile ? "" : "center"} gutter={[48, 8]}>
-        <Col>
+      <Row align="top" justify={isMobile ? "" : "center"} gutter={[32, 8]}>
+        <Col span={isMobile ? 24 : ""}>
           <WhatsAppOutlined />{" "}
           <a
             href="https://api.whatsapp.com/send?phone=+6282282512539"
@@ -27,7 +27,7 @@ const Footer = () => {
             0822-8251-2539
           </a>
         </Col>
-        <Col>
+        <Col span={isMobile ? 24 : ""}>
           <MailOutlined />{" "}
           <a
             href="mailto:palembangdigital01@gmail.com"
@@ -37,7 +37,7 @@ const Footer = () => {
             palembangdigital01@gmail.com
           </a>
         </Col>
-        <Col>
+        <Col span={isMobile ? 24 : ""}>
           <InstagramOutlined />{" "}
           <a
             href="https://instagram.com/palembang_digital"
@@ -47,7 +47,7 @@ const Footer = () => {
             palembang_digital
           </a>
         </Col>
-        <Col>
+        <Col span={isMobile ? 24 : ""}>
           <YoutubeOutlined />{" "}
           <a
             href="https://www.youtube.com/channel/UCc2Wluk3SISRSNzNlxaQ1Fw"

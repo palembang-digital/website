@@ -10,7 +10,7 @@ const UpcomingEvents = ({ events }) => {
   const { isMobile } = useContext(SiteContext);
 
   return (
-    <Row align="top" justify="space-between" gutter={[48, 48]}>
+    <Row align="top" justify="space-between" gutter={[32, 48]}>
       {events
         .sort(
           (a, b) =>
@@ -23,7 +23,7 @@ const UpcomingEvents = ({ events }) => {
           <Col key={idx} span={isMobile ? 24 : 8}>
             <Card
               hoverable
-              cover={<img alt={event.title} src={event.image_url} height={380} width={380} />}
+              cover={<img alt={event.title} src={event.image_url} />}
               onClick={() => navigate(event.registration_url)}>
               <Text strong>{event.title}</Text>
             </Card>

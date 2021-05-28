@@ -10,7 +10,7 @@ const About = () => {
   const { isMobile } = useContext(SiteContext);
 
   return (
-    <Row align="top" justify="space-between" gutter={[48, 8]}>
+    <Row align="top" justify="space-between" gutter={[32, 8]}>
       <Col span={isMobile ? 24 : 12}>
         <Title title="Visi" titleLevel={3} />
         <Paragraph>
