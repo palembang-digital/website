@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Col, Row, Typography } from "antd";
+import { RightOutlined } from '@ant-design/icons';
 
 import SiteContext from "../../providers/site/SiteContext";
 
@@ -13,7 +14,7 @@ const Banner = () => {
       className="container"
       align="middle"
       justify="space-between"
-      style={{ height: 320 }}>
+      style={{ marginBottom: 40, height: 400 }}>
       <Col span={isMobile ? 24 : 12}>
         <Title level={isMobile ? 2 : 1}>
           Dari wong kito,
@@ -34,7 +35,7 @@ const Banner = () => {
           target="_blank"
           rel="noopener noreferrer"
           style={{ paddingLeft: "25px", paddingRight: "25px" }}>
-          Bergabung Sekarang
+          Bergabung Sekarang <RightOutlined style={{ fontSize: 14 }} />
         </Button>
       </Col>
 
