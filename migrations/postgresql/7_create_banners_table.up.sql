@@ -1,8 +1,6 @@
 CREATE TABLE IF NOT EXISTS banners (
     id SERIAL PRIMARY KEY,
     text TEXT NOT NULL,
-    is_active BOOLEAN DEFAULT false,
-    priority INTEGER DEFAULT -1,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP
 );

@@ -492,12 +492,6 @@ var doc = `{
                 "id": {
                     "type": "integer"
                 },
-                "is_active": {
-                    "type": "boolean"
-                },
-                "priority": {
-                    "type": "integer"
-                },
                 "text": {
                     "type": "string"
                 },

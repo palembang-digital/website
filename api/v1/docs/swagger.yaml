@@ -7,10 +7,6 @@ definitions:
         type: string
       id:
         type: integer
-      is_active:
-        type: boolean
-      priority:
-        type: integer
       text:
         type: string
       updated_at:

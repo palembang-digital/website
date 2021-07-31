@@ -31,8 +31,6 @@ func (s *bannersService) ListBanners(ctx context.Context) ([]models.Banner, erro
 		SELECT
 			id
 			, text
-			, is_active
-			, priority
 			, created_at
 			, updated_at
 		FROM banners`
@@ -50,8 +48,6 @@ func (s *bannersService) GetBanner(ctx context.Context, id int64) (models.Banner
 		SELECT
 			id
 			, text
-			, is_active
-			, priority
 			, created_at
 			, updated_at
 		FROM banners
@@ -66,10 +62,10 @@ func (s *bannersService) GetBanner(ctx context.Context, id int64) (models.Banner
 }
 
 func (s *bannersService) CreateBanner(ctx context.Context, banner models.Banner) (models.Banner, error) {
-	query := "INSERT INTO banners (text, is_active, priority) VALUES ($1, $2, $3) RETURNING id"
+	query := "INSERT INTO banners (text) VALUES ($1) RETURNING id"
 
 	var id int64
-	if err := s.db.QueryRowxContext(ctx, query, banner.Text, banner.IsActive, banner.Priority).Scan(&id); err != nil {
+	if err := s.db.QueryRowxContext(ctx, query, banner.Text).Scan(&id); err != nil {
 		return models.Banner{}, fmt.Errorf("insert new banner: %s", err)
 	}
 
