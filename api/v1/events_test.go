@@ -31,7 +31,7 @@ func TestAPI_listEvents(t *testing.T) {
 	mockEventsService := &mocks.EventsService{}
 	mockEventsService.On("ListEvents", mock.Anything).Return([]models.Event{}, nil)
 
-	api := NewAPI(mockEventsService, nil, nil, "", "")
+	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.listEvents(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
 		assert.Equal(t, "[]\n", rec.Body.String())
@@ -51,7 +51,7 @@ func TestAPI_getEvent(t *testing.T) {
 	mockEventsService := &mocks.EventsService{}
 	mockEventsService.On("GetEvent", mock.Anything, int64(1)).Return(models.Event{}, nil)
 
-	api := NewAPI(mockEventsService, nil, nil, "", "")
+	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.getEvent(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
 		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\"}\n", rec.Body.String())
@@ -78,7 +78,7 @@ func TestAPI_createEvent(t *testing.T) {
 	mockEventsService := &mocks.EventsService{}
 	mockEventsService.On("CreateEvent", mock.Anything, event).Return(event, nil)
 
-	api := NewAPI(mockEventsService, nil, nil, "", "")
+	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.createEvent(c)) {
 		assert.Equal(t, http.StatusCreated, rec.Code)
 		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\"}\n", rec.Body.String())
@@ -98,7 +98,7 @@ func TestAPI_deleteEvent(t *testing.T) {
 	mockEventsService := &mocks.EventsService{}
 	mockEventsService.On("DeleteEvent", mock.Anything, int64(1)).Return(nil)
 
-	api := NewAPI(mockEventsService, nil, nil, "", "")
+	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.deleteEvent(c)) {
 		assert.Equal(t, http.StatusNoContent, rec.Code)
 		assert.Equal(t, "", rec.Body.String())

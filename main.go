@@ -58,6 +58,7 @@ func main() {
 	defer db.Close()
 
 	log.Println("Initializing services ...")
+	bannersService := services.NewBannersService(db)
 	eventsService := services.NewEventsService(db)
 	organizationsService := services.NewOrganizationsService(db)
 	startupsService := services.NewStartupsService(db)
@@ -76,7 +77,7 @@ func main() {
 	e.GET("/ping", ping)
 
 	// Serve API
-	api := api.NewAPI(eventsService, organizationsService, startupsService, cfg.AdminUsername, cfg.AdminPassword)
+	api := api.NewAPI(bannersService, eventsService, organizationsService, startupsService, cfg.AdminUsername, cfg.AdminPassword)
 	api.Register(e.Group("/api/v1", middleware.Logger()))
 
 	// Serve UI

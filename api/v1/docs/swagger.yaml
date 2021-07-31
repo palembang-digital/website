@@ -1,5 +1,22 @@
 basePath: /api/v1
 definitions:
+  models.Banner:
+    properties:
+      created_at:
+        example: "2020-04-21T00:00:00Z"
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      priority:
+        type: integer
+      text:
+        type: string
+      updated_at:
+        example: "2020-04-21T00:00:00Z"
+        type: string
+    type: object
   models.Event:
     properties:
       created_at:
@@ -65,6 +82,81 @@ info:
   title: Palembang Digital API
   version: 1.0.0
 paths:
+  /banners:
+    get:
+      description: Get the list of banners
+      operationId: list-banners
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Banner'
+            type: array
+      summary: List banners
+      tags:
+      - banners
+    post:
+      description: Create a new banner
+      operationId: create-banner
+      parameters:
+      - description: Create banner
+        in: body
+        name: banner
+        required: true
+        schema:
+          $ref: '#/definitions/models.Banner'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Banner'
+      summary: Create a new banner
+      tags:
+      - banners
+  /banners/{id}:
+    delete:
+      description: Delete an banner by id
+      operationId: delete-banner
+      parameters:
+      - description: Banner ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+      summary: Delete an banner
+      tags:
+      - banners
+    get:
+      description: Get an banner by id
+      operationId: get-banner
+      parameters:
+      - description: Banner ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Banner'
+      summary: Get an banner
+      tags:
+      - banners
   /events:
     get:
       description: Get the list of events

@@ -32,6 +32,118 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/banners": {
+            "get": {
+                "description": "Get the list of banners",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "banners"
+                ],
+                "summary": "List banners",
+                "operationId": "list-banners",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Banner"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new banner",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "banners"
+                ],
+                "summary": "Create a new banner",
+                "operationId": "create-banner",
+                "parameters": [
+                    {
+                        "description": "Create banner",
+                        "name": "banner",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Banner"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Banner"
+                        }
+                    }
+                }
+            }
+        },
+        "/banners/{id}": {
+            "get": {
+                "description": "Get an banner by id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "banners"
+                ],
+                "summary": "Get an banner",
+                "operationId": "get-banner",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Banner ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Banner"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an banner by id",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "banners"
+                ],
+                "summary": "Delete an banner",
+                "operationId": "delete-banner",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Banner ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/events": {
             "get": {
                 "description": "Get the list of events",
@@ -370,6 +482,31 @@ var doc = `{
         }
     },
     "definitions": {
+        "models.Banner": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "example": "2020-04-21T00:00:00Z"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "priority": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2020-04-21T00:00:00Z"
+                }
+            }
+        },
         "models.Event": {
             "type": "object",
             "properties": {
