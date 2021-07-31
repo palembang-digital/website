@@ -10,6 +10,7 @@ import (
 // API can register a set of endpoints in a router and handle
 // them using the provided storage.
 type API struct {
+	bannersService       services.BannersService
 	eventsService        services.EventsService
 	organizationsService services.OrganizationsService
 	startupsService      services.StartupsService
@@ -19,11 +20,15 @@ type API struct {
 }
 
 // NewAPI returns an initialized API type.
-func NewAPI(eventsService services.EventsService,
+func NewAPI(
+	bannersService services.BannersService,
+	eventsService services.EventsService,
 	organizationsService services.OrganizationsService,
 	startupsService services.StartupsService,
-	adminUsername, adminPassword string) *API {
+	adminUsername, adminPassword string,
+) *API {
 	return &API{
+		bannersService:       bannersService,
 		eventsService:        eventsService,
 		organizationsService: organizationsService,
 		startupsService:      startupsService,
@@ -35,6 +40,12 @@ func NewAPI(eventsService services.EventsService,
 
 // Register the API's endpoints in the given router.
 func (api *API) Register(g *echo.Group) {
+	// Banners API
+	g.GET("/banners", api.listBanners)
+	g.GET("/banners/:id", api.getBanner)
+	g.POST("/banners", api.createBanner, middleware.BasicAuth(api.adminValidator))
+	g.DELETE("/banners/:id", api.deleteBanner, middleware.BasicAuth(api.adminValidator))
+
 	// Events API
 	g.GET("/events", api.listEvents)
 	g.GET("/events/:id", api.getEvent)

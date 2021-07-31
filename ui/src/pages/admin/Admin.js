@@ -9,23 +9,55 @@ import Organizations from "./organization/Organizations";
 import CreateOrganization from "./organization/CreateOrganization";
 import Startups from "./startup/Startups";
 import CreateStartup from "./startup/CreateStartup";
+import Banners from "./banner/Banners";
+import CreateBanner from "./banner/CreateBanner";
 
 const { Header, Content, Footer } = Layout;
 
 const Admin = () => {
+  const menuItems = [
+    {
+      label: "Banners",
+      listPage: "/admin/banners",
+      routes: [
+        <Banners path="/banners" />,
+        <CreateBanner path="/banners/create" />,
+      ]
+    },
+    {
+      label: "Events",
+      listPage: "/admin/events",
+      routes: [
+        <Events path="/events" />,
+        <CreateEvent path="/events/create" />,
+      ]
+    },
+    {
+      label: "Organizations",
+      listPage: "/admin/organizations",
+      routes: [
+        <Organizations path="/organizations" />,
+        <CreateOrganization path="/organizations/create" />,
+      ]
+    },
+    {
+      label: "Startup",
+      listPage: "/admin/startups",
+      routes: [
+        <Startups path="/startups" />,
+        <CreateStartup path="/startups/create" />,
+      ]
+    },
+  ]
   return (
     <Layout theme="light">
       <Header>
         <Menu theme="dark" mode="horizontal">
-          <Menu.Item key="1">
-            <Link to="/admin/events">Events</Link>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Link to="/admin/organizations">Organizations</Link>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Link to="/admin/startups">Startups</Link>
-          </Menu.Item>
+          {menuItems.map((item, idx) => (
+            <Menu.Item key={idx}>
+              <Link to={`${item.listPage}`}>{item.label}</Link>
+            </Menu.Item>
+          ))}
         </Menu>
       </Header>
 
@@ -39,18 +71,11 @@ const Admin = () => {
           style={{ background: "#fff", padding: "24px", minHeight: "280px" }}
         >
           <Router>
-            <Events path="/events" />
-            <CreateEvent path="/events/create" />
-          </Router>
-
-          <Router>
-            <Organizations path="/organizations" />
-            <CreateOrganization path="/organizations/create" />
-          </Router>
-
-          <Router>
-            <Startups path="/startups" />
-            <CreateStartup path="/startups/create" />
+            {menuItems.map(item => (
+              item.routes && item.routes.map(route => (
+                route
+              ))
+            ))}
           </Router>
         </Layout>
       </Content>

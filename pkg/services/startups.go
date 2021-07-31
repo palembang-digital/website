@@ -36,7 +36,7 @@ func (s *startupsService) ListStartups(ctx context.Context) ([]models.Startup, e
 			, updated_at
 		FROM startups`
 
-	var startups []models.Startup
+	startups := []models.Startup{}
 	if err := s.db.SelectContext(ctx, &startups, query); err != nil {
 		return nil, fmt.Errorf("get the list of startups: %s", err)
 	}

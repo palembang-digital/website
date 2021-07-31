@@ -1,7 +1,16 @@
+include .env.sample
+export
+
 API_DOCS_PATH = api/v1/docs
+BIN_NAME=patal
 UI_PATH = ui
 
 all: init test build
+
+.PHONY: setup
+setup:
+	@echo "> Setting up tools ..."
+	@test -x ${GOPATH}/bin/swag || go get -u github.com/swaggo/swag/cmd/swag
 
 .PHONY: init
 init: init-ui init-server
@@ -16,7 +25,6 @@ init-server:
 	@echo "> Installing the server dependencies ..."
 	@go mod tidy -v
 	@go get -v ./...
-	@go install github.com/swaggo/swag/cmd/swag
 
 .PHONY: test
 test: test-ui test-server
@@ -43,7 +51,12 @@ build-ui:
 .PHONY: build-server
 build-server: gen-swagger
 	@echo "> Building the server binary ..."
-	@rm -rf bin && go build -o bin/patal .
+	@rm -rf bin && go build -o bin/${BIN_NAME} .
+
+.PHONY: run
+run:
+	@echo "> Running application ..."
+	@./bin/${BIN_NAME}
 
 .PHONY: lint-ui
 lint-ui:
@@ -55,3 +68,8 @@ gen-swagger:
 	@echo "Updating API documentation..."
 	@rm -rf ${API_DOCS_PATH}
 	@swag init -o ${API_DOCS_PATH}
+
+.PHONY: local-db
+local-db:
+	@echo "> Starting up local database ..."
+	@docker-compose up -d postgres

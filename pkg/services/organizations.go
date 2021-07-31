@@ -36,7 +36,7 @@ func (s *organizationsService) ListOrganizations(ctx context.Context) ([]models.
 			, updated_at
 		FROM organizations`
 
-	var organizations []models.Organization
+	organizations := []models.Organization{}
 	if err := s.db.SelectContext(ctx, &organizations, query); err != nil {
 		return nil, fmt.Errorf("get the list of organizations: %s", err)
 	}

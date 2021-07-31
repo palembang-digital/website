@@ -39,7 +39,7 @@ func (s *eventsService) ListEvents(ctx context.Context) ([]models.Event, error) 
 			, updated_at
 		FROM events`
 
-	var events []models.Event
+	events := []models.Event{}
 	if err := s.db.SelectContext(ctx, &events, query); err != nil {
 		return nil, fmt.Errorf("get the list of events: %s", err)
 	}

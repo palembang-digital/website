@@ -4,7 +4,7 @@ COPY ui .
 RUN yarn
 RUN yarn build
 
-FROM golang:1.14-alpine as go-builder
+FROM golang:1.16-alpine as go-builder
 WORKDIR /src
 COPY . .
 COPY --from=node-builder /src/ui/build ./ui/build

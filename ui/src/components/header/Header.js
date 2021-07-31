@@ -7,16 +7,13 @@ import Logo from "./Logo";
 import SiteContext from "../../providers/site/SiteContext";
 
 import "./Header.scss";
+import Banner from "./Banner";
 
 const Header = () => {
   const { isMobile } = useContext(SiteContext);
   const menuMode = isMobile ? "inline" : "horizontal";
 
   const menuItems = useMemo(() => [
-    // {
-    //   title: "Event",
-    //   href: "/events",
-    // },
     {
       title: "Belajar",
       href: "https://belajar.palembangdigital.org",
@@ -66,31 +63,35 @@ const Header = () => {
   );
 
   return (
-    <header id="header" className="container">
-      <Row
-        align="middle"
-        justify="space-between"
-        style={{ flexFlow: "nowrap", height: 96 }}>
-        <Col>
-          <Logo />
-        </Col>
+    <>
+      <Banner />
 
-        <Col>
-          {isMobile ? (
-            <Popover
-              overlayClassName="popover-menu"
-              placement="bottomRight"
-              trigger="click"
-              content={navigation}
-              arrowPointAtCenter>
-              <MenuOutlined style={{ fontSize: "20px" }} />
-            </Popover>
-          ) : (
-            navigation
-          )}
-        </Col>
-      </Row>
-    </header>
+      <header id="header" className="container">
+        <Row
+          align="middle"
+          justify="space-between"
+          style={{ flexFlow: "nowrap", height: 96 }}>
+          <Col>
+            <Logo />
+          </Col>
+
+          <Col>
+            {isMobile ? (
+              <Popover
+                overlayClassName="popover-menu"
+                placement="bottomRight"
+                trigger="click"
+                content={navigation}
+                arrowPointAtCenter>
+                <MenuOutlined style={{ fontSize: "20px" }} />
+              </Popover>
+            ) : (
+              navigation
+            )}
+          </Col>
+        </Row>
+      </header>
+    </>
   );
 };
 
