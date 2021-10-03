@@ -35,6 +35,8 @@ definitions:
       updated_at:
         example: "2020-04-21T00:00:00Z"
         type: string
+      youtube_id:
+        type: string
     type: object
   models.Organization:
     properties:
@@ -245,12 +247,12 @@ paths:
       tags:
       - organizations
     post:
-      description: Create a new event
-      operationId: create-event
+      description: Create a new organization
+      operationId: create-organization
       parameters:
-      - description: Create event
+      - description: Create organization
         in: body
-        name: event
+        name: organization
         required: true
         schema:
           $ref: '#/definitions/models.Organization'
@@ -261,13 +263,13 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/models.Organization'
-      summary: Create a new event
+      summary: Create a new organization
       tags:
       - organizations
   /organizations/{id}:
     delete:
-      description: Delete an event by id
-      operationId: delete-event
+      description: Delete an organization by id
+      operationId: delete-organization
       parameters:
       - description: Organization ID
         in: path
@@ -281,12 +283,12 @@ paths:
           description: No Content
           schema:
             type: string
-      summary: Delete an event
+      summary: Delete an organization
       tags:
       - organizations
     get:
-      description: Get an event by id
-      operationId: get-event
+      description: Get an organization by id
+      operationId: get-organization
       parameters:
       - description: Organization ID
         in: path
@@ -300,7 +302,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Organization'
-      summary: Get an event
+      summary: Get an organization
       tags:
       - organizations
   /startups:
@@ -320,12 +322,12 @@ paths:
       tags:
       - startups
     post:
-      description: Create a new event
-      operationId: create-event
+      description: Create a new startup
+      operationId: create-startup
       parameters:
-      - description: Create event
+      - description: Create startup
         in: body
-        name: event
+        name: startup
         required: true
         schema:
           $ref: '#/definitions/models.Startup'
@@ -336,13 +338,13 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/models.Startup'
-      summary: Create a new event
+      summary: Create a new startup
       tags:
       - startups
   /startups/{id}:
     delete:
-      description: Delete an event by id
-      operationId: delete-event
+      description: Delete an startup by id
+      operationId: delete-startup
       parameters:
       - description: Startup ID
         in: path
@@ -356,12 +358,12 @@ paths:
           description: No Content
           schema:
             type: string
-      summary: Delete an event
+      summary: Delete an startup
       tags:
       - startups
     get:
-      description: Get an event by id
-      operationId: get-event
+      description: Get an startup by id
+      operationId: get-startup
       parameters:
       - description: Startup ID
         in: path
@@ -375,7 +377,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Startup'
-      summary: Get an event
+      summary: Get an startup
       tags:
       - startups
 swagger: "2.0"
