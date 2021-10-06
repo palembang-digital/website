@@ -5,7 +5,7 @@ import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 
 import PublicLayout from "./components/layouts/PublicLayout";
-import { About, Events, Landing, Organizations, Startups, DetailEvent } from "./pages";
+import { About, Events, Landing, Organizations, Startups, EventsDetailUpcoming, EventsDetailDone } from "./pages";
 
 const Admin = loadable(() => import("./pages").then(c => c.Admin));
 
@@ -33,7 +33,8 @@ const App = () => {
         <Router>
           <PublicRoute path="/" render={PublicLayout(Landing)} />
           <PublicRoute path="/events" render={PublicLayout(Events)} />
-          <PublicRoute path="/events/detail" render={PublicLayout(DetailEvent)} />
+          <PublicRoute path="/events/detailupcoming" render={PublicLayout(EventsDetailUpcoming)} />
+          <PublicRoute path="/events/detaildone" render={PublicLayout(EventsDetailDone)} />
           <PublicRoute path="/startups" render={PublicLayout(Startups)} />
           <PublicRoute path="/organizations" render={PublicLayout(Organizations)} />
           <PublicRoute path="/about" render={PublicLayout(About)} />
