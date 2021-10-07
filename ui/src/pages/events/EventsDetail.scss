@@ -1,5 +1,5 @@
 .title {
-    margin: 64px 0 22px 0;
+    margin: 64px 0 48px 0;
 
     h1 {
         color: #2C6471;
@@ -20,41 +20,64 @@
 
 .content {
     margin-bottom: 57px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21.94px;
+
     img {
-        width: 512px;
+        width: 90%;
+        height: auto;
     }
 
-    .text {
-        p {
-            font-size: 25px;
-            font-weight: 500;
-            line-height: 30.48px;
+    .img-thumb {
+        img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 36px;
         }
+    }
+
+    .register {
+        img {
+            width: 24px;
+            margin-right: 28px;
+        }
+    }
+
+    .content-desc {
+        margin-top: 40px;
     }
 }
 
-.register {
-    p {
-        img {
-            margin-right: 28px;
-        }
+.button {
 
-        font-size: 40px;
-        font-weight: 600;
-        line-height: 48.76px;
-    }
     .ant-btn {
         padding: 10px 25px;
         height: 80px;
-        background-color: #2C6471; 
+        background-color: #2C6471;
         font-size: 40px;
         font-weight: 600;
         border: none;
     }
+
     .ant-btn:hover {
-        background-color: #204953;  
+        background-color: #204953;
     }
+
     .ant-btn:focus {
         background-color: #204953;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .button {
+        .ant-btn {
+            padding: 5px 12px;
+            font-size: 20px;
+            height: 40px;
+        }
+    }
+    .content {
+        margin-bottom: 20px;
     }
 }

@@ -1,11 +1,7 @@
 import React from "react";
 import { Col, Row, Button } from 'antd'
 import ImageTes from '../../assets/img/image-tes.png'
-import iconDate from '../../assets/icons/UpcomingIcons/Date.png'
-import iconFree from '../../assets/icons/UpcomingIcons/Free.png'
-import iconLocation from '../../assets/icons/UpcomingIcons/Location.png'
-import iconTime from '../../assets/icons/UpcomingIcons/Time.png'
-
+import Register from "./component/Register";
 import './EventsDetail.scss'
 
 const EventsDetailUpcoming = () => {
@@ -18,26 +14,25 @@ const EventsDetailUpcoming = () => {
                 </div>
                 <div className="content">
                     <Row>
-                        <Col span={11}>
+                        <Col md={11}>
                             <img src={ImageTes} alt="ImageTes" /> <br />
                         </Col>
-                        <Col span={12}>
-                            <div className="text">
-                                <p>Buat kalian yang saat ini ingin cari tau bagaimana sih sebenarny peluang karir dibidang digital seperti programming, digital marketing dan lain sebagainya dan juga kalian ingin tau bagaimana sih budaya kerja di perusahaan teknologi / digital..
-                                    <br /> <br />
+                        <Col md={12}>
+                            <div className="content-desc">
+                                <div className="text">
+                                    <p>Buat kalian yang saat ini ingin cari tau bagaimana sih sebenarny peluang karir dibidang digital seperti programming, digital marketing dan lain sebagainya dan juga kalian ingin tau bagaimana sih budaya kerja di perusahaan teknologi / digital..
+                                        <br /> <br />
 
-                                    Ikuti webinar Palembang digital sharing session dengan tema " Melihat peluang karir talenta digital diera sekarang"<br /> <br />
+                                        Ikuti webinar Palembang digital sharing session dengan tema " Melihat peluang karir talenta digital diera sekarang"<br /> <br />
 
-                                    Dengan Narasumber Riski Jaka Lalana, beliau merupakan GM human Capital di 3(Tri) Indonesia dan juga beliau meruapakan co. founder dari Komunitas dimeja kantor.</p>
+                                        Dengan Narasumber Riski Jaka Lalana, beliau merupakan GM human Capital di 3(Tri) Indonesia dan juga beliau meruapakan co. founder dari Komunitas dimeja kantor.</p>
+                                </div>
+                                <Register />
                             </div>
                         </Col>
                     </Row>
                 </div>
-                <div className="register">
-                    <p><img src={iconDate} alt="iconDate" /> Jum'at, 24 September 2021</p>
-                    <p><img src={iconTime} alt="iconTime" />19.00 WIB</p>
-                    <p><img src={iconFree} alt="iconFree" />Free</p>
-                    <p><img src={iconLocation} alt="iconLocation" />  Live via Zoom Meet</p>
+                <div className="button">
                     <Button type="primary" shape="round">Daftar Sekarang</Button>
                 </div>
             </div>
