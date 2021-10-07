@@ -22,7 +22,7 @@ func (m *mockRequestValidator) Validate(i interface{}) error {
 }
 
 func TestAPI_listEvents(t *testing.T) {
-	req := httptest.NewRequest(http.MethodPost, "/events", nil)
+	req := httptest.NewRequest(http.MethodGet, "/events", nil)
 	rec := httptest.NewRecorder()
 
 	e := echo.New()
