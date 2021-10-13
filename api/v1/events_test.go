@@ -22,7 +22,7 @@ func (m *mockRequestValidator) Validate(i interface{}) error {
 }
 
 func TestAPI_listEvents(t *testing.T) {
-	req := httptest.NewRequest(http.MethodPost, "/events", nil)
+	req := httptest.NewRequest(http.MethodGet, "/events", nil)
 	rec := httptest.NewRecorder()
 
 	e := echo.New()
@@ -54,7 +54,7 @@ func TestAPI_getEvent(t *testing.T) {
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.getEvent(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
-		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\"}\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":\"\"}\n", rec.Body.String())
 	}
 }
 
@@ -64,6 +64,7 @@ func TestAPI_createEvent(t *testing.T) {
 		Title:           "event-1",
 		ImageURL:        "https://patal.com/event-1.png",
 		RegistrationURL: "https://patal.com/event-1",
+		YoutubeID:       "dQw4w9WgXcQ",
 	}
 	eventJSON, _ := json.Marshal(event)
 
@@ -81,7 +82,7 @@ func TestAPI_createEvent(t *testing.T) {
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.createEvent(c)) {
 		assert.Equal(t, http.StatusCreated, rec.Code)
-		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\"}\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\",\"youtube_id\":\"dQw4w9WgXcQ\"}\n", rec.Body.String())
 	}
 }
 

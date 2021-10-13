@@ -264,19 +264,19 @@
                 }
             },
             "post": {
-                "description": "Create a new event",
+                "description": "Create a new organization",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "organizations"
                 ],
-                "summary": "Create a new event",
-                "operationId": "create-event",
+                "summary": "Create a new organization",
+                "operationId": "create-organization",
                 "parameters": [
                     {
-                        "description": "Create event",
-                        "name": "event",
+                        "description": "Create organization",
+                        "name": "organization",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -296,15 +296,15 @@
         },
         "/organizations/{id}": {
             "get": {
-                "description": "Get an event by id",
+                "description": "Get an organization by id",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "organizations"
                 ],
-                "summary": "Get an event",
-                "operationId": "get-event",
+                "summary": "Get an organization",
+                "operationId": "get-organization",
                 "parameters": [
                     {
                         "type": "integer",
@@ -324,15 +324,15 @@
                 }
             },
             "delete": {
-                "description": "Delete an event by id",
+                "description": "Delete an organization by id",
                 "produces": [
                     "text/plain"
                 ],
                 "tags": [
                     "organizations"
                 ],
-                "summary": "Delete an event",
-                "operationId": "delete-event",
+                "summary": "Delete an organization",
+                "operationId": "delete-organization",
                 "parameters": [
                     {
                         "type": "integer",
@@ -376,19 +376,19 @@
                 }
             },
             "post": {
-                "description": "Create a new event",
+                "description": "Create a new startup",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "startups"
                 ],
-                "summary": "Create a new event",
-                "operationId": "create-event",
+                "summary": "Create a new startup",
+                "operationId": "create-startup",
                 "parameters": [
                     {
-                        "description": "Create event",
-                        "name": "event",
+                        "description": "Create startup",
+                        "name": "startup",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -408,15 +408,15 @@
         },
         "/startups/{id}": {
             "get": {
-                "description": "Get an event by id",
+                "description": "Get an startup by id",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "startups"
                 ],
-                "summary": "Get an event",
-                "operationId": "get-event",
+                "summary": "Get an startup",
+                "operationId": "get-startup",
                 "parameters": [
                     {
                         "type": "integer",
@@ -436,15 +436,15 @@
                 }
             },
             "delete": {
-                "description": "Delete an event by id",
+                "description": "Delete an startup by id",
                 "produces": [
                     "text/plain"
                 ],
                 "tags": [
                     "startups"
                 ],
-                "summary": "Delete an event",
-                "operationId": "delete-event",
+                "summary": "Delete an startup",
+                "operationId": "delete-startup",
                 "parameters": [
                     {
                         "type": "integer",
@@ -515,6 +515,9 @@
                 "updated_at": {
                     "type": "string",
                     "example": "2020-04-21T00:00:00Z"
+                },
+                "youtube_id": {
+                    "type": "string"
                 }
             }
         },
