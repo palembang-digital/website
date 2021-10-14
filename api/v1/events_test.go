@@ -54,17 +54,18 @@ func TestAPI_getEvent(t *testing.T) {
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.getEvent(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
-		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":\"\"}\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":null}\n", rec.Body.String())
 	}
 }
 
 func TestAPI_createEvent(t *testing.T) {
+	ytid := "dQw4w9WgXcQ"
 	event := models.Event{
 		ID:              1,
 		Title:           "event-1",
 		ImageURL:        "https://patal.com/event-1.png",
 		RegistrationURL: "https://patal.com/event-1",
-		YoutubeID:       "dQw4w9WgXcQ",
+		YoutubeID:       &ytid,
 	}
 	eventJSON, _ := json.Marshal(event)
 
