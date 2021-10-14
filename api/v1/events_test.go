@@ -55,6 +55,7 @@ func TestAPI_getEvent(t *testing.T) {
 	if assert.NoError(t, api.getEvent(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
 		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":null}\n", rec.Body.String())
+
 	}
 }
 
