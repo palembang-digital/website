@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "@reach/router";
 import { useRequest } from "ahooks";
 import { Card, Col, Row, Skeleton, Typography } from "antd";
 import { Helmet } from "react-helmet";
@@ -35,24 +36,28 @@ const Startups = () => {
                 <Col
                   key={index}
                   className="gutter-row"
-                  span={isMobile ? 24 : 6}>
-                  <Card
-                    bordered={false}
-                    hoverable
-                    style={{ background: "transparent" }}
-                    cover={
-                      <div className="center">
-                        <img
-                          alt={startup.name}
-                          src={startup.image_url}
-                          width={200}
-                        />
-                      </div>
-                    }>
-                    <Card.Meta
-                      title={<div className="center">{startup.name}</div>}
-                    />
-                  </Card>
+                  span={isMobile ? 24 : 6}
+                >
+                  <Link to={`/startups/${startup.slug}`}>
+                    <Card
+                      bordered={false}
+                      hoverable
+                      style={{ background: "transparent" }}
+                      cover={
+                        <div className="center">
+                          <img
+                            alt={startup.name}
+                            src={startup.image_url}
+                            width={200}
+                          />
+                        </div>
+                      }
+                    >
+                      <Card.Meta
+                        title={<div className="center">{startup.name}</div>}
+                      />
+                    </Card>
+                  </Link>
                 </Col>
               ))}
           </Row>
