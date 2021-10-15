@@ -79,6 +79,53 @@ const CreateStartup = () => {
           />
         </Form.Item>
 
+        <Form.Item
+          label="Code name"
+          name="slug"
+          extra="The code name will be used by the startup profile page. E.g. https://palembangdigital.org/startups/agt"
+          rules={[{ required: true, message: "Please input the code name!" }]}
+        >
+          <Input
+            onChange={(e) => setRequest({ ...request, slug: e.target.value })}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="One Liner"
+          name="one_liner"
+          rules={[{ required: true, message: "Please input the one liner!" }]}
+        >
+          <Input
+            onChange={(e) =>
+              setRequest({ ...request, one_liner: e.target.value })
+            }
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Description"
+          name="description"
+          rules={[{ required: true, message: "Please input the description!" }]}
+        >
+          <Input
+            onChange={(e) =>
+              setRequest({ ...request, description: e.target.value })
+            }
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Website"
+          name="website"
+          rules={[{ required: true, message: "Please input the website!" }]}
+        >
+          <Input
+            onChange={(e) =>
+              setRequest({ ...request, website: e.target.value })
+            }
+          />
+        </Form.Item>
+
         <Form.Item label="Image" name="image">
           <Space size="middle">
             <Avatar shape="square" size={128} src={request.image_url} />

@@ -4,5 +4,14 @@ import Events from "./events/Events";
 import Landing from "./landing/Landing";
 import Organizations from "./organizations/Organizations";
 import Startups from "./startups/Startups";
+import StartupDetails from "./startups/StartupDetails";
 
-export { About, Admin, Events, Landing, Organizations, Startups };
+export {
+  About,
+  Admin,
+  Events,
+  Landing,
+  Organizations,
+  Startups,
+  StartupDetails,
+};

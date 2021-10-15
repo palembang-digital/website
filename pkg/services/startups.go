@@ -12,7 +12,8 @@ import (
 // StartupsService service interface.
 type StartupsService interface {
 	ListStartups(ctx context.Context) ([]models.Startup, error)
-	GetStartup(ctx context.Context, id int64) (models.Startup, error)
+	GetStartupByID(ctx context.Context, id int64) (models.Startup, error)
+	GetStartupBySlug(ctx context.Context, slug string) (models.Startup, error)
 	CreateStartup(ctx context.Context, startup models.Startup) (models.Startup, error)
 	DeleteStartup(ctx context.Context, id int64) error
 }
@@ -32,6 +33,10 @@ func (s *startupsService) ListStartups(ctx context.Context) ([]models.Startup, e
 			id
 			, name
 			, image_url
+			, slug
+			, one_liner
+			, description
+			, website
 			, created_at
 			, updated_at
 		FROM startups`
@@ -44,12 +49,16 @@ func (s *startupsService) ListStartups(ctx context.Context) ([]models.Startup, e
 	return startups, nil
 }
 
-func (s *startupsService) GetStartup(ctx context.Context, id int64) (models.Startup, error) {
+func (s *startupsService) GetStartupByID(ctx context.Context, id int64) (models.Startup, error) {
 	query := `
 		SELECT
 			id
 			, name
 			, image_url
+			, slug
+			, one_liner
+			, description
+			, website
 			, created_at
 			, updated_at
 		FROM startups
@@ -57,21 +66,61 @@ func (s *startupsService) GetStartup(ctx context.Context, id int64) (models.Star
 
 	var startup models.Startup
 	if err := s.db.GetContext(ctx, &startup, query, id); err != nil {
-		return models.Startup{}, fmt.Errorf("get an startup: %s", err)
+		return models.Startup{}, fmt.Errorf("get an startup by id (%d): %s", id, err)
+	}
+
+	return startup, nil
+}
+
+func (s *startupsService) GetStartupBySlug(ctx context.Context, slug string) (models.Startup, error) {
+	query := `
+		SELECT
+			id
+			, name
+			, image_url
+			, slug
+			, one_liner
+			, description
+			, website
+			, created_at
+			, updated_at
+		FROM startups
+		WHERE slug = $1`
+
+	var startup models.Startup
+	if err := s.db.GetContext(ctx, &startup, query, slug); err != nil {
+		return models.Startup{}, fmt.Errorf("get an startup by slug (%s): %s", slug, err)
 	}
 
 	return startup, nil
 }
 
 func (s *startupsService) CreateStartup(ctx context.Context, startup models.Startup) (models.Startup, error) {
-	query := "INSERT INTO startups (name, image_url) VALUES ($1, $2) RETURNING id"
+	query := `
+		INSERT INTO startups (
+			name
+			, image_url
+			, slug
+			, one_liner
+			, description
+			, website
+		)
+		VALUES ($1, $2, $3, $4, $5, $6)
+		RETURNING id`
 
 	var id int64
-	if err := s.db.QueryRowxContext(ctx, query, startup.Name, startup.ImageURL).Scan(&id); err != nil {
+	if err := s.db.QueryRowxContext(ctx, query,
+		startup.Name,
+		startup.ImageURL,
+		startup.Slug,
+		startup.OneLiner,
+		startup.Description,
+		startup.Website,
+	).Scan(&id); err != nil {
 		return models.Startup{}, fmt.Errorf("insert new startup: %s", err)
 	}
 
-	newStartup, err := s.GetStartup(ctx, id)
+	newStartup, err := s.GetStartupByID(ctx, id)
 	if err != nil {
 		return models.Startup{}, fmt.Errorf("get new startup: %s", err)
 	}
