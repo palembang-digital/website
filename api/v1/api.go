@@ -60,7 +60,7 @@ func (api *API) Register(g *echo.Group) {
 
 	// Startups API
 	g.GET("/startups", api.listStartups)
-	g.GET("/startups/:id", api.getStartup)
+	g.GET("/startups/:slug", api.getStartupBySlug)
 	g.POST("/startups", api.createStartup, middleware.BasicAuth(api.adminValidator))
 	g.DELETE("/startups/:id", api.deleteStartup, middleware.BasicAuth(api.adminValidator))
 }

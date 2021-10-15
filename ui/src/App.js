@@ -5,9 +5,16 @@ import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 
 import PublicLayout from "./components/layouts/PublicLayout";
-import { About, Events, Landing, Organizations, Startups } from "./pages";
+import {
+  About,
+  Events,
+  Landing,
+  Organizations,
+  Startups,
+  StartupDetails,
+} from "./pages";
 
-const Admin = loadable(() => import("./pages").then(c => c.Admin));
+const Admin = loadable(() => import("./pages").then((c) => c.Admin));
 
 ReactGA.initialize("UA-169186060-1", {
   testMode: process.env.NODE_ENV === "test",
@@ -34,7 +41,14 @@ const App = () => {
           <PublicRoute path="/" render={PublicLayout(Landing)} />
           <PublicRoute path="/events" render={PublicLayout(Events)} />
           <PublicRoute path="/startups" render={PublicLayout(Startups)} />
-          <PublicRoute path="/organizations" render={PublicLayout(Organizations)} />
+          <PublicRoute
+            path="/startups/:startupSlug"
+            render={PublicLayout(StartupDetails)}
+          />
+          <PublicRoute
+            path="/organizations"
+            render={PublicLayout(Organizations)}
+          />
           <PublicRoute path="/about" render={PublicLayout(About)} />
 
           <Admin path="/admin/*" />

@@ -58,14 +58,22 @@ definitions:
       created_at:
         example: "2020-04-21T00:00:00Z"
         type: string
+      description:
+        type: string
       id:
         type: integer
       image_url:
         type: string
       name:
         type: string
+      one_liner:
+        type: string
+      slug:
+        type: string
       updated_at:
         example: "2020-04-21T00:00:00Z"
+        type: string
+      website:
         type: string
     type: object
 info:
@@ -361,15 +369,16 @@ paths:
       summary: Delete an startup
       tags:
       - startups
+  /startups/{slug}:
     get:
-      description: Get an startup by id
-      operationId: get-startup
+      description: Get an startup by slug
+      operationId: get-startup-by-slug
       parameters:
-      - description: Startup ID
+      - description: Startup slug
         in: path
-        name: id
+        name: slug
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -377,7 +386,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Startup'
-      summary: Get an startup
+      summary: Get an startup by slug
       tags:
       - startups
 swagger: "2.0"

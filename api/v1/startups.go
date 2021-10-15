@@ -28,22 +28,21 @@ func (api *API) listStartups(c echo.Context) error {
 	return c.JSON(http.StatusOK, startups)
 }
 
-// Get an startup
-// @Summary Get an startup
-// @Description Get an startup by id
+// Get an startup by slug
+// @Summary Get an startup by slug
+// @Description Get an startup by slug
 // @Tags startups
-// @ID get-startup
+// @ID get-startup-by-slug
 // @Produce json
-// @Param id path int true "Startup ID"
+// @Param slug path string true "Startup slug"
 // @Success 200 {object} models.Startup
-// @Router /startups/{id} [get]
-func (api *API) getStartup(c echo.Context) error {
+// @Router /startups/{slug} [get]
+func (api *API) getStartupBySlug(c echo.Context) error {
 	ctx := c.Request().Context()
 
-	idString := c.Param("id")
-	id, _ := strconv.ParseInt(idString, 10, 64)
+	slug := c.Param("slug")
 
-	startup, err := api.startupsService.GetStartup(ctx, id)
+	startup, err := api.startupsService.GetStartupBySlug(ctx, slug)
 	if err != nil {
 		return err
 	}

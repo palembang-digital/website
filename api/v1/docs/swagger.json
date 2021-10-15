@@ -407,34 +407,6 @@
             }
         },
         "/startups/{id}": {
-            "get": {
-                "description": "Get an startup by id",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "startups"
-                ],
-                "summary": "Get an startup",
-                "operationId": "get-startup",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Startup ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Startup"
-                        }
-                    }
-                }
-            },
             "delete": {
                 "description": "Delete an startup by id",
                 "produces": [
@@ -459,6 +431,36 @@
                         "description": "No Content",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/startups/{slug}": {
+            "get": {
+                "description": "Get an startup by slug",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "startups"
+                ],
+                "summary": "Get an startup by slug",
+                "operationId": "get-startup-by-slug",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Startup slug",
+                        "name": "slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Startup"
                         }
                     }
                 }
@@ -550,6 +552,9 @@
                     "type": "string",
                     "example": "2020-04-21T00:00:00Z"
                 },
+                "description": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },
@@ -559,9 +564,18 @@
                 "name": {
                     "type": "string"
                 },
+                "one_liner": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
                 "updated_at": {
                     "type": "string",
                     "example": "2020-04-21T00:00:00Z"
+                },
+                "website": {
+                    "type": "string"
                 }
             }
         }
