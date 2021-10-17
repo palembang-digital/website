@@ -22,6 +22,8 @@ definitions:
         type: integer
       image_url:
         type: string
+      registration_fee:
+        type: integer
       registration_url:
         type: string
       scheduled_end:
@@ -236,6 +238,31 @@ paths:
           schema:
             $ref: '#/definitions/models.Event'
       summary: Get an event
+      tags:
+      - events
+    put:
+      description: Update an event
+      operationId: update-event
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update event
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/models.Event'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Event'
+      summary: Update an event
       tags:
       - events
   /organizations:
