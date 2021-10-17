@@ -54,7 +54,7 @@ func TestAPI_getEvent(t *testing.T) {
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.getEvent(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
-		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":\"\"}\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":\"\",\"registration_fee\":0}\n", rec.Body.String())
 	}
 }
 
@@ -65,6 +65,7 @@ func TestAPI_createEvent(t *testing.T) {
 		ImageURL:        "https://patal.com/event-1.png",
 		RegistrationURL: "https://patal.com/event-1",
 		YoutubeID:       "dQw4w9WgXcQ",
+		RegistrationFee: 0,
 	}
 	eventJSON, _ := json.Marshal(event)
 
@@ -82,7 +83,39 @@ func TestAPI_createEvent(t *testing.T) {
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.createEvent(c)) {
 		assert.Equal(t, http.StatusCreated, rec.Code)
-		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\",\"youtube_id\":\"dQw4w9WgXcQ\"}\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\",\"youtube_id\":\"dQw4w9WgXcQ\",\"registration_fee\":0}\n", rec.Body.String())
+	}
+}
+
+func TestAPI_updateEvent(t *testing.T) {
+	event := models.Event{
+		ID:              1,
+		Title:           "event-1",
+		ImageURL:        "https://patal.com/event-1.png",
+		RegistrationURL: "https://patal.com/event-1",
+		YoutubeID:       "dQw4w9WgXcQ",
+		RegistrationFee: 20000,
+	}
+	eventJSON, _ := json.Marshal(event)
+
+	req := httptest.NewRequest(http.MethodPut, "/events/1", bytes.NewReader(eventJSON))
+	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+	rec := httptest.NewRecorder()
+
+	e := echo.New()
+	e.Validator = &mockRequestValidator{}
+	c := e.NewContext(req, rec)
+	c.SetPath("/events/:id")
+	c.SetParamNames("id")
+	c.SetParamValues("1")
+
+	mockEventsService := &mocks.EventsService{}
+	mockEventsService.On("UpdateEvent", req.Context(), event).Return(event, nil)
+
+	api := &API{eventsService: mockEventsService}
+	if assert.NoError(t, api.updateEvent(c)) {
+		assert.Equal(t, http.StatusOK, rec.Code)
+		assert.Equal(t, string(eventJSON)+"\n", rec.Body.String())
 	}
 }
 
