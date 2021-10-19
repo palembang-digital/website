@@ -1,17 +1,7 @@
 [
   {
-    "name": "Joneten",
-    "job": "Chairman",
-    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Joneten_b4jmzu_luarzo.jpg",
-    "links": {
-      "linkedin": "https://id.linkedin.com/in/joneten-saputra-913816105",
-      "instagram": "https://instagram.com/jonetensaputra"
-    },
-    "status": "active"
-  },
-  {
     "name": "Sofian Hadiwijaya",
-    "job": "Advisor / Patron",
+    "job": "Advisor",
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704642/patal/teams/Sofian_d0idbk_ny2llg.jpg",
     "links": {
       "github": "https://github.com/sofianhw",
@@ -21,8 +11,29 @@
     "status": "active"
   },
   {
+    "name": "Joneten",
+    "job": "Community Lead",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Joneten_b4jmzu_luarzo.jpg",
+    "links": {
+      "linkedin": "https://id.linkedin.com/in/joneten-saputra-913816105",
+      "instagram": "https://instagram.com/jonetensaputra"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Tommy Maulana",
+    "job": "Operation Lead",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1634643303/patal/teams/Tommy_azkgla.jpg",
+    "links": {
+      "github": "https://github.com/tommy-maulana",
+      "linkedin": "https://www.linkedin.com/in/tommmy-maulana/",
+      "instagram": "https://www.instagram.com/tommmy.maulana/"
+    },
+    "status": "active"
+  },
+  {
     "name": "Arief Rahmansyah",
-    "job": "Technical Architect",
+    "job": "Technical Lead",
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1622137911/patal/events/2020_s9xwvw.jpg",
     "links": {
       "github": "https://github.com/ariefrahmansyah",
@@ -202,7 +213,7 @@
     "name": "Friski Kasviko",
     "job": "Backend Developer",
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704640/patal/teams/Friski_n9nqk0_edvxjc.jpg",
-    "status": "active"
+    "status": "alumni"
   },
   {
     "name": "Taufiqulhakim",
@@ -231,7 +242,7 @@
       "github": "https://github.com/ekomuliyo",
       "instagram": "https://instagram.com/ekomuliyo"
     },
-    "status": "active"
+    "status": "alumni"
   },
   {
     "name": "Nayaka Al Syahreal Kanaka",
