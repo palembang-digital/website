@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS events ADD COLUMN IF NOT EXISTS registration_fee INT;

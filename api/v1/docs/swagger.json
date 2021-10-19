@@ -211,6 +211,43 @@
                     }
                 }
             },
+            "put": {
+                "description": "Update an event",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "events"
+                ],
+                "summary": "Update an event",
+                "operationId": "update-event",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Event ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update event",
+                        "name": "event",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Event"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Event"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "description": "Delete an event by id",
                 "produces": [
@@ -499,6 +536,9 @@
                 },
                 "image_url": {
                     "type": "string"
+                },
+                "registration_fee": {
+                    "type": "integer"
                 },
                 "registration_url": {
                     "type": "string"
