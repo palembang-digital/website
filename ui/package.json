@@ -1,4 +1,4 @@
-{
+  {
   "name": "palembangdigital.org",
   "version": "0.1.0",
   "private": true,
@@ -42,7 +42,7 @@
     "build-start": "react-scripts build && serve -s build",
     "build-start:compressed": "react-scripts build && terser --compress --mangle -- build/static/js/*.js && serve -s build"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "https://palembangdigital.org",
   "eslintConfig": {
     "extends": "react-app"
   },

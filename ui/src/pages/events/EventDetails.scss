@@ -38,6 +38,7 @@
     }
 
     .register {
+        margin-top: 30px;
         img {
             width: 24px;
             margin-right: 28px;
@@ -52,12 +53,13 @@
 .button {
 
     .ant-btn {
-        padding: 10px 25px;
+        padding: 10px 25px; 
         height: 80px;
         background-color: #2C6471;
         font-size: 40px;
         font-weight: 600;
         border: none;
+        line-height: 2;
     }
 
     .ant-btn:hover {
@@ -70,6 +72,13 @@
 }
 
 @media screen and (max-width: 750px) {
+    .title {
+        h1 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 23px;
+        }
+    }
     .button {
         .ant-btn {
             padding: 5px 12px;
@@ -80,4 +89,5 @@
     .content {
         margin-bottom: 20px;
     }
+    
 }

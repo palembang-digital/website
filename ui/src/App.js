@@ -33,8 +33,8 @@ const App = () => {
         <Router>
           <PublicRoute path="/" render={PublicLayout(Landing)} />
           <PublicRoute path="/events" render={PublicLayout(Events)} />
-          <PublicRoute path="/events/detailupcoming" render={PublicLayout(EventsDetailUpcoming)} />
-          <PublicRoute path="/events/detaildone" render={PublicLayout(EventsDetailDone)} />
+          <PublicRoute path="/events/detailupcoming/:id" render={PublicLayout(EventsDetailUpcoming)} />
+          <PublicRoute path="/events/detaildone/:id" render={PublicLayout(EventsDetailDone)} />
           <PublicRoute path="/startups" render={PublicLayout(Startups)} />
           <PublicRoute path="/organizations" render={PublicLayout(Organizations)} />
           <PublicRoute path="/about" render={PublicLayout(About)} />

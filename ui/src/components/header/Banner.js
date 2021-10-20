@@ -17,7 +17,7 @@ const Banner = () => {
             showIcon={false}
             message={
               <center>
-                <div class="alert-banner-message-div" dangerouslySetInnerHTML={{ __html: banner.text }}/>
+                <div className="alert-banner-message-div" dangerouslySetInnerHTML={{ __html: banner.text }}/>
               </center>
             }
           />
