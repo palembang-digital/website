@@ -23,7 +23,7 @@ const EventRoute = (props) => {
     }
 
     return (
-        <Link to={`/events/${TImeEvent() < TimeNow() ? "detailupcoming" : "detaildone"}/${props.id}`}><li key={props.id}>{props.title}</li></Link>
+        <Link to={`/events/${TImeEvent() > TimeNow() ? "detailupcoming" : "detaildone"}/${props.id}`}><li key={props.id}>{props.title}</li></Link>
     )
 }
 
