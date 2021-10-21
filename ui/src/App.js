@@ -5,9 +5,11 @@ import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 
 import PublicLayout from "./components/layouts/PublicLayout";
+
 import {
   About,
   Events,
+  EventDetails,
   Landing,
   Organizations,
   Startups,
@@ -39,16 +41,21 @@ const App = () => {
       <LocationProvider>
         <Router>
           <PublicRoute path="/" render={PublicLayout(Landing)} />
+
           <PublicRoute path="/events" render={PublicLayout(Events)} />
+          <PublicRoute path="/events/:id" render={PublicLayout(EventDetails)} />
+
           <PublicRoute path="/startups" render={PublicLayout(Startups)} />
           <PublicRoute
             path="/startups/:startupSlug"
             render={PublicLayout(StartupDetails)}
           />
+
           <PublicRoute
             path="/organizations"
             render={PublicLayout(Organizations)}
           />
+
           <PublicRoute path="/about" render={PublicLayout(About)} />
 
           <Admin path="/admin/*" />

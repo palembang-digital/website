@@ -1,0 +1,93 @@
+.title {
+    margin: 64px 0 48px 0;
+
+    h1 {
+        color: #2C6471;
+        font-size: 60px;
+        font-weight: 700;
+        line-height: 73px;
+        margin: 0;
+    }
+
+    h3 {
+        color: #2C6471;
+        font-size: 45px;
+        font-weight: 600;
+        line-height: 55px;
+        margin: 0;
+    }
+}
+
+.content {
+    margin-bottom: 57px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21.94px;
+
+    img {
+        width: 90%;
+        height: auto;
+    }
+
+    .img-thumb {
+        img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 36px;
+        }
+    }
+
+    .register {
+        margin-top: 30px;
+        img {
+            width: 24px;
+            margin-right: 28px;
+        }
+    }
+
+    .content-desc {
+        margin-top: 40px;
+    }
+}
+
+.button {
+
+    .ant-btn {
+        padding: 10px 25px; 
+        height: 80px;
+        background-color: #2C6471;
+        font-size: 40px;
+        font-weight: 600;
+        border: none;
+        line-height: 2;
+    }
+
+    .ant-btn:hover {
+        background-color: #204953;
+    }
+
+    .ant-btn:focus {
+        background-color: #204953;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .title {
+        h1 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 23px;
+        }
+    }
+    .button {
+        .ant-btn {
+            padding: 5px 12px;
+            font-size: 20px;
+            height: 40px;
+        }
+    }
+    .content {
+        margin-bottom: 20px;
+    }
+    
+}

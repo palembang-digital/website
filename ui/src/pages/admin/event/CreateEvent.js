@@ -122,6 +122,20 @@ const CreateEvent = () => {
           />
         </Form.Item>
 
+        <Form.Item
+          label="Registration Fee"
+          name="registration_fee"
+          rules={[
+            { required: true, message: "Please input the registration fee!" },
+          ]}
+        >
+          <Input
+            onChange={(e) =>
+              setEvent({ ...event, registration_fee: parseInt(e.target.value) })
+            }
+          />
+        </Form.Item>
+
         <Form.Item label="Image" name="image">
           <Space size="middle">
             <Avatar shape="square" size={128} src={event.image_url} />
