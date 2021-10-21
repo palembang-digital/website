@@ -5,9 +5,19 @@ import ReactGA from "react-ga";
 import { Helmet } from "react-helmet";
 
 import PublicLayout from "./components/layouts/PublicLayout";
-import { About, Events, Landing, Organizations, Startups, EventsDetailUpcoming, EventsDetailDone } from "./pages";
 
-const Admin = loadable(() => import("./pages").then(c => c.Admin));
+import {
+  About,
+  Events,
+  EventsDetailUpcoming,
+  EventsDetailDone,
+  Landing,
+  Organizations,
+  Startups,
+  StartupDetails,
+} from "./pages";
+
+const Admin = loadable(() => import("./pages").then((c) => c.Admin));
 
 ReactGA.initialize("UA-169186060-1", {
   testMode: process.env.NODE_ENV === "test",
@@ -33,10 +43,23 @@ const App = () => {
         <Router>
           <PublicRoute path="/" render={PublicLayout(Landing)} />
           <PublicRoute path="/events" render={PublicLayout(Events)} />
-          <PublicRoute path="/events/detailupcoming/:id" render={PublicLayout(EventsDetailUpcoming)} />
-          <PublicRoute path="/events/detaildone/:id" render={PublicLayout(EventsDetailDone)} />
+          <PublicRoute
+            path="/events/detailupcoming/:id"
+            render={PublicLayout(EventsDetailUpcoming)}
+          />
+          <PublicRoute
+            path="/events/detaildone/:id"
+            render={PublicLayout(EventsDetailDone)}
+          />
           <PublicRoute path="/startups" render={PublicLayout(Startups)} />
-          <PublicRoute path="/organizations" render={PublicLayout(Organizations)} />
+          <PublicRoute
+            path="/startups/:startupSlug"
+            render={PublicLayout(StartupDetails)}
+          />
+          <PublicRoute
+            path="/organizations"
+            render={PublicLayout(Organizations)}
+          />
           <PublicRoute path="/about" render={PublicLayout(About)} />
 
           <Admin path="/admin/*" />

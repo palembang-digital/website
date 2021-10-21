@@ -211,6 +211,43 @@
                     }
                 }
             },
+            "put": {
+                "description": "Update an event",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "events"
+                ],
+                "summary": "Update an event",
+                "operationId": "update-event",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Event ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update event",
+                        "name": "event",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Event"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Event"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "description": "Delete an event by id",
                 "produces": [
@@ -264,19 +301,19 @@
                 }
             },
             "post": {
-                "description": "Create a new event",
+                "description": "Create a new organization",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "organizations"
                 ],
-                "summary": "Create a new event",
-                "operationId": "create-event",
+                "summary": "Create a new organization",
+                "operationId": "create-organization",
                 "parameters": [
                     {
-                        "description": "Create event",
-                        "name": "event",
+                        "description": "Create organization",
+                        "name": "organization",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -296,15 +333,15 @@
         },
         "/organizations/{id}": {
             "get": {
-                "description": "Get an event by id",
+                "description": "Get an organization by id",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "organizations"
                 ],
-                "summary": "Get an event",
-                "operationId": "get-event",
+                "summary": "Get an organization",
+                "operationId": "get-organization",
                 "parameters": [
                     {
                         "type": "integer",
@@ -324,15 +361,15 @@
                 }
             },
             "delete": {
-                "description": "Delete an event by id",
+                "description": "Delete an organization by id",
                 "produces": [
                     "text/plain"
                 ],
                 "tags": [
                     "organizations"
                 ],
-                "summary": "Delete an event",
-                "operationId": "delete-event",
+                "summary": "Delete an organization",
+                "operationId": "delete-organization",
                 "parameters": [
                     {
                         "type": "integer",
@@ -376,19 +413,19 @@
                 }
             },
             "post": {
-                "description": "Create a new event",
+                "description": "Create a new startup",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "startups"
                 ],
-                "summary": "Create a new event",
-                "operationId": "create-event",
+                "summary": "Create a new startup",
+                "operationId": "create-startup",
                 "parameters": [
                     {
-                        "description": "Create event",
-                        "name": "event",
+                        "description": "Create startup",
+                        "name": "startup",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -407,44 +444,16 @@
             }
         },
         "/startups/{id}": {
-            "get": {
-                "description": "Get an event by id",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "startups"
-                ],
-                "summary": "Get an event",
-                "operationId": "get-event",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Startup ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.Startup"
-                        }
-                    }
-                }
-            },
             "delete": {
-                "description": "Delete an event by id",
+                "description": "Delete an startup by id",
                 "produces": [
                     "text/plain"
                 ],
                 "tags": [
                     "startups"
                 ],
-                "summary": "Delete an event",
-                "operationId": "delete-event",
+                "summary": "Delete an startup",
+                "operationId": "delete-startup",
                 "parameters": [
                     {
                         "type": "integer",
@@ -459,6 +468,36 @@
                         "description": "No Content",
                         "schema": {
                             "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/startups/{slug}": {
+            "get": {
+                "description": "Get an startup by slug",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "startups"
+                ],
+                "summary": "Get an startup by slug",
+                "operationId": "get-startup-by-slug",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Startup slug",
+                        "name": "slug",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Startup"
                         }
                     }
                 }
@@ -498,6 +537,9 @@
                 "image_url": {
                     "type": "string"
                 },
+                "registration_fee": {
+                    "type": "integer"
+                },
                 "registration_url": {
                     "type": "string"
                 },
@@ -515,6 +557,9 @@
                 "updated_at": {
                     "type": "string",
                     "example": "2020-04-21T00:00:00Z"
+                },
+                "youtube_id": {
+                    "type": "string"
                 }
             }
         },
@@ -547,6 +592,9 @@
                     "type": "string",
                     "example": "2020-04-21T00:00:00Z"
                 },
+                "description": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },
@@ -556,9 +604,18 @@
                 "name": {
                     "type": "string"
                 },
+                "one_liner": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
                 "updated_at": {
                     "type": "string",
                     "example": "2020-04-21T00:00:00Z"
+                },
+                "website": {
+                    "type": "string"
                 }
             }
         }

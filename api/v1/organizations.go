@@ -28,11 +28,11 @@ func (api *API) listOrganizations(c echo.Context) error {
 	return c.JSON(http.StatusOK, organizations)
 }
 
-// Get an event
-// @Summary Get an event
-// @Description Get an event by id
+// Get an organization
+// @Summary Get an organization
+// @Description Get an organization by id
 // @Tags organizations
-// @ID get-event
+// @ID get-organization
 // @Produce json
 // @Param id path int true "Organization ID"
 // @Success 200 {object} models.Organization
@@ -43,36 +43,36 @@ func (api *API) getOrganization(c echo.Context) error {
 	idString := c.Param("id")
 	id, _ := strconv.ParseInt(idString, 10, 64)
 
-	event, err := api.organizationsService.GetOrganization(ctx, id)
+	organization, err := api.organizationsService.GetOrganization(ctx, id)
 	if err != nil {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, event)
+	return c.JSON(http.StatusOK, organization)
 }
 
-// Create a new event
-// @Summary Create a new event
-// @Description Create a new event
+// Create a new organization
+// @Summary Create a new organization
+// @Description Create a new organization
 // @Tags organizations
-// @ID create-event
+// @ID create-organization
 // @Produce json
-// @Param event body models.Organization true "Create event"
+// @Param organization body models.Organization true "Create organization"
 // @Success 201 {object} models.Organization
 // @Router /organizations [post]
 func (api *API) createOrganization(c echo.Context) error {
 	ctx := c.Request().Context()
 
-	event := new(models.Organization)
-	if err := c.Bind(event); err != nil {
+	organization := new(models.Organization)
+	if err := c.Bind(organization); err != nil {
 		return err
 	}
 
-	if err := c.Validate(event); err != nil {
+	if err := c.Validate(organization); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	newOrganization, err := api.organizationsService.CreateOrganization(ctx, *event)
+	newOrganization, err := api.organizationsService.CreateOrganization(ctx, *organization)
 	if err != nil {
 		return err
 	}
@@ -80,11 +80,11 @@ func (api *API) createOrganization(c echo.Context) error {
 	return c.JSON(http.StatusCreated, newOrganization)
 }
 
-// Delete an event
-// @Summary Delete an event
-// @Description Delete an event by id
+// Delete an organization
+// @Summary Delete an organization
+// @Description Delete an organization by id
 // @Tags organizations
-// @ID delete-event
+// @ID delete-organization
 // @Produce plain
 // @Param id path int true "Organization ID"
 // @Success 204 {string} string ""

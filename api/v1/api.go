@@ -50,6 +50,7 @@ func (api *API) Register(g *echo.Group) {
 	g.GET("/events", api.listEvents)
 	g.GET("/events/:id", api.getEvent)
 	g.POST("/events", api.createEvent, middleware.BasicAuth(api.adminValidator))
+	g.PUT("/events/:id", api.updateEvent, middleware.BasicAuth(api.adminValidator))
 	g.DELETE("/events/:id", api.deleteEvent, middleware.BasicAuth(api.adminValidator))
 
 	// Organizations API
@@ -60,7 +61,7 @@ func (api *API) Register(g *echo.Group) {
 
 	// Startups API
 	g.GET("/startups", api.listStartups)
-	g.GET("/startups/:id", api.getStartup)
+	g.GET("/startups/:slug", api.getStartupBySlug)
 	g.POST("/startups", api.createStartup, middleware.BasicAuth(api.adminValidator))
 	g.DELETE("/startups/:id", api.deleteStartup, middleware.BasicAuth(api.adminValidator))
 }

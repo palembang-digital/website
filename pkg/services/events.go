@@ -14,6 +14,7 @@ type EventsService interface {
 	ListEvents(ctx context.Context) ([]models.Event, error)
 	GetEvent(ctx context.Context, id int64) (models.Event, error)
 	CreateEvent(ctx context.Context, event models.Event) (models.Event, error)
+	UpdateEvent(ctx context.Context, event models.Event) (models.Event, error)
 	DeleteEvent(ctx context.Context, id int64) error
 }
 
@@ -33,6 +34,8 @@ func (s *eventsService) ListEvents(ctx context.Context) ([]models.Event, error) 
 			, title
 			, image_url
 			, registration_url
+			, youtube_id
+			, registration_fee
 			, scheduled_start
 			, scheduled_end
 			, created_at
@@ -54,6 +57,8 @@ func (s *eventsService) GetEvent(ctx context.Context, id int64) (models.Event, e
 			, title
 			, image_url
 			, registration_url
+			, youtube_id
+			, registration_fee
 			, scheduled_start
 			, scheduled_end
 			, created_at
@@ -70,16 +75,45 @@ func (s *eventsService) GetEvent(ctx context.Context, id int64) (models.Event, e
 }
 
 func (s *eventsService) CreateEvent(ctx context.Context, event models.Event) (models.Event, error) {
-	query := "INSERT INTO events (title, image_url, registration_url, scheduled_start, scheduled_end) VALUES ($1, $2, $3, $4, $5) RETURNING id"
+	query := "INSERT INTO events (title, image_url, registration_url, youtube_id, registration_fee, scheduled_start, scheduled_end) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id"
 
 	var id int64
-	if err := s.db.QueryRowxContext(ctx, query, event.Title, event.ImageURL, event.RegistrationURL, event.ScheduledStart, event.ScheduledEnd).Scan(&id); err != nil {
+	if err := s.db.QueryRowxContext(ctx, query, event.Title, event.ImageURL, event.RegistrationURL, event.YoutubeID, event.RegistrationFee, event.ScheduledStart, event.ScheduledEnd).Scan(&id); err != nil {
 		return models.Event{}, fmt.Errorf("insert new event: %s", err)
 	}
 
 	newEvent, err := s.GetEvent(ctx, id)
 	if err != nil {
 		return models.Event{}, fmt.Errorf("get new event: %s", err)
+	}
+
+	return newEvent, nil
+}
+
+func (s *eventsService) UpdateEvent(ctx context.Context, event models.Event) (models.Event, error) {
+	query := `
+		UPDATE events SET
+			title = $1
+			, image_url = $2
+			, registration_url = $3
+			, youtube_id = $4
+			, registration_fee = $5
+			, scheduled_start = $6
+			, scheduled_end = $7
+			, updated_at = CURRENT_TIMESTAMP
+		WHERE id = $8
+		RETURNING id`
+
+	var id int64
+	if err := s.db.QueryRowxContext(
+		ctx, query, event.Title, event.ImageURL, event.RegistrationURL, event.YoutubeID, event.RegistrationFee, event.ScheduledStart, event.ScheduledEnd, event.ID,
+	).Scan(&id); err != nil {
+		return models.Event{}, fmt.Errorf("update event: %s", err)
+	}
+
+	newEvent, err := s.GetEvent(ctx, id)
+	if err != nil {
+		return models.Event{}, fmt.Errorf("get updated event: %s", err)
 	}
 
 	return newEvent, nil

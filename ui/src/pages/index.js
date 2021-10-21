@@ -6,5 +6,16 @@ import Organizations from "./organizations/Organizations";
 import Startups from "./startups/Startups";
 import EventsDetailUpcoming from "./events/EventDetailsUpcoming";
 import EventsDetailDone from "./events/EventDetailsDone";
+import StartupDetails from "./startups/StartupDetails";
 
-export { About, Admin, Events, Landing, Organizations, Startups, EventsDetailUpcoming, EventsDetailDone };
+export {
+  About,
+  Admin,
+  Events,
+  EventsDetailUpcoming,
+  EventsDetailDone,
+  Landing,
+  Organizations,
+  Startups,
+  StartupDetails,
+};

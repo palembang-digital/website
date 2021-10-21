@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS events DROP COLUMN IF EXISTS registration_fee;

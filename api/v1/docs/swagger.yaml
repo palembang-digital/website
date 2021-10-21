@@ -22,6 +22,8 @@ definitions:
         type: integer
       image_url:
         type: string
+      registration_fee:
+        type: integer
       registration_url:
         type: string
       scheduled_end:
@@ -34,6 +36,8 @@ definitions:
         type: string
       updated_at:
         example: "2020-04-21T00:00:00Z"
+        type: string
+      youtube_id:
         type: string
     type: object
   models.Organization:
@@ -56,14 +60,22 @@ definitions:
       created_at:
         example: "2020-04-21T00:00:00Z"
         type: string
+      description:
+        type: string
       id:
         type: integer
       image_url:
         type: string
       name:
         type: string
+      one_liner:
+        type: string
+      slug:
+        type: string
       updated_at:
         example: "2020-04-21T00:00:00Z"
+        type: string
+      website:
         type: string
     type: object
 info:
@@ -228,6 +240,31 @@ paths:
       summary: Get an event
       tags:
       - events
+    put:
+      description: Update an event
+      operationId: update-event
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update event
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/models.Event'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Event'
+      summary: Update an event
+      tags:
+      - events
   /organizations:
     get:
       description: Get the list of organizations
@@ -245,12 +282,12 @@ paths:
       tags:
       - organizations
     post:
-      description: Create a new event
-      operationId: create-event
+      description: Create a new organization
+      operationId: create-organization
       parameters:
-      - description: Create event
+      - description: Create organization
         in: body
-        name: event
+        name: organization
         required: true
         schema:
           $ref: '#/definitions/models.Organization'
@@ -261,13 +298,13 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/models.Organization'
-      summary: Create a new event
+      summary: Create a new organization
       tags:
       - organizations
   /organizations/{id}:
     delete:
-      description: Delete an event by id
-      operationId: delete-event
+      description: Delete an organization by id
+      operationId: delete-organization
       parameters:
       - description: Organization ID
         in: path
@@ -281,12 +318,12 @@ paths:
           description: No Content
           schema:
             type: string
-      summary: Delete an event
+      summary: Delete an organization
       tags:
       - organizations
     get:
-      description: Get an event by id
-      operationId: get-event
+      description: Get an organization by id
+      operationId: get-organization
       parameters:
       - description: Organization ID
         in: path
@@ -300,7 +337,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Organization'
-      summary: Get an event
+      summary: Get an organization
       tags:
       - organizations
   /startups:
@@ -320,12 +357,12 @@ paths:
       tags:
       - startups
     post:
-      description: Create a new event
-      operationId: create-event
+      description: Create a new startup
+      operationId: create-startup
       parameters:
-      - description: Create event
+      - description: Create startup
         in: body
-        name: event
+        name: startup
         required: true
         schema:
           $ref: '#/definitions/models.Startup'
@@ -336,13 +373,13 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/models.Startup'
-      summary: Create a new event
+      summary: Create a new startup
       tags:
       - startups
   /startups/{id}:
     delete:
-      description: Delete an event by id
-      operationId: delete-event
+      description: Delete an startup by id
+      operationId: delete-startup
       parameters:
       - description: Startup ID
         in: path
@@ -356,18 +393,19 @@ paths:
           description: No Content
           schema:
             type: string
-      summary: Delete an event
+      summary: Delete an startup
       tags:
       - startups
+  /startups/{slug}:
     get:
-      description: Get an event by id
-      operationId: get-event
+      description: Get an startup by slug
+      operationId: get-startup-by-slug
       parameters:
-      - description: Startup ID
+      - description: Startup slug
         in: path
-        name: id
+        name: slug
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -375,7 +413,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/models.Startup'
-      summary: Get an event
+      summary: Get an startup by slug
       tags:
       - startups
 swagger: "2.0"
