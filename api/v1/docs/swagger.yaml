@@ -18,6 +18,8 @@ definitions:
       created_at:
         example: "2020-04-21T00:00:00Z"
         type: string
+      description:
+        type: string
       id:
         type: integer
       image_url:

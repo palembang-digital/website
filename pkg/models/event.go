@@ -8,6 +8,7 @@ type Event struct {
 
 	ID              int64  `json:"id" db:"id"`
 	Title           string `json:"title" db:"title" valid:"required"`
+	Description     string `json:"description" db:"description"`
 	ImageURL        string `json:"image_url" db:"image_url" valid:"url,required"`
 	RegistrationURL string `json:"registration_url" db:"registration_url" valid:"url"`
 	YoutubeID       string `json:"youtube_id" db:"youtube_id"`

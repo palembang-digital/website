@@ -546,6 +546,9 @@ var doc = `{
                     "type": "string",
                     "example": "2020-04-21T00:00:00Z"
                 },
+                "description": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "integer"
                 },
