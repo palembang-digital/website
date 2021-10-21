@@ -24,7 +24,8 @@ const UpcomingEvents = ({ events }) => {
             <Card
               hoverable
               cover={<img alt={event.title} src={event.image_url} />}
-              onClick={() => navigate(event.registration_url)}>
+              onClick={() => navigate(`/events/${event.id}`)}
+            >
               <Text strong>{event.title}</Text>
             </Card>
           </Col>

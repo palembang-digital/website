@@ -4,6 +4,7 @@ import Events from "./events/EventDetails";
 import Landing from "./landing/Landing";
 import Organizations from "./organizations/Organizations";
 import Startups from "./startups/Startups";
+import EventDetails from "./events/EventDetails";
 import EventsDetailUpcoming from "./events/EventDetailsUpcoming";
 import EventsDetailDone from "./events/EventDetailsDone";
 import StartupDetails from "./startups/StartupDetails";
@@ -12,8 +13,9 @@ export {
   About,
   Admin,
   Events,
-  EventsDetailUpcoming,
   EventsDetailDone,
+  EventsDetailUpcoming,
+  EventDetails,
   Landing,
   Organizations,
   Startups,

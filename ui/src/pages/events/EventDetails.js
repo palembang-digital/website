@@ -1,26 +1,25 @@
 import React from "react";
-// import { Skeleton } from "antd";
 import { useRequest } from "ahooks";
-import EventRoute from "./EventRoute";
+import { Skeleton } from "antd";
+import EventDetailsDone from "./EventDetailsDone";
+import EventDetailsUpcoming from "./EventDetailsUpcoming";
 
-const EventsDetail = () => {
-  const { data: events } = useRequest("api/v1/events");
-
-  if (events == null) {
-    return 'loading...'
-  }
+const EventDetails = ({ id }) => {
+  const { data: event } = useRequest(`/api/v1/events/${id}`);
 
   return (
     <div className="container">
-      <p>Events page</p>
-      {/* <Skeleton active /> */}
-      <ul>
-        {events.map((event) => {
-          return <EventRoute key={event.id} id={event.id} title={event.title} scheduled_end={event.scheduled_end}/>
-        })}
-      </ul>
+      {event ? (
+        new Date(event.scheduled_start) > Date.now() ? (
+          <EventDetailsUpcoming event={event} />
+        ) : (
+          <EventDetailsDone event={event} />
+        )
+      ) : (
+        <Skeleton active />
+      )}
     </div>
   );
 };
 
-export default EventsDetail
+export default EventDetails;
