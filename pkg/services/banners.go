@@ -31,7 +31,7 @@ func (s *bannersService) ListBanners(ctx context.Context) ([]models.Banner, erro
 		return nil, fmt.Errorf("get the list of banners: %s", err)
 	}
 
-	var banners []models.Banner
+	banners := []models.Banner{}
 	for _, dbBanner := range dbBanners {
 		var banner models.Banner
 		banner.ID = dbBanner.ID

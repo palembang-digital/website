@@ -32,7 +32,7 @@ func (s *eventsService) ListEvents(ctx context.Context) ([]models.Event, error) 
 		return nil, fmt.Errorf("get the list of events: %s", err)
 	}
 
-	var events []models.Event
+	events := []models.Event{}
 	for _, dbEvent := range dbEvents {
 		var event models.Event
 		event.ID = dbEvent.ID

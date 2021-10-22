@@ -31,7 +31,7 @@ func (s *organizationsService) ListOrganizations(ctx context.Context) ([]models.
 		return nil, fmt.Errorf("get the list of organizations: %s", err)
 	}
 
-	var organizations []models.Organization
+	organizations := []models.Organization{}
 	for _, dbOrganization := range dbOrganizations {
 		var organization models.Organization
 		organization.ID = dbOrganization.ID

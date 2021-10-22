@@ -33,7 +33,7 @@ func (s *startupsService) ListStartups(ctx context.Context) ([]models.Startup, e
 		return nil, fmt.Errorf("get the list of startups: %s", err)
 	}
 
-	var startups []models.Startup
+	startups := []models.Startup{}
 	for _, dbStartup := range dbStartups {
 		var startup models.Startup
 		startup.ID = dbStartup.ID
@@ -42,6 +42,7 @@ func (s *startupsService) ListStartups(ctx context.Context) ([]models.Startup, e
 		startup.Slug = dbStartup.Slug.String
 		startup.OneLiner = dbStartup.OneLiner.String
 		startup.Description = dbStartup.Description.String
+		startup.Website = dbStartup.Website.String
 		startup.CreatedAt = &dbStartup.CreatedAt
 		if dbStartup.UpdatedAt.Valid {
 			startup.UpdatedAt = &dbStartup.UpdatedAt.Time
@@ -67,6 +68,7 @@ func (s *startupsService) GetStartupByID(ctx context.Context, id int64) (models.
 	startup.Slug = dbStartup.Slug.String
 	startup.OneLiner = dbStartup.OneLiner.String
 	startup.Description = dbStartup.Description.String
+	startup.Website = dbStartup.Website.String
 	startup.CreatedAt = &dbStartup.CreatedAt
 	if dbStartup.UpdatedAt.Valid {
 		startup.UpdatedAt = &dbStartup.UpdatedAt.Time
@@ -78,9 +80,9 @@ func (s *startupsService) GetStartupByID(ctx context.Context, id int64) (models.
 }
 
 func (s *startupsService) GetStartupBySlug(ctx context.Context, slug string) (models.Startup, error) {
-	slugValue := &sql.NullString{}
+	slugValue := sql.NullString{}
 	slugValue.Scan(slug)
-	dbStartup, err := s.db.GetStartupBySlug(ctx, *slugValue)
+	dbStartup, err := s.db.GetStartupBySlug(ctx, slugValue)
 	if err != nil {
 		return models.Startup{}, fmt.Errorf("get an startup by slug (%s): %s", slug, err)
 	}
@@ -92,6 +94,7 @@ func (s *startupsService) GetStartupBySlug(ctx context.Context, slug string) (mo
 	startup.Slug = dbStartup.Slug.String
 	startup.OneLiner = dbStartup.OneLiner.String
 	startup.Description = dbStartup.Description.String
+	startup.Website = dbStartup.Website.String
 	startup.CreatedAt = &dbStartup.CreatedAt
 	if dbStartup.UpdatedAt.Valid {
 		startup.UpdatedAt = &dbStartup.UpdatedAt.Time
