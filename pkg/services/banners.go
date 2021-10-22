@@ -4,8 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jmoiron/sqlx"
-
+	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/models"
 )
 
@@ -18,54 +17,58 @@ type BannersService interface {
 }
 
 type bannersService struct {
-	db *sqlx.DB
+	db db.Querier
 }
 
 // NewBannersService returns an initialized BannersService implementation.
-func NewBannersService(db *sqlx.DB) BannersService {
+func NewBannersService(db db.Querier) BannersService {
 	return &bannersService{db: db}
 }
 
 func (s *bannersService) ListBanners(ctx context.Context) ([]models.Banner, error) {
-	query := `
-		SELECT
-			id
-			, text
-			, created_at
-			, updated_at
-		FROM banners`
-
-	var banners []models.Banner
-	if err := s.db.SelectContext(ctx, &banners, query); err != nil {
+	dbBanners, err := s.db.ListBanners(ctx)
+	if err != nil {
 		return nil, fmt.Errorf("get the list of banners: %s", err)
 	}
 
+	var banners []models.Banner
+	for _, dbBanner := range dbBanners {
+		var banner models.Banner
+		banner.ID = dbBanner.ID
+		banner.Text = dbBanner.Text
+		banner.CreatedAt = &dbBanner.CreatedAt
+		if dbBanner.UpdatedAt.Valid {
+			banner.UpdatedAt = &dbBanner.UpdatedAt.Time
+		} else {
+			banner.UpdatedAt = nil
+		}
+		banners = append(banners, banner)
+	}
 	return banners, nil
 }
 
 func (s *bannersService) GetBanner(ctx context.Context, id int64) (models.Banner, error) {
-	query := `
-		SELECT
-			id
-			, text
-			, created_at
-			, updated_at
-		FROM banners
-		WHERE id = $1`
+	dbBanner, err := s.db.GetBanner(ctx, id)
+	if err != nil {
+		return models.Banner{}, fmt.Errorf("get an banner: %s", err)
+	}
 
 	var banner models.Banner
-	if err := s.db.GetContext(ctx, &banner, query, id); err != nil {
-		return models.Banner{}, fmt.Errorf("get an banner: %s", err)
+	banner.ID = dbBanner.ID
+	banner.Text = dbBanner.Text
+	banner.CreatedAt = &dbBanner.CreatedAt
+	if dbBanner.UpdatedAt.Valid {
+		banner.UpdatedAt = &dbBanner.UpdatedAt.Time
+	} else {
+		banner.UpdatedAt = nil
 	}
 
 	return banner, nil
 }
 
 func (s *bannersService) CreateBanner(ctx context.Context, banner models.Banner) (models.Banner, error) {
-	query := "INSERT INTO banners (text) VALUES ($1) RETURNING id"
-
-	var id int64
-	if err := s.db.QueryRowxContext(ctx, query, banner.Text).Scan(&id); err != nil {
+	id, err := s.db.CreateBanner(ctx, banner.Text)
+	if err != nil {
 		return models.Banner{}, fmt.Errorf("insert new banner: %s", err)
 	}
 
@@ -78,9 +81,7 @@ func (s *bannersService) CreateBanner(ctx context.Context, banner models.Banner)
 }
 
 func (s *bannersService) DeleteBanner(ctx context.Context, id int64) error {
-	query := `DELETE FROM banners WHERE id = $1`
-
-	if _, err := s.db.ExecContext(ctx, query, id); err != nil {
+	if err := s.db.DeleteBanner(ctx, id); err != nil {
 		return fmt.Errorf("delete an banner: %s", err)
 	}
 

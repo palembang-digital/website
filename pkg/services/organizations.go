@@ -4,8 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jmoiron/sqlx"
-
+	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/models"
 )
 
@@ -18,56 +17,65 @@ type OrganizationsService interface {
 }
 
 type organizationsService struct {
-	db *sqlx.DB
+	db db.Querier
 }
 
 // NewOrganizationsService returns an initialized OrganizationsService implementation.
-func NewOrganizationsService(db *sqlx.DB) OrganizationsService {
+func NewOrganizationsService(db db.Querier) OrganizationsService {
 	return &organizationsService{db: db}
 }
 
 func (s *organizationsService) ListOrganizations(ctx context.Context) ([]models.Organization, error) {
-	query := `
-		SELECT
-			id
-			, name
-			, image_url
-			, created_at
-			, updated_at
-		FROM organizations`
-
-	organizations := []models.Organization{}
-	if err := s.db.SelectContext(ctx, &organizations, query); err != nil {
+	dbOrganizations, err := s.db.ListOrganizations(ctx)
+	if err != nil {
 		return nil, fmt.Errorf("get the list of organizations: %s", err)
+	}
+
+	var organizations []models.Organization
+	for _, dbOrganization := range dbOrganizations {
+		var organization models.Organization
+		organization.ID = dbOrganization.ID
+		organization.Name = dbOrganization.Name
+		organization.ImageURL = dbOrganization.ImageUrl.String
+		organization.CreatedAt = &dbOrganization.CreatedAt
+		if dbOrganization.UpdatedAt.Valid {
+			organization.UpdatedAt = &dbOrganization.UpdatedAt.Time
+		} else {
+			organization.UpdatedAt = nil
+		}
+		organizations = append(organizations, organization)
 	}
 
 	return organizations, nil
 }
 
 func (s *organizationsService) GetOrganization(ctx context.Context, id int64) (models.Organization, error) {
-	query := `
-		SELECT
-			id
-			, name
-			, image_url
-			, created_at
-			, updated_at
-		FROM organizations
-		WHERE id = $1`
+	dbOrganization, err := s.db.GetOrganization(ctx, id)
+	if err != nil {
+		return models.Organization{}, fmt.Errorf("get an organization: %s", err)
+	}
 
 	var organization models.Organization
-	if err := s.db.GetContext(ctx, &organization, query, id); err != nil {
-		return models.Organization{}, fmt.Errorf("get an organization: %s", err)
+	organization.ID = dbOrganization.ID
+	organization.Name = dbOrganization.Name
+	organization.ImageURL = dbOrganization.ImageUrl.String
+	organization.CreatedAt = &dbOrganization.CreatedAt
+	if dbOrganization.UpdatedAt.Valid {
+		organization.UpdatedAt = &dbOrganization.UpdatedAt.Time
+	} else {
+		organization.UpdatedAt = nil
 	}
 
 	return organization, nil
 }
 
 func (s *organizationsService) CreateOrganization(ctx context.Context, organization models.Organization) (models.Organization, error) {
-	query := "INSERT INTO organizations (name, image_url) VALUES ($1, $2) RETURNING id"
+	var organizationParams db.CreateOrganizationParams
+	organizationParams.Name = organization.Name
+	organizationParams.ImageUrl.Scan(organization.ImageURL)
 
-	var id int64
-	if err := s.db.QueryRowxContext(ctx, query, organization.Name, organization.ImageURL).Scan(&id); err != nil {
+	id, err := s.db.CreateOrganization(ctx, organizationParams)
+	if err != nil {
 		return models.Organization{}, fmt.Errorf("insert new organization: %s", err)
 	}
 
@@ -80,9 +88,7 @@ func (s *organizationsService) CreateOrganization(ctx context.Context, organizat
 }
 
 func (s *organizationsService) DeleteOrganization(ctx context.Context, id int64) error {
-	query := `DELETE FROM organizations WHERE id = $1`
-
-	if _, err := s.db.ExecContext(ctx, query, id); err != nil {
+	if err := s.db.DeleteOrganization(ctx, id); err != nil {
 		return fmt.Errorf("delete an organization: %s", err)
 	}
 

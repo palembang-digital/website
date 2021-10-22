@@ -2,10 +2,10 @@ package services
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
-	"github.com/jmoiron/sqlx"
-
+	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/models"
 )
 
@@ -19,104 +19,100 @@ type StartupsService interface {
 }
 
 type startupsService struct {
-	db *sqlx.DB
+	db db.Querier
 }
 
 // NewStartupsService returns an initialized StartupsService implementation.
-func NewStartupsService(db *sqlx.DB) StartupsService {
+func NewStartupsService(db db.Querier) StartupsService {
 	return &startupsService{db: db}
 }
 
 func (s *startupsService) ListStartups(ctx context.Context) ([]models.Startup, error) {
-	query := `
-		SELECT
-			id
-			, name
-			, image_url
-			, slug
-			, one_liner
-			, description
-			, website
-			, created_at
-			, updated_at
-		FROM startups`
-
-	startups := []models.Startup{}
-	if err := s.db.SelectContext(ctx, &startups, query); err != nil {
+	dbStartups, err := s.db.ListStartups(ctx)
+	if err != nil {
 		return nil, fmt.Errorf("get the list of startups: %s", err)
+	}
+
+	var startups []models.Startup
+	for _, dbStartup := range dbStartups {
+		var startup models.Startup
+		startup.ID = dbStartup.ID
+		startup.Name = dbStartup.Name
+		startup.ImageURL = dbStartup.ImageUrl.String
+		startup.Slug = dbStartup.Slug.String
+		startup.OneLiner = dbStartup.OneLiner.String
+		startup.Description = dbStartup.Description.String
+		startup.CreatedAt = &dbStartup.CreatedAt
+		if dbStartup.UpdatedAt.Valid {
+			startup.UpdatedAt = &dbStartup.UpdatedAt.Time
+		} else {
+			startup.UpdatedAt = nil
+		}
+		startups = append(startups, startup)
 	}
 
 	return startups, nil
 }
 
 func (s *startupsService) GetStartupByID(ctx context.Context, id int64) (models.Startup, error) {
-	query := `
-		SELECT
-			id
-			, name
-			, image_url
-			, slug
-			, one_liner
-			, description
-			, website
-			, created_at
-			, updated_at
-		FROM startups
-		WHERE id = $1`
+	dbStartup, err := s.db.GetStartupByID(ctx, id)
+	if err != nil {
+		return models.Startup{}, fmt.Errorf("get an startup by id (%d): %s", id, err)
+	}
 
 	var startup models.Startup
-	if err := s.db.GetContext(ctx, &startup, query, id); err != nil {
-		return models.Startup{}, fmt.Errorf("get an startup by id (%d): %s", id, err)
+	startup.ID = dbStartup.ID
+	startup.Name = dbStartup.Name
+	startup.ImageURL = dbStartup.ImageUrl.String
+	startup.Slug = dbStartup.Slug.String
+	startup.OneLiner = dbStartup.OneLiner.String
+	startup.Description = dbStartup.Description.String
+	startup.CreatedAt = &dbStartup.CreatedAt
+	if dbStartup.UpdatedAt.Valid {
+		startup.UpdatedAt = &dbStartup.UpdatedAt.Time
+	} else {
+		startup.UpdatedAt = nil
 	}
 
 	return startup, nil
 }
 
 func (s *startupsService) GetStartupBySlug(ctx context.Context, slug string) (models.Startup, error) {
-	query := `
-		SELECT
-			id
-			, name
-			, image_url
-			, slug
-			, one_liner
-			, description
-			, website
-			, created_at
-			, updated_at
-		FROM startups
-		WHERE slug = $1`
+	slugValue := &sql.NullString{}
+	slugValue.Scan(slug)
+	dbStartup, err := s.db.GetStartupBySlug(ctx, *slugValue)
+	if err != nil {
+		return models.Startup{}, fmt.Errorf("get an startup by slug (%s): %s", slug, err)
+	}
 
 	var startup models.Startup
-	if err := s.db.GetContext(ctx, &startup, query, slug); err != nil {
-		return models.Startup{}, fmt.Errorf("get an startup by slug (%s): %s", slug, err)
+	startup.ID = dbStartup.ID
+	startup.Name = dbStartup.Name
+	startup.ImageURL = dbStartup.ImageUrl.String
+	startup.Slug = dbStartup.Slug.String
+	startup.OneLiner = dbStartup.OneLiner.String
+	startup.Description = dbStartup.Description.String
+	startup.CreatedAt = &dbStartup.CreatedAt
+	if dbStartup.UpdatedAt.Valid {
+		startup.UpdatedAt = &dbStartup.UpdatedAt.Time
+	} else {
+		startup.UpdatedAt = nil
 	}
 
 	return startup, nil
 }
 
 func (s *startupsService) CreateStartup(ctx context.Context, startup models.Startup) (models.Startup, error) {
-	query := `
-		INSERT INTO startups (
-			name
-			, image_url
-			, slug
-			, one_liner
-			, description
-			, website
-		)
-		VALUES ($1, $2, $3, $4, $5, $6)
-		RETURNING id`
+	var startupParams db.CreateStartupParams
+	startupParams.Name = startup.Name
+	startupParams.ImageUrl.Scan(startup.ImageURL)
+	startupParams.Slug.Scan(startup.Slug)
+	startupParams.OneLiner.Scan(startup.OneLiner)
+	startupParams.Description.Scan(startup.Description)
+	startupParams.Website.Scan(startup.Website)
 
-	var id int64
-	if err := s.db.QueryRowxContext(ctx, query,
-		startup.Name,
-		startup.ImageURL,
-		startup.Slug,
-		startup.OneLiner,
-		startup.Description,
-		startup.Website,
-	).Scan(&id); err != nil {
+	id, err := s.db.CreateStartup(ctx, startupParams)
+	if err != nil {
 		return models.Startup{}, fmt.Errorf("insert new startup: %s", err)
 	}
 
@@ -129,9 +125,7 @@ func (s *startupsService) CreateStartup(ctx context.Context, startup models.Star
 }
 
 func (s *startupsService) DeleteStartup(ctx context.Context, id int64) error {
-	query := `DELETE FROM startups WHERE id = $1`
-
-	if _, err := s.db.ExecContext(ctx, query, id); err != nil {
+	if err := s.db.DeleteStartup(ctx, id); err != nil {
 		return fmt.Errorf("delete an startup: %s", err)
 	}
 

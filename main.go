@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"log"
 	"net/http"
@@ -10,14 +11,14 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	"github.com/jmoiron/sqlx"
+	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	_ "github.com/lib/pq"
 	echoSwagger "github.com/swaggo/echo-swagger"
 
 	"github.com/palembang-digital/website/api/v1"
 	_ "github.com/palembang-digital/website/api/v1/docs"
+	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/services"
 )
 
@@ -51,17 +52,18 @@ func main() {
 	}
 
 	log.Println("Initializing the database connection ...")
-	db, err := sqlx.Connect(cfg.Database.Driver, cfg.Database.URL)
+	conn, err := pgxpool.Connect(context.Background(), cfg.Database.URL)
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
+	defer conn.Close()
 
 	log.Println("Initializing services ...")
-	bannersService := services.NewBannersService(db)
-	eventsService := services.NewEventsService(db)
-	organizationsService := services.NewOrganizationsService(db)
-	startupsService := services.NewStartupsService(db)
+	queries := db.New(conn)
+	bannersService := services.NewBannersService(queries)
+	eventsService := services.NewEventsService(queries)
+	organizationsService := services.NewOrganizationsService(queries)
+	startupsService := services.NewStartupsService(queries)
 
 	log.Println("Initializing the web server ...")
 	e := echo.New()
