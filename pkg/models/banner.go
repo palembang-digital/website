@@ -4,6 +4,6 @@ package models
 type Banner struct {
 	CreatedUpdated
 
-	ID   int64  `json:"id" db:"id"`
-	Text string `json:"text" db:"text" valid:"required"`
+	ID   int64  `json:"id"`
+	Text string `json:"text" valid:"required"`
 }

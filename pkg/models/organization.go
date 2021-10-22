@@ -4,7 +4,7 @@ package models
 type Organization struct {
 	CreatedUpdated
 
-	ID       int64  `json:"id" db:"id"`
-	Name     string `json:"name" db:"name" valid:"required"`
-	ImageURL string `json:"image_url" db:"image_url" valid:"url,required"`
+	ID       int64  `json:"id"`
+	Name     string `json:"name" valid:"required"`
+	ImageURL string `json:"image_url" valid:"url,required"`
 }
