@@ -17,7 +17,7 @@ type Config struct {
 type DatabaseConfig struct {
 	URL            string `envconfig:"DATABASE_URL" required:"true"`
 	Driver         string `envconfig:"DATABASE_DRIVER" default:"postgres"`
-	MigrationsPath string `envconfig:"DATABASE_MIGRATIONS_PATH" required:"true" default:"file://migrations/postgresql"`
+	MigrationsPath string `envconfig:"DATABASE_MIGRATIONS_PATH" required:"true" default:"file://sql/schema"`
 }
 
 // ReadConfig populates configurations from environment variables.

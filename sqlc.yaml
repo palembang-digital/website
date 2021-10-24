@@ -2,12 +2,11 @@ version: "1"
 packages:
   - name: "db"
     path: "pkg/db"
-    queries: "pkg/db/query/"
-    schema: "migrations/postgresql/"
+    queries: "./sql/query/"
+    schema: "./sql/schema/"
     sql_package: "pgx/v4"
     engine: "postgresql"
     emit_empty_slices: true
     emit_interface: true
-    overrides:
-      - go_type: "int64"
-        db_type: "serial"
+    emit_json_tags: true
+    json_tags_case_style: "snake"
