@@ -4,7 +4,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 type Querier interface {
@@ -20,7 +19,7 @@ type Querier interface {
 	GetEvent(ctx context.Context, id int64) (GetEventRow, error)
 	GetOrganization(ctx context.Context, id int64) (Organization, error)
 	GetStartupByID(ctx context.Context, id int64) (GetStartupByIDRow, error)
-	GetStartupBySlug(ctx context.Context, slug sql.NullString) (GetStartupBySlugRow, error)
+	GetStartupBySlug(ctx context.Context, slug string) (GetStartupBySlugRow, error)
 	ListBanners(ctx context.Context) ([]Banner, error)
 	ListEvents(ctx context.Context) ([]ListEventsRow, error)
 	ListOrganizations(ctx context.Context) ([]Organization, error)

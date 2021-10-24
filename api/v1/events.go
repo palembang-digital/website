@@ -5,8 +5,7 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo/v4"
-
-	"github.com/palembang-digital/website/pkg/models"
+	"github.com/palembang-digital/website/pkg/db"
 )
 
 // List events
@@ -15,7 +14,7 @@ import (
 // @Tags events
 // @ID list-events
 // @Produce json
-// @Success 200 {array} models.Event
+// @Success 200 {array} db.Event
 // @Router /events [get]
 func (api *API) listEvents(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -35,7 +34,7 @@ func (api *API) listEvents(c echo.Context) error {
 // @ID get-event
 // @Produce json
 // @Param id path int true "Event ID"
-// @Success 200 {object} models.Event
+// @Success 200 {object} db.Event
 // @Router /events/{id} [get]
 func (api *API) getEvent(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -57,13 +56,13 @@ func (api *API) getEvent(c echo.Context) error {
 // @Tags events
 // @ID create-event
 // @Produce json
-// @Param event body models.Event true "Create event"
-// @Success 201 {object} models.Event
+// @Param event body db.Event true "Create event"
+// @Success 201 {object} db.Event
 // @Router /events [post]
 func (api *API) createEvent(c echo.Context) error {
 	ctx := c.Request().Context()
 
-	event := new(models.Event)
+	event := new(db.Event)
 	if err := c.Bind(event); err != nil {
 		return err
 	}
@@ -87,8 +86,8 @@ func (api *API) createEvent(c echo.Context) error {
 // @ID update-event
 // @Produce json
 // @Param id path int true "Event ID"
-// @Param event body models.Event true "Update event"
-// @Success 200 {object} models.Event
+// @Param event body db.Event true "Update event"
+// @Success 200 {object} db.Event
 // @Router /events/{id} [put]
 func (api *API) updateEvent(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -96,7 +95,7 @@ func (api *API) updateEvent(c echo.Context) error {
 	idString := c.Param("id")
 	id, _ := strconv.ParseInt(idString, 10, 64)
 
-	event := new(models.Event)
+	event := new(db.Event)
 	if err := c.Bind(event); err != nil {
 		return err
 	}

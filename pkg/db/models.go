@@ -3,47 +3,46 @@
 package db
 
 import (
-	"database/sql"
 	"time"
 )
 
 type Banner struct {
-	ID        int64
-	Text      string
-	CreatedAt time.Time
-	UpdatedAt sql.NullTime
+	ID        int64     `db:"id" json:"id"`
+	Text      string    `db:"text" json:"text"`
+	CreatedAt time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
 }
 
 type Event struct {
-	ID              int64
-	Title           string
-	ImageUrl        sql.NullString
-	CreatedAt       time.Time
-	UpdatedAt       sql.NullTime
-	RegistrationUrl sql.NullString
-	ScheduledStart  time.Time
-	ScheduledEnd    time.Time
-	YoutubeID       sql.NullString
-	RegistrationFee sql.NullInt32
-	Description     sql.NullString
+	ID              int64     `db:"id" json:"id"`
+	Title           string    `db:"title" json:"title"`
+	ImageUrl        string    `db:"image_url" json:"image_url"`
+	CreatedAt       time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt       time.Time `db:"updated_at" json:"updated_at"`
+	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
+	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
+	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
+	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
+	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
+	Description     string    `db:"description" json:"description"`
 }
 
 type Organization struct {
-	ID        int64
-	Name      string
-	ImageUrl  sql.NullString
-	CreatedAt time.Time
-	UpdatedAt sql.NullTime
+	ID        int64     `db:"id" json:"id"`
+	Name      string    `db:"name" json:"name"`
+	ImageUrl  string    `db:"image_url" json:"image_url"`
+	CreatedAt time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
 }
 
 type Startup struct {
-	ID          int64
-	Name        string
-	ImageUrl    sql.NullString
-	CreatedAt   time.Time
-	UpdatedAt   sql.NullTime
-	Slug        sql.NullString
-	OneLiner    sql.NullString
-	Description sql.NullString
-	Website     sql.NullString
+	ID          int64     `db:"id" json:"id"`
+	Name        string    `db:"name" json:"name"`
+	ImageUrl    string    `db:"image_url" json:"image_url"`
+	CreatedAt   time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
+	Slug        string    `db:"slug" json:"slug"`
+	OneLiner    string    `db:"one_liner" json:"one_liner"`
+	Description string    `db:"description" json:"description"`
+	Website     string    `db:"website" json:"website"`
 }

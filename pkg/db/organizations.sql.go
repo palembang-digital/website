@@ -5,7 +5,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createOrganization = `-- name: CreateOrganization :one
@@ -13,8 +12,8 @@ INSERT INTO organizations (name, image_url) VALUES ($1, $2) RETURNING id
 `
 
 type CreateOrganizationParams struct {
-	Name     string
-	ImageUrl sql.NullString
+	Name     string `db:"name" json:"name"`
+	ImageUrl string `db:"image_url" json:"image_url"`
 }
 
 func (q *Queries) CreateOrganization(ctx context.Context, arg CreateOrganizationParams) (int64, error) {

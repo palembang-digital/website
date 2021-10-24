@@ -5,7 +5,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 	"time"
 )
 
@@ -23,12 +22,12 @@ RETURNING id
 `
 
 type CreateStartupParams struct {
-	Name        string
-	ImageUrl    sql.NullString
-	Slug        sql.NullString
-	OneLiner    sql.NullString
-	Description sql.NullString
-	Website     sql.NullString
+	Name        string `db:"name" json:"name"`
+	ImageUrl    string `db:"image_url" json:"image_url"`
+	Slug        string `db:"slug" json:"slug"`
+	OneLiner    string `db:"one_liner" json:"one_liner"`
+	Description string `db:"description" json:"description"`
+	Website     string `db:"website" json:"website"`
 }
 
 func (q *Queries) CreateStartup(ctx context.Context, arg CreateStartupParams) (int64, error) {
@@ -70,15 +69,15 @@ WHERE id = $1
 `
 
 type GetStartupByIDRow struct {
-	ID          int64
-	Name        string
-	ImageUrl    sql.NullString
-	Slug        sql.NullString
-	OneLiner    sql.NullString
-	Description sql.NullString
-	Website     sql.NullString
-	CreatedAt   time.Time
-	UpdatedAt   sql.NullTime
+	ID          int64     `db:"id" json:"id"`
+	Name        string    `db:"name" json:"name"`
+	ImageUrl    string    `db:"image_url" json:"image_url"`
+	Slug        string    `db:"slug" json:"slug"`
+	OneLiner    string    `db:"one_liner" json:"one_liner"`
+	Description string    `db:"description" json:"description"`
+	Website     string    `db:"website" json:"website"`
+	CreatedAt   time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
 }
 
 func (q *Queries) GetStartupByID(ctx context.Context, id int64) (GetStartupByIDRow, error) {
@@ -114,18 +113,18 @@ WHERE slug = $1
 `
 
 type GetStartupBySlugRow struct {
-	ID          int64
-	Name        string
-	ImageUrl    sql.NullString
-	Slug        sql.NullString
-	OneLiner    sql.NullString
-	Description sql.NullString
-	Website     sql.NullString
-	CreatedAt   time.Time
-	UpdatedAt   sql.NullTime
+	ID          int64     `db:"id" json:"id"`
+	Name        string    `db:"name" json:"name"`
+	ImageUrl    string    `db:"image_url" json:"image_url"`
+	Slug        string    `db:"slug" json:"slug"`
+	OneLiner    string    `db:"one_liner" json:"one_liner"`
+	Description string    `db:"description" json:"description"`
+	Website     string    `db:"website" json:"website"`
+	CreatedAt   time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
 }
 
-func (q *Queries) GetStartupBySlug(ctx context.Context, slug sql.NullString) (GetStartupBySlugRow, error) {
+func (q *Queries) GetStartupBySlug(ctx context.Context, slug string) (GetStartupBySlugRow, error) {
 	row := q.db.QueryRow(ctx, getStartupBySlug, slug)
 	var i GetStartupBySlugRow
 	err := row.Scan(
@@ -157,15 +156,15 @@ FROM startups
 `
 
 type ListStartupsRow struct {
-	ID          int64
-	Name        string
-	ImageUrl    sql.NullString
-	Slug        sql.NullString
-	OneLiner    sql.NullString
-	Description sql.NullString
-	Website     sql.NullString
-	CreatedAt   time.Time
-	UpdatedAt   sql.NullTime
+	ID          int64     `db:"id" json:"id"`
+	Name        string    `db:"name" json:"name"`
+	ImageUrl    string    `db:"image_url" json:"image_url"`
+	Slug        string    `db:"slug" json:"slug"`
+	OneLiner    string    `db:"one_liner" json:"one_liner"`
+	Description string    `db:"description" json:"description"`
+	Website     string    `db:"website" json:"website"`
+	CreatedAt   time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
 }
 
 func (q *Queries) ListStartups(ctx context.Context) ([]ListStartupsRow, error) {

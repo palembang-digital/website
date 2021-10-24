@@ -5,14 +5,13 @@ import (
 	"fmt"
 
 	"github.com/palembang-digital/website/pkg/db"
-	"github.com/palembang-digital/website/pkg/models"
 )
 
 // OrganizationsService service interface.
 type OrganizationsService interface {
-	ListOrganizations(ctx context.Context) ([]models.Organization, error)
-	GetOrganization(ctx context.Context, id int64) (models.Organization, error)
-	CreateOrganization(ctx context.Context, organization models.Organization) (models.Organization, error)
+	ListOrganizations(ctx context.Context) ([]db.Organization, error)
+	GetOrganization(ctx context.Context, id int64) (db.Organization, error)
+	CreateOrganization(ctx context.Context, organization db.Organization) (db.Organization, error)
 	DeleteOrganization(ctx context.Context, id int64) error
 }
 
@@ -25,63 +24,36 @@ func NewOrganizationsService(db db.Querier) OrganizationsService {
 	return &organizationsService{db: db}
 }
 
-func (s *organizationsService) ListOrganizations(ctx context.Context) ([]models.Organization, error) {
-	dbOrganizations, err := s.db.ListOrganizations(ctx)
+func (s *organizationsService) ListOrganizations(ctx context.Context) ([]db.Organization, error) {
+	organizations, err := s.db.ListOrganizations(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("get the list of organizations: %s", err)
-	}
-
-	organizations := []models.Organization{}
-	for _, dbOrganization := range dbOrganizations {
-		var organization models.Organization
-		organization.ID = dbOrganization.ID
-		organization.Name = dbOrganization.Name
-		organization.ImageURL = dbOrganization.ImageUrl.String
-		organization.CreatedAt = &dbOrganization.CreatedAt
-		if dbOrganization.UpdatedAt.Valid {
-			organization.UpdatedAt = &dbOrganization.UpdatedAt.Time
-		} else {
-			organization.UpdatedAt = nil
-		}
-		organizations = append(organizations, organization)
 	}
 
 	return organizations, nil
 }
 
-func (s *organizationsService) GetOrganization(ctx context.Context, id int64) (models.Organization, error) {
-	dbOrganization, err := s.db.GetOrganization(ctx, id)
+func (s *organizationsService) GetOrganization(ctx context.Context, id int64) (db.Organization, error) {
+	organization, err := s.db.GetOrganization(ctx, id)
 	if err != nil {
-		return models.Organization{}, fmt.Errorf("get an organization: %s", err)
-	}
-
-	var organization models.Organization
-	organization.ID = dbOrganization.ID
-	organization.Name = dbOrganization.Name
-	organization.ImageURL = dbOrganization.ImageUrl.String
-	organization.CreatedAt = &dbOrganization.CreatedAt
-	if dbOrganization.UpdatedAt.Valid {
-		organization.UpdatedAt = &dbOrganization.UpdatedAt.Time
-	} else {
-		organization.UpdatedAt = nil
+		return db.Organization{}, fmt.Errorf("get an organization: %s", err)
 	}
 
 	return organization, nil
 }
 
-func (s *organizationsService) CreateOrganization(ctx context.Context, organization models.Organization) (models.Organization, error) {
-	var organizationParams db.CreateOrganizationParams
-	organizationParams.Name = organization.Name
-	organizationParams.ImageUrl.Scan(organization.ImageURL)
-
-	id, err := s.db.CreateOrganization(ctx, organizationParams)
+func (s *organizationsService) CreateOrganization(ctx context.Context, organization db.Organization) (db.Organization, error) {
+	id, err := s.db.CreateOrganization(ctx, db.CreateOrganizationParams{
+		Name:     organization.Name,
+		ImageUrl: organization.ImageUrl,
+	})
 	if err != nil {
-		return models.Organization{}, fmt.Errorf("insert new organization: %s", err)
+		return db.Organization{}, fmt.Errorf("insert new organization: %s", err)
 	}
 
 	newOrganization, err := s.GetOrganization(ctx, id)
 	if err != nil {
-		return models.Organization{}, fmt.Errorf("get new organization: %s", err)
+		return db.Organization{}, fmt.Errorf("get new organization: %s", err)
 	}
 
 	return newOrganization, nil

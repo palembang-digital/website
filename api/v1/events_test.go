@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/palembang-digital/website/pkg/models"
+	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/services/mocks"
 )
 
@@ -29,7 +29,7 @@ func TestAPI_listEvents(t *testing.T) {
 	c := e.NewContext(req, rec)
 
 	mockEventsService := &mocks.EventsService{}
-	mockEventsService.On("ListEvents", mock.Anything).Return([]models.Event{}, nil)
+	mockEventsService.On("ListEvents", mock.Anything).Return([]db.Event{}, nil)
 
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.listEvents(c)) {
@@ -49,7 +49,7 @@ func TestAPI_getEvent(t *testing.T) {
 	c.SetParamValues("1")
 
 	mockEventsService := &mocks.EventsService{}
-	mockEventsService.On("GetEvent", mock.Anything, int64(1)).Return(models.Event{}, nil)
+	mockEventsService.On("GetEvent", mock.Anything, int64(1)).Return(db.Event{}, nil)
 
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.getEvent(c)) {
@@ -59,12 +59,12 @@ func TestAPI_getEvent(t *testing.T) {
 }
 
 func TestAPI_createEvent(t *testing.T) {
-	event := models.Event{
+	event := db.Event{
 		ID:              1,
 		Title:           "event-1",
 		Description:     "deskripsi event",
-		ImageURL:        "https://patal.com/event-1.png",
-		RegistrationURL: "https://patal.com/event-1",
+		ImageUrl:        "https://patal.com/event-1.png",
+		RegistrationUrl: "https://patal.com/event-1",
 		YoutubeID:       "dQw4w9WgXcQ",
 		RegistrationFee: 0,
 	}
@@ -89,12 +89,12 @@ func TestAPI_createEvent(t *testing.T) {
 }
 
 func TestAPI_updateEvent(t *testing.T) {
-	event := models.Event{
+	event := db.Event{
 		ID:              1,
 		Title:           "event-1",
 		Description:     "deskripsi event",
-		ImageURL:        "https://patal.com/event-1.png",
-		RegistrationURL: "https://patal.com/event-1",
+		ImageUrl:        "https://patal.com/event-1.png",
+		RegistrationUrl: "https://patal.com/event-1",
 		YoutubeID:       "dQw4w9WgXcQ",
 		RegistrationFee: 20000,
 	}

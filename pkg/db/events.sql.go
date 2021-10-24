@@ -5,7 +5,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 	"time"
 )
 
@@ -23,14 +22,14 @@ INSERT INTO events (
 `
 
 type CreateEventParams struct {
-	Title           string
-	Description     sql.NullString
-	ImageUrl        sql.NullString
-	RegistrationUrl sql.NullString
-	YoutubeID       sql.NullString
-	RegistrationFee sql.NullInt32
-	ScheduledStart  time.Time
-	ScheduledEnd    time.Time
+	Title           string    `db:"title" json:"title"`
+	Description     string    `db:"description" json:"description"`
+	ImageUrl        string    `db:"image_url" json:"image_url"`
+	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
+	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
+	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
+	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
+	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
 }
 
 func (q *Queries) CreateEvent(ctx context.Context, arg CreateEventParams) (int64, error) {
@@ -76,17 +75,17 @@ WHERE id = $1
 `
 
 type GetEventRow struct {
-	ID              int64
-	Title           string
-	Description     sql.NullString
-	ImageUrl        sql.NullString
-	RegistrationUrl sql.NullString
-	YoutubeID       sql.NullString
-	RegistrationFee sql.NullInt32
-	ScheduledStart  time.Time
-	ScheduledEnd    time.Time
-	CreatedAt       time.Time
-	UpdatedAt       sql.NullTime
+	ID              int64     `db:"id" json:"id"`
+	Title           string    `db:"title" json:"title"`
+	Description     string    `db:"description" json:"description"`
+	ImageUrl        string    `db:"image_url" json:"image_url"`
+	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
+	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
+	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
+	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
+	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
+	CreatedAt       time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt       time.Time `db:"updated_at" json:"updated_at"`
 }
 
 func (q *Queries) GetEvent(ctx context.Context, id int64) (GetEventRow, error) {
@@ -125,17 +124,17 @@ FROM events
 `
 
 type ListEventsRow struct {
-	ID              int64
-	Title           string
-	Description     sql.NullString
-	ImageUrl        sql.NullString
-	RegistrationUrl sql.NullString
-	YoutubeID       sql.NullString
-	RegistrationFee sql.NullInt32
-	ScheduledStart  time.Time
-	ScheduledEnd    time.Time
-	CreatedAt       time.Time
-	UpdatedAt       sql.NullTime
+	ID              int64     `db:"id" json:"id"`
+	Title           string    `db:"title" json:"title"`
+	Description     string    `db:"description" json:"description"`
+	ImageUrl        string    `db:"image_url" json:"image_url"`
+	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
+	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
+	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
+	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
+	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
+	CreatedAt       time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt       time.Time `db:"updated_at" json:"updated_at"`
 }
 
 func (q *Queries) ListEvents(ctx context.Context) ([]ListEventsRow, error) {
@@ -186,15 +185,15 @@ RETURNING id
 `
 
 type UpdateEventParams struct {
-	Title           string
-	ImageUrl        sql.NullString
-	RegistrationUrl sql.NullString
-	YoutubeID       sql.NullString
-	RegistrationFee sql.NullInt32
-	ScheduledStart  time.Time
-	ScheduledEnd    time.Time
-	Description     sql.NullString
-	ID              int64
+	Title           string    `db:"title" json:"title"`
+	ImageUrl        string    `db:"image_url" json:"image_url"`
+	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
+	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
+	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
+	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
+	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
+	Description     string    `db:"description" json:"description"`
+	ID              int64     `db:"id" json:"id"`
 }
 
 func (q *Queries) UpdateEvent(ctx context.Context, arg UpdateEventParams) (int64, error) {
