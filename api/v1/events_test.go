@@ -29,7 +29,7 @@ func TestAPI_listEvents(t *testing.T) {
 	c := e.NewContext(req, rec)
 
 	mockEventsService := &mocks.EventsService{}
-	mockEventsService.On("ListEvents", mock.Anything).Return([]db.Event{}, nil)
+	mockEventsService.On("ListEvents", mock.Anything).Return([]db.ListEventsRow{}, nil)
 
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.listEvents(c)) {
@@ -49,12 +49,12 @@ func TestAPI_getEvent(t *testing.T) {
 	c.SetParamValues("1")
 
 	mockEventsService := &mocks.EventsService{}
-	mockEventsService.On("GetEvent", mock.Anything, int64(1)).Return(db.Event{}, nil)
+	mockEventsService.On("GetEvent", mock.Anything, int64(1)).Return(db.GetEventRow{}, nil)
 
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.getEvent(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
-		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"description\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":\"\",\"registration_fee\":0}\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":0,\"title\":\"\",\"description\":\"\",\"image_url\":\"\",\"registration_url\":\"\",\"youtube_id\":\"\",\"registration_fee\":0,\"scheduled_start\":\"0001-01-01T00:00:00Z\",\"scheduled_end\":\"0001-01-01T00:00:00Z\",\"created_at\":\"0001-01-01T00:00:00Z\",\"updated_at\":\"0001-01-01T00:00:00Z\"}\n", rec.Body.String())
 	}
 }
 
@@ -79,12 +79,24 @@ func TestAPI_createEvent(t *testing.T) {
 	c := e.NewContext(req, rec)
 
 	mockEventsService := &mocks.EventsService{}
-	mockEventsService.On("CreateEvent", mock.Anything, event).Return(event, nil)
+	mockEventsService.On("CreateEvent", mock.Anything, event).Return(db.GetEventRow{
+		ID:              event.ID,
+		Title:           event.Title,
+		Description:     event.Description,
+		ImageUrl:        event.ImageUrl,
+		RegistrationUrl: event.RegistrationUrl,
+		YoutubeID:       event.YoutubeID,
+		RegistrationFee: event.RegistrationFee,
+		ScheduledStart:  event.ScheduledStart,
+		ScheduledEnd:    event.ScheduledEnd,
+		CreatedAt:       event.CreatedAt,
+		UpdatedAt:       event.UpdatedAt,
+	}, nil)
 
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.createEvent(c)) {
 		assert.Equal(t, http.StatusCreated, rec.Code)
-		assert.Equal(t, string(eventJSON)+"\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"description\":\"deskripsi event\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\",\"youtube_id\":\"dQw4w9WgXcQ\",\"registration_fee\":0,\"scheduled_start\":\"0001-01-01T00:00:00Z\",\"scheduled_end\":\"0001-01-01T00:00:00Z\",\"created_at\":\"0001-01-01T00:00:00Z\",\"updated_at\":\"0001-01-01T00:00:00Z\"}\n", rec.Body.String())
 	}
 }
 
@@ -112,12 +124,24 @@ func TestAPI_updateEvent(t *testing.T) {
 	c.SetParamValues("1")
 
 	mockEventsService := &mocks.EventsService{}
-	mockEventsService.On("UpdateEvent", req.Context(), event).Return(event, nil)
+	mockEventsService.On("UpdateEvent", req.Context(), event).Return(db.GetEventRow{
+		ID:              event.ID,
+		Title:           event.Title,
+		Description:     event.Description,
+		ImageUrl:        event.ImageUrl,
+		RegistrationUrl: event.RegistrationUrl,
+		YoutubeID:       event.YoutubeID,
+		RegistrationFee: event.RegistrationFee,
+		ScheduledStart:  event.ScheduledStart,
+		ScheduledEnd:    event.ScheduledEnd,
+		CreatedAt:       event.CreatedAt,
+		UpdatedAt:       event.UpdatedAt,
+	}, nil)
 
 	api := &API{eventsService: mockEventsService}
 	if assert.NoError(t, api.updateEvent(c)) {
 		assert.Equal(t, http.StatusOK, rec.Code)
-		assert.Equal(t, string(eventJSON)+"\n", rec.Body.String())
+		assert.Equal(t, "{\"id\":1,\"title\":\"event-1\",\"description\":\"deskripsi event\",\"image_url\":\"https://patal.com/event-1.png\",\"registration_url\":\"https://patal.com/event-1\",\"youtube_id\":\"dQw4w9WgXcQ\",\"registration_fee\":20000,\"scheduled_start\":\"0001-01-01T00:00:00Z\",\"scheduled_end\":\"0001-01-01T00:00:00Z\",\"created_at\":\"0001-01-01T00:00:00Z\",\"updated_at\":\"0001-01-01T00:00:00Z\"}\n", rec.Body.String())
 	}
 }
 
