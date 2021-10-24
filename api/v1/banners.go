@@ -67,7 +67,7 @@ func (api *API) createBanner(c echo.Context) error {
 		return err
 	}
 
-	if err := c.Validate(banner); err != nil {
+	if err := api.bannerValidator(banner); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

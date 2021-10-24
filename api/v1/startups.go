@@ -66,7 +66,7 @@ func (api *API) createStartup(c echo.Context) error {
 		return err
 	}
 
-	if err := c.Validate(startup); err != nil {
+	if err := api.startupValidator(startup); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

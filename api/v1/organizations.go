@@ -67,7 +67,7 @@ func (api *API) createOrganization(c echo.Context) error {
 		return err
 	}
 
-	if err := c.Validate(organization); err != nil {
+	if err := api.organizationValidator(organization); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/asaskevich/govalidator"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
@@ -70,8 +69,6 @@ func main() {
 	e.Pre(middleware.RemoveTrailingSlash())
 	e.Use(middleware.Recover())
 
-	e.Validator = &requestValidator{}
-
 	// Utility endpoints
 	e.GET("/docs/api/v1/index.html", echoSwagger.WrapHandler)
 	e.GET("/docs/api/v1/doc.json", echoSwagger.WrapHandler)
@@ -96,13 +93,6 @@ func main() {
 	}
 
 	e.Logger.Fatal(e.StartServer(s))
-}
-
-type requestValidator struct{}
-
-func (rv *requestValidator) Validate(i interface{}) (err error) {
-	_, err = govalidator.ValidateStruct(i)
-	return
 }
 
 // ping write pong to http.ResponseWriter.

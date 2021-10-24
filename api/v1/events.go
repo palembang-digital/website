@@ -67,7 +67,7 @@ func (api *API) createEvent(c echo.Context) error {
 		return err
 	}
 
-	if err := c.Validate(event); err != nil {
+	if err := api.eventValidator(event); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
@@ -100,7 +100,7 @@ func (api *API) updateEvent(c echo.Context) error {
 		return err
 	}
 
-	if err := c.Validate(event); err != nil {
+	if err := api.eventValidator(event); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

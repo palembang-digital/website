@@ -3,9 +3,10 @@ module github.com/palembang-digital/website
 go 1.16
 
 require (
-	github.com/asaskevich/govalidator v0.0.0-20200819183940-29e1ff8eb0bb
+	github.com/asaskevich/govalidator v0.0.0-20200819183940-29e1ff8eb0bb // indirect
 	github.com/go-openapi/jsonreference v0.19.6 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
+	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/golang-migrate/migrate/v4 v4.12.2
 	github.com/jackc/pgconn v1.10.0
 	github.com/jackc/pgx/v4 v4.13.0
