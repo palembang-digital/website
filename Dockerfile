@@ -13,5 +13,5 @@ RUN go build -o bin/patal .
 FROM alpine:3.12
 COPY --from=node-builder /src/ui/build ./ui/build
 COPY --from=go-builder /src/bin/patal .
-COPY migrations migrations
+COPY sql sql
 CMD ["./patal"]

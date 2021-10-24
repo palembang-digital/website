@@ -14,7 +14,7 @@ import (
 // @Tags startups
 // @ID list-startups
 // @Produce json
-// @Success 200 {array} db.Startup
+// @Success 200 {array} db.ListStartupsRow
 // @Router /startups [get]
 func (api *API) listStartups(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -34,7 +34,7 @@ func (api *API) listStartups(c echo.Context) error {
 // @ID get-startup-by-slug
 // @Produce json
 // @Param slug path string true "Startup slug"
-// @Success 200 {object} db.Startup
+// @Success 200 {object} db.GetStartupBySlugRow
 // @Router /startups/{slug} [get]
 func (api *API) getStartupBySlug(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -56,7 +56,7 @@ func (api *API) getStartupBySlug(c echo.Context) error {
 // @ID create-startup
 // @Produce json
 // @Param startup body db.Startup true "Create startup"
-// @Success 201 {object} db.Startup
+// @Success 201 {object} db.GetStartupByIDRow
 // @Router /startups [post]
 func (api *API) createStartup(c echo.Context) error {
 	ctx := c.Request().Context()

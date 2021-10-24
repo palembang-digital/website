@@ -33,7 +33,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Banner"
+                                "$ref": "#/definitions/db.Banner"
                             }
                         }
                     }
@@ -56,7 +56,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Banner"
+                            "$ref": "#/definitions/db.Banner"
                         }
                     }
                 ],
@@ -64,7 +64,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Banner"
+                            "$ref": "#/definitions/db.Banner"
                         }
                     }
                 }
@@ -94,7 +94,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Banner"
+                            "$ref": "#/definitions/db.Banner"
                         }
                     }
                 }
@@ -145,7 +145,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Event"
+                                "$ref": "#/definitions/db.ListEventsRow"
                             }
                         }
                     }
@@ -168,7 +168,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 ],
@@ -176,7 +176,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.GetEventRow"
                         }
                     }
                 }
@@ -206,7 +206,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.GetEventRow"
                         }
                     }
                 }
@@ -235,7 +235,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 ],
@@ -243,7 +243,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.GetEventRow"
                         }
                     }
                 }
@@ -294,7 +294,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Organization"
+                                "$ref": "#/definitions/db.Organization"
                             }
                         }
                     }
@@ -317,7 +317,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Organization"
+                            "$ref": "#/definitions/db.Organization"
                         }
                     }
                 ],
@@ -325,7 +325,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Organization"
+                            "$ref": "#/definitions/db.Organization"
                         }
                     }
                 }
@@ -355,7 +355,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Organization"
+                            "$ref": "#/definitions/db.Organization"
                         }
                     }
                 }
@@ -406,7 +406,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Startup"
+                                "$ref": "#/definitions/db.ListStartupsRow"
                             }
                         }
                     }
@@ -429,7 +429,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Startup"
+                            "$ref": "#/definitions/db.Startup"
                         }
                     }
                 ],
@@ -437,7 +437,7 @@
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Startup"
+                            "$ref": "#/definitions/db.GetStartupByIDRow"
                         }
                     }
                 }
@@ -497,7 +497,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Startup"
+                            "$ref": "#/definitions/db.GetStartupBySlugRow"
                         }
                     }
                 }
@@ -505,12 +505,11 @@
         }
     },
     "definitions": {
-        "models.Banner": {
+        "db.Banner": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -519,17 +518,15 @@
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 }
             }
         },
-        "models.Event": {
+        "db.Event": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "description": {
                     "type": "string"
@@ -547,31 +544,30 @@
                     "type": "string"
                 },
                 "scheduled_end": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "scheduled_start": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "youtube_id": {
                     "type": "string"
                 }
             }
         },
-        "models.Organization": {
+        "db.GetEventRow": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -579,21 +575,34 @@
                 "image_url": {
                     "type": "string"
                 },
-                "name": {
+                "registration_fee": {
+                    "type": "integer"
+                },
+                "registration_url": {
+                    "type": "string"
+                },
+                "scheduled_end": {
+                    "type": "string"
+                },
+                "scheduled_start": {
+                    "type": "string"
+                },
+                "title": {
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
+                },
+                "youtube_id": {
+                    "type": "string"
                 }
             }
         },
-        "models.Startup": {
+        "db.GetStartupByIDRow": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "description": {
                     "type": "string"
@@ -614,8 +623,161 @@
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                }
+            }
+        },
+        "db.GetStartupBySlugRow": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "one_liner": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                }
+            }
+        },
+        "db.ListEventsRow": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "registration_fee": {
+                    "type": "integer"
+                },
+                "registration_url": {
+                    "type": "string"
+                },
+                "scheduled_end": {
+                    "type": "string"
+                },
+                "scheduled_start": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "youtube_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "db.ListStartupsRow": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "one_liner": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                }
+            }
+        },
+        "db.Organization": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "db.Startup": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "one_liner": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
                 },
                 "website": {
                     "type": "string"
