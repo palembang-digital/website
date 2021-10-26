@@ -160,7 +160,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/db.ListEventsRow"
+                                "$ref": "#/definitions/db.Event"
                             }
                         }
                     }
@@ -191,7 +191,7 @@ var doc = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/db.GetEventRow"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 }
@@ -221,7 +221,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/db.GetEventRow"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 }
@@ -258,7 +258,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/db.GetEventRow"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 }
@@ -421,7 +421,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/db.ListStartupsRow"
+                                "$ref": "#/definitions/db.Startup"
                             }
                         }
                     }
@@ -452,7 +452,7 @@ var doc = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/db.GetStartupByIDRow"
+                            "$ref": "#/definitions/db.Startup"
                         }
                     }
                 }
@@ -512,7 +512,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/db.GetStartupBySlugRow"
+                            "$ref": "#/definitions/db.Startup"
                         }
                     }
                 }
@@ -571,178 +571,6 @@ var doc = `{
                     "type": "string"
                 },
                 "youtube_id": {
-                    "type": "string"
-                }
-            }
-        },
-        "db.GetEventRow": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "image_url": {
-                    "type": "string"
-                },
-                "registration_fee": {
-                    "type": "integer"
-                },
-                "registration_url": {
-                    "type": "string"
-                },
-                "scheduled_end": {
-                    "type": "string"
-                },
-                "scheduled_start": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                },
-                "youtube_id": {
-                    "type": "string"
-                }
-            }
-        },
-        "db.GetStartupByIDRow": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "image_url": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "one_liner": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                },
-                "website": {
-                    "type": "string"
-                }
-            }
-        },
-        "db.GetStartupBySlugRow": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "image_url": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "one_liner": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                },
-                "website": {
-                    "type": "string"
-                }
-            }
-        },
-        "db.ListEventsRow": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "image_url": {
-                    "type": "string"
-                },
-                "registration_fee": {
-                    "type": "integer"
-                },
-                "registration_url": {
-                    "type": "string"
-                },
-                "scheduled_end": {
-                    "type": "string"
-                },
-                "scheduled_start": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                },
-                "youtube_id": {
-                    "type": "string"
-                }
-            }
-        },
-        "db.ListStartupsRow": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "image_url": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "one_liner": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "updated_at": {
-                    "type": "string"
-                },
-                "website": {
                     "type": "string"
                 }
             }
