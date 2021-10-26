@@ -16,14 +16,14 @@ type Querier interface {
 	DeleteOrganization(ctx context.Context, id int64) error
 	DeleteStartup(ctx context.Context, id int64) error
 	GetBanner(ctx context.Context, id int64) (Banner, error)
-	GetEvent(ctx context.Context, id int64) (GetEventRow, error)
+	GetEvent(ctx context.Context, id int64) (Event, error)
 	GetOrganization(ctx context.Context, id int64) (Organization, error)
-	GetStartupByID(ctx context.Context, id int64) (GetStartupByIDRow, error)
-	GetStartupBySlug(ctx context.Context, slug string) (GetStartupBySlugRow, error)
+	GetStartupByID(ctx context.Context, id int64) (Startup, error)
+	GetStartupBySlug(ctx context.Context, slug string) (Startup, error)
 	ListBanners(ctx context.Context) ([]Banner, error)
-	ListEvents(ctx context.Context) ([]ListEventsRow, error)
+	ListEvents(ctx context.Context) ([]Event, error)
 	ListOrganizations(ctx context.Context) ([]Organization, error)
-	ListStartups(ctx context.Context) ([]ListStartupsRow, error)
+	ListStartups(ctx context.Context) ([]Startup, error)
 	UpdateEvent(ctx context.Context, arg UpdateEventParams) (int64, error)
 }
 

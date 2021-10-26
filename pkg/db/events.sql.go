@@ -11,37 +11,37 @@ import (
 const createEvent = `-- name: CreateEvent :one
 INSERT INTO events (
     title
-    , description
     , image_url
     , registration_url
-    , youtube_id
-    , registration_fee
     , scheduled_start
     , scheduled_end
+    , youtube_id
+    , registration_fee
+    , description
 ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id
 `
 
 type CreateEventParams struct {
 	Title           string    `db:"title" json:"title"`
-	Description     string    `db:"description" json:"description"`
 	ImageUrl        string    `db:"image_url" json:"image_url"`
 	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
-	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
-	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
 	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
 	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
+	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
+	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
+	Description     string    `db:"description" json:"description"`
 }
 
 func (q *Queries) CreateEvent(ctx context.Context, arg CreateEventParams) (int64, error) {
 	row := q.db.QueryRow(ctx, createEvent,
 		arg.Title,
-		arg.Description,
 		arg.ImageUrl,
 		arg.RegistrationUrl,
-		arg.YoutubeID,
-		arg.RegistrationFee,
 		arg.ScheduledStart,
 		arg.ScheduledEnd,
+		arg.YoutubeID,
+		arg.RegistrationFee,
+		arg.Description,
 	)
 	var id int64
 	err := row.Scan(&id)
@@ -61,48 +61,34 @@ const getEvent = `-- name: GetEvent :one
 SELECT
     id
     , title
-    , description
     , image_url
-    , registration_url
-    , youtube_id
-    , registration_fee
-    , scheduled_start
-    , scheduled_end
     , created_at
     , updated_at
+    , registration_url
+    , scheduled_start
+    , scheduled_end
+    , youtube_id
+    , registration_fee
+    , description
 FROM events
 WHERE id = $1
 `
 
-type GetEventRow struct {
-	ID              int64     `db:"id" json:"id"`
-	Title           string    `db:"title" json:"title"`
-	Description     string    `db:"description" json:"description"`
-	ImageUrl        string    `db:"image_url" json:"image_url"`
-	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
-	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
-	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
-	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
-	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
-	CreatedAt       time.Time `db:"created_at" json:"created_at"`
-	UpdatedAt       time.Time `db:"updated_at" json:"updated_at"`
-}
-
-func (q *Queries) GetEvent(ctx context.Context, id int64) (GetEventRow, error) {
+func (q *Queries) GetEvent(ctx context.Context, id int64) (Event, error) {
 	row := q.db.QueryRow(ctx, getEvent, id)
-	var i GetEventRow
+	var i Event
 	err := row.Scan(
 		&i.ID,
 		&i.Title,
-		&i.Description,
 		&i.ImageUrl,
-		&i.RegistrationUrl,
-		&i.YoutubeID,
-		&i.RegistrationFee,
-		&i.ScheduledStart,
-		&i.ScheduledEnd,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.RegistrationUrl,
+		&i.ScheduledStart,
+		&i.ScheduledEnd,
+		&i.YoutubeID,
+		&i.RegistrationFee,
+		&i.Description,
 	)
 	return i, err
 }
@@ -111,53 +97,39 @@ const listEvents = `-- name: ListEvents :many
 SELECT
     id
     , title
-    , description
     , image_url
-    , registration_url
-    , youtube_id
-    , registration_fee
-    , scheduled_start
-    , scheduled_end
     , created_at
     , updated_at
+    , registration_url
+    , scheduled_start
+    , scheduled_end
+    , youtube_id
+    , registration_fee
+    , description
 FROM events
 `
 
-type ListEventsRow struct {
-	ID              int64     `db:"id" json:"id"`
-	Title           string    `db:"title" json:"title"`
-	Description     string    `db:"description" json:"description"`
-	ImageUrl        string    `db:"image_url" json:"image_url"`
-	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
-	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
-	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
-	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
-	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
-	CreatedAt       time.Time `db:"created_at" json:"created_at"`
-	UpdatedAt       time.Time `db:"updated_at" json:"updated_at"`
-}
-
-func (q *Queries) ListEvents(ctx context.Context) ([]ListEventsRow, error) {
+func (q *Queries) ListEvents(ctx context.Context) ([]Event, error) {
 	rows, err := q.db.Query(ctx, listEvents)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	items := []ListEventsRow{}
+	items := []Event{}
 	for rows.Next() {
-		var i ListEventsRow
+		var i Event
 		if err := rows.Scan(
 			&i.ID,
 			&i.Title,
-			&i.Description,
 			&i.ImageUrl,
-			&i.RegistrationUrl,
-			&i.YoutubeID,
-			&i.RegistrationFee,
-			&i.ScheduledStart,
-			&i.ScheduledEnd,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.RegistrationUrl,
+			&i.ScheduledStart,
+			&i.ScheduledEnd,
+			&i.YoutubeID,
+			&i.RegistrationFee,
+			&i.Description,
 		); err != nil {
 			return nil, err
 		}
@@ -171,42 +143,42 @@ func (q *Queries) ListEvents(ctx context.Context) ([]ListEventsRow, error) {
 
 const updateEvent = `-- name: UpdateEvent :one
 UPDATE events SET
-    title = $1
-    , image_url = $2
-    , registration_url = $3
-    , youtube_id = $4
-    , registration_fee = $5
-    , scheduled_start = $6
-    , scheduled_end = $7
+    title = $2
+    , image_url = $3
     , updated_at = CURRENT_TIMESTAMP
-    , description = $8
-WHERE id = $9
+    , registration_url = $4
+    , scheduled_start = $5
+    , scheduled_end = $6
+    , youtube_id = $7
+    , registration_fee = $8
+    , description = $9
+WHERE id = $1
 RETURNING id
 `
 
 type UpdateEventParams struct {
+	ID              int64     `db:"id" json:"id"`
 	Title           string    `db:"title" json:"title"`
 	ImageUrl        string    `db:"image_url" json:"image_url"`
 	RegistrationUrl string    `db:"registration_url" json:"registration_url"`
-	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
-	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
 	ScheduledStart  time.Time `db:"scheduled_start" json:"scheduled_start"`
 	ScheduledEnd    time.Time `db:"scheduled_end" json:"scheduled_end"`
+	YoutubeID       string    `db:"youtube_id" json:"youtube_id"`
+	RegistrationFee int64     `db:"registration_fee" json:"registration_fee"`
 	Description     string    `db:"description" json:"description"`
-	ID              int64     `db:"id" json:"id"`
 }
 
 func (q *Queries) UpdateEvent(ctx context.Context, arg UpdateEventParams) (int64, error) {
 	row := q.db.QueryRow(ctx, updateEvent,
+		arg.ID,
 		arg.Title,
 		arg.ImageUrl,
 		arg.RegistrationUrl,
-		arg.YoutubeID,
-		arg.RegistrationFee,
 		arg.ScheduledStart,
 		arg.ScheduledEnd,
+		arg.YoutubeID,
+		arg.RegistrationFee,
 		arg.Description,
-		arg.ID,
 	)
 	var id int64
 	err := row.Scan(&id)

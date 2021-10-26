@@ -2,57 +2,57 @@
 SELECT
     id
     , title
-    , description
     , image_url
-    , registration_url
-    , youtube_id
-    , registration_fee
-    , scheduled_start
-    , scheduled_end
     , created_at
     , updated_at
+    , registration_url
+    , scheduled_start
+    , scheduled_end
+    , youtube_id
+    , registration_fee
+    , description
 FROM events;
 
 -- name: GetEvent :one
 SELECT
     id
     , title
-    , description
     , image_url
-    , registration_url
-    , youtube_id
-    , registration_fee
-    , scheduled_start
-    , scheduled_end
     , created_at
     , updated_at
+    , registration_url
+    , scheduled_start
+    , scheduled_end
+    , youtube_id
+    , registration_fee
+    , description
 FROM events
 WHERE id = $1;
 
 -- name: CreateEvent :one
 INSERT INTO events (
     title
-    , description
     , image_url
     , registration_url
-    , youtube_id
-    , registration_fee
     , scheduled_start
     , scheduled_end
+    , youtube_id
+    , registration_fee
+    , description
 ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id;
 
 -- name: UpdateEvent :one
 UPDATE events SET
-    title = $1
-    , image_url = $2
-    , registration_url = $3
-    , youtube_id = $4
-    , registration_fee = $5
-    , scheduled_start = $6
-    , scheduled_end = $7
+    title = $2
+    , image_url = $3
     , updated_at = CURRENT_TIMESTAMP
-    , description = $8
-WHERE id = $9
+    , registration_url = $4
+    , scheduled_start = $5
+    , scheduled_end = $6
+    , youtube_id = $7
+    , registration_fee = $8
+    , description = $9
+WHERE id = $1
 RETURNING id;
 
 -- name: DeleteEvent :exec

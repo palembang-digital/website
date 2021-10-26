@@ -3,12 +3,12 @@ SELECT
     id
     , name
     , image_url
+    , created_at
+    , updated_at
     , slug
     , one_liner
     , description
     , website
-    , created_at
-    , updated_at
 FROM startups;
 
 -- name: GetStartupByID :one
@@ -16,12 +16,12 @@ SELECT
     id
     , name
     , image_url
+    , created_at
+    , updated_at
     , slug
     , one_liner
     , description
     , website
-    , created_at
-    , updated_at
 FROM startups
 WHERE id = $1;
 
@@ -30,12 +30,12 @@ SELECT
     id
     , name
     , image_url
+    , created_at
+    , updated_at
     , slug
     , one_liner
     , description
     , website
-    , created_at
-    , updated_at
 FROM startups
 WHERE slug = $1;
 

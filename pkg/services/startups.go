@@ -9,10 +9,10 @@ import (
 
 // StartupsService service interface.
 type StartupsService interface {
-	ListStartups(ctx context.Context) ([]db.ListStartupsRow, error)
-	GetStartupByID(ctx context.Context, id int64) (db.GetStartupByIDRow, error)
-	GetStartupBySlug(ctx context.Context, slug string) (db.GetStartupBySlugRow, error)
-	CreateStartup(ctx context.Context, startup db.Startup) (db.GetStartupByIDRow, error)
+	ListStartups(ctx context.Context) ([]db.Startup, error)
+	GetStartupByID(ctx context.Context, id int64) (db.Startup, error)
+	GetStartupBySlug(ctx context.Context, slug string) (db.Startup, error)
+	CreateStartup(ctx context.Context, startup db.Startup) (db.Startup, error)
 	DeleteStartup(ctx context.Context, id int64) error
 }
 
@@ -25,7 +25,7 @@ func NewStartupsService(db db.Querier) StartupsService {
 	return &startupsService{db: db}
 }
 
-func (s *startupsService) ListStartups(ctx context.Context) ([]db.ListStartupsRow, error) {
+func (s *startupsService) ListStartups(ctx context.Context) ([]db.Startup, error) {
 	startups, err := s.db.ListStartups(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("get the list of startups: %s", err)
@@ -34,25 +34,25 @@ func (s *startupsService) ListStartups(ctx context.Context) ([]db.ListStartupsRo
 	return startups, nil
 }
 
-func (s *startupsService) GetStartupByID(ctx context.Context, id int64) (db.GetStartupByIDRow, error) {
+func (s *startupsService) GetStartupByID(ctx context.Context, id int64) (db.Startup, error) {
 	startup, err := s.db.GetStartupByID(ctx, id)
 	if err != nil {
-		return db.GetStartupByIDRow{}, fmt.Errorf("get an startup by id (%d): %s", id, err)
+		return db.Startup{}, fmt.Errorf("get an startup by id (%d): %s", id, err)
 	}
 
 	return startup, nil
 }
 
-func (s *startupsService) GetStartupBySlug(ctx context.Context, slug string) (db.GetStartupBySlugRow, error) {
+func (s *startupsService) GetStartupBySlug(ctx context.Context, slug string) (db.Startup, error) {
 	startup, err := s.db.GetStartupBySlug(ctx, slug)
 	if err != nil {
-		return db.GetStartupBySlugRow{}, fmt.Errorf("get an startup by slug (%s): %s", slug, err)
+		return db.Startup{}, fmt.Errorf("get an startup by slug (%s): %s", slug, err)
 	}
 
 	return startup, nil
 }
 
-func (s *startupsService) CreateStartup(ctx context.Context, startup db.Startup) (db.GetStartupByIDRow, error) {
+func (s *startupsService) CreateStartup(ctx context.Context, startup db.Startup) (db.Startup, error) {
 	id, err := s.db.CreateStartup(ctx, db.CreateStartupParams{
 		Name:        startup.Name,
 		ImageUrl:    startup.ImageUrl,
@@ -62,12 +62,12 @@ func (s *startupsService) CreateStartup(ctx context.Context, startup db.Startup)
 		Website:     startup.Website,
 	})
 	if err != nil {
-		return db.GetStartupByIDRow{}, fmt.Errorf("insert new startup: %s", err)
+		return db.Startup{}, fmt.Errorf("insert new startup: %s", err)
 	}
 
 	newStartup, err := s.GetStartupByID(ctx, id)
 	if err != nil {
-		return db.GetStartupByIDRow{}, fmt.Errorf("get new startup: %s", err)
+		return db.Startup{}, fmt.Errorf("get new startup: %s", err)
 	}
 
 	return newStartup, nil

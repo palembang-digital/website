@@ -9,10 +9,10 @@ import (
 
 // EventsService service interface.
 type EventsService interface {
-	ListEvents(ctx context.Context) ([]db.ListEventsRow, error)
-	GetEvent(ctx context.Context, id int64) (db.GetEventRow, error)
-	CreateEvent(ctx context.Context, event db.Event) (db.GetEventRow, error)
-	UpdateEvent(ctx context.Context, event db.Event) (db.GetEventRow, error)
+	ListEvents(ctx context.Context) ([]db.Event, error)
+	GetEvent(ctx context.Context, id int64) (db.Event, error)
+	CreateEvent(ctx context.Context, event db.Event) (db.Event, error)
+	UpdateEvent(ctx context.Context, event db.Event) (db.Event, error)
 	DeleteEvent(ctx context.Context, id int64) error
 }
 
@@ -25,7 +25,7 @@ func NewEventsService(db db.Querier) EventsService {
 	return &eventsService{db: db}
 }
 
-func (s *eventsService) ListEvents(ctx context.Context) ([]db.ListEventsRow, error) {
+func (s *eventsService) ListEvents(ctx context.Context) ([]db.Event, error) {
 	events, err := s.db.ListEvents(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("get the list of events: %s", err)
@@ -34,16 +34,16 @@ func (s *eventsService) ListEvents(ctx context.Context) ([]db.ListEventsRow, err
 	return events, nil
 }
 
-func (s *eventsService) GetEvent(ctx context.Context, id int64) (db.GetEventRow, error) {
+func (s *eventsService) GetEvent(ctx context.Context, id int64) (db.Event, error) {
 	event, err := s.db.GetEvent(ctx, id)
 	if err != nil {
-		return db.GetEventRow{}, fmt.Errorf("get an event: %s", err)
+		return db.Event{}, fmt.Errorf("get an event: %s", err)
 	}
 
 	return event, nil
 }
 
-func (s *eventsService) CreateEvent(ctx context.Context, event db.Event) (db.GetEventRow, error) {
+func (s *eventsService) CreateEvent(ctx context.Context, event db.Event) (db.Event, error) {
 	id, err := s.db.CreateEvent(ctx, db.CreateEventParams{
 		Title:           event.Title,
 		Description:     event.Description,
@@ -55,18 +55,18 @@ func (s *eventsService) CreateEvent(ctx context.Context, event db.Event) (db.Get
 		ScheduledEnd:    event.ScheduledEnd,
 	})
 	if err != nil {
-		return db.GetEventRow{}, fmt.Errorf("insert new event: %s", err)
+		return db.Event{}, fmt.Errorf("insert new event: %s", err)
 	}
 
 	newEvent, err := s.GetEvent(ctx, id)
 	if err != nil {
-		return db.GetEventRow{}, fmt.Errorf("get new event: %s", err)
+		return db.Event{}, fmt.Errorf("get new event: %s", err)
 	}
 
 	return newEvent, nil
 }
 
-func (s *eventsService) UpdateEvent(ctx context.Context, event db.Event) (db.GetEventRow, error) {
+func (s *eventsService) UpdateEvent(ctx context.Context, event db.Event) (db.Event, error) {
 	id, err := s.db.UpdateEvent(ctx, db.UpdateEventParams{
 		Title:           event.Title,
 		ImageUrl:        event.ImageUrl,
@@ -79,12 +79,12 @@ func (s *eventsService) UpdateEvent(ctx context.Context, event db.Event) (db.Get
 		ID:              event.ID,
 	})
 	if err != nil {
-		return db.GetEventRow{}, fmt.Errorf("update event: %s", err)
+		return db.Event{}, fmt.Errorf("update event: %s", err)
 	}
 
 	newEvent, err := s.GetEvent(ctx, id)
 	if err != nil {
-		return db.GetEventRow{}, fmt.Errorf("get updated event: %s", err)
+		return db.Event{}, fmt.Errorf("get updated event: %s", err)
 	}
 
 	return newEvent, nil
