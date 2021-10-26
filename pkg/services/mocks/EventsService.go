@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	models "github.com/palembang-digital/website/pkg/models"
+	db "github.com/palembang-digital/website/pkg/db"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -15,18 +15,18 @@ type EventsService struct {
 }
 
 // CreateEvent provides a mock function with given fields: ctx, event
-func (_m *EventsService) CreateEvent(ctx context.Context, event models.Event) (models.Event, error) {
+func (_m *EventsService) CreateEvent(ctx context.Context, event db.Event) (db.Event, error) {
 	ret := _m.Called(ctx, event)
 
-	var r0 models.Event
-	if rf, ok := ret.Get(0).(func(context.Context, models.Event) models.Event); ok {
+	var r0 db.Event
+	if rf, ok := ret.Get(0).(func(context.Context, db.Event) db.Event); ok {
 		r0 = rf(ctx, event)
 	} else {
-		r0 = ret.Get(0).(models.Event)
+		r0 = ret.Get(0).(db.Event)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, models.Event) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, db.Event) error); ok {
 		r1 = rf(ctx, event)
 	} else {
 		r1 = ret.Error(1)
@@ -50,14 +50,14 @@ func (_m *EventsService) DeleteEvent(ctx context.Context, id int64) error {
 }
 
 // GetEvent provides a mock function with given fields: ctx, id
-func (_m *EventsService) GetEvent(ctx context.Context, id int64) (models.Event, error) {
+func (_m *EventsService) GetEvent(ctx context.Context, id int64) (db.Event, error) {
 	ret := _m.Called(ctx, id)
 
-	var r0 models.Event
-	if rf, ok := ret.Get(0).(func(context.Context, int64) models.Event); ok {
+	var r0 db.Event
+	if rf, ok := ret.Get(0).(func(context.Context, int64) db.Event); ok {
 		r0 = rf(ctx, id)
 	} else {
-		r0 = ret.Get(0).(models.Event)
+		r0 = ret.Get(0).(db.Event)
 	}
 
 	var r1 error
@@ -71,15 +71,15 @@ func (_m *EventsService) GetEvent(ctx context.Context, id int64) (models.Event, 
 }
 
 // ListEvents provides a mock function with given fields: ctx
-func (_m *EventsService) ListEvents(ctx context.Context) ([]models.Event, error) {
+func (_m *EventsService) ListEvents(ctx context.Context) ([]db.Event, error) {
 	ret := _m.Called(ctx)
 
-	var r0 []models.Event
-	if rf, ok := ret.Get(0).(func(context.Context) []models.Event); ok {
+	var r0 []db.Event
+	if rf, ok := ret.Get(0).(func(context.Context) []db.Event); ok {
 		r0 = rf(ctx)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]models.Event)
+			r0 = ret.Get(0).([]db.Event)
 		}
 	}
 
@@ -94,18 +94,18 @@ func (_m *EventsService) ListEvents(ctx context.Context) ([]models.Event, error)
 }
 
 // UpdateEvent provides a mock function with given fields: ctx, event
-func (_m *EventsService) UpdateEvent(ctx context.Context, event models.Event) (models.Event, error) {
+func (_m *EventsService) UpdateEvent(ctx context.Context, event db.Event) (db.Event, error) {
 	ret := _m.Called(ctx, event)
 
-	var r0 models.Event
-	if rf, ok := ret.Get(0).(func(context.Context, models.Event) models.Event); ok {
+	var r0 db.Event
+	if rf, ok := ret.Get(0).(func(context.Context, db.Event) db.Event); ok {
 		r0 = rf(ctx, event)
 	} else {
-		r0 = ret.Get(0).(models.Event)
+		r0 = ret.Get(0).(db.Event)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, models.Event) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, db.Event) error); ok {
 		r1 = rf(ctx, event)
 	} else {
 		r1 = ret.Error(1)

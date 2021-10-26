@@ -5,8 +5,7 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo/v4"
-
-	"github.com/palembang-digital/website/pkg/models"
+	"github.com/palembang-digital/website/pkg/db"
 )
 
 // List startups
@@ -15,7 +14,7 @@ import (
 // @Tags startups
 // @ID list-startups
 // @Produce json
-// @Success 200 {array} models.Startup
+// @Success 200 {array} db.Startup
 // @Router /startups [get]
 func (api *API) listStartups(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -35,7 +34,7 @@ func (api *API) listStartups(c echo.Context) error {
 // @ID get-startup-by-slug
 // @Produce json
 // @Param slug path string true "Startup slug"
-// @Success 200 {object} models.Startup
+// @Success 200 {object} db.Startup
 // @Router /startups/{slug} [get]
 func (api *API) getStartupBySlug(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -56,18 +55,18 @@ func (api *API) getStartupBySlug(c echo.Context) error {
 // @Tags startups
 // @ID create-startup
 // @Produce json
-// @Param startup body models.Startup true "Create startup"
-// @Success 201 {object} models.Startup
+// @Param startup body db.Startup true "Create startup"
+// @Success 201 {object} db.Startup
 // @Router /startups [post]
 func (api *API) createStartup(c echo.Context) error {
 	ctx := c.Request().Context()
 
-	startup := new(models.Startup)
+	startup := new(db.Startup)
 	if err := c.Bind(startup); err != nil {
 		return err
 	}
 
-	if err := c.Validate(startup); err != nil {
+	if err := api.startupValidator(startup); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

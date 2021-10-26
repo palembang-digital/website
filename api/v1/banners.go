@@ -5,8 +5,7 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo/v4"
-
-	"github.com/palembang-digital/website/pkg/models"
+	"github.com/palembang-digital/website/pkg/db"
 )
 
 // List banners
@@ -15,7 +14,7 @@ import (
 // @Tags banners
 // @ID list-banners
 // @Produce json
-// @Success 200 {array} models.Banner
+// @Success 200 {array} db.Banner
 // @Router /banners [get]
 func (api *API) listBanners(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -35,7 +34,7 @@ func (api *API) listBanners(c echo.Context) error {
 // @ID get-banner
 // @Produce json
 // @Param id path int true "Banner ID"
-// @Success 200 {object} models.Banner
+// @Success 200 {object} db.Banner
 // @Router /banners/{id} [get]
 func (api *API) getBanner(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -57,18 +56,18 @@ func (api *API) getBanner(c echo.Context) error {
 // @Tags banners
 // @ID create-banner
 // @Produce json
-// @Param banner body models.Banner true "Create banner"
-// @Success 201 {object} models.Banner
+// @Param banner body db.Banner true "Create banner"
+// @Success 201 {object} db.Banner
 // @Router /banners [post]
 func (api *API) createBanner(c echo.Context) error {
 	ctx := c.Request().Context()
 
-	banner := new(models.Banner)
+	banner := new(db.Banner)
 	if err := c.Bind(banner); err != nil {
 		return err
 	}
 
-	if err := c.Validate(banner); err != nil {
+	if err := api.bannerValidator(banner); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

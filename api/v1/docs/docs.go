@@ -48,7 +48,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Banner"
+                                "$ref": "#/definitions/db.Banner"
                             }
                         }
                     }
@@ -71,7 +71,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Banner"
+                            "$ref": "#/definitions/db.Banner"
                         }
                     }
                 ],
@@ -79,7 +79,7 @@ var doc = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Banner"
+                            "$ref": "#/definitions/db.Banner"
                         }
                     }
                 }
@@ -109,7 +109,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Banner"
+                            "$ref": "#/definitions/db.Banner"
                         }
                     }
                 }
@@ -160,7 +160,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Event"
+                                "$ref": "#/definitions/db.Event"
                             }
                         }
                     }
@@ -183,7 +183,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 ],
@@ -191,7 +191,7 @@ var doc = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 }
@@ -221,7 +221,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 }
@@ -250,7 +250,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 ],
@@ -258,7 +258,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Event"
+                            "$ref": "#/definitions/db.Event"
                         }
                     }
                 }
@@ -309,7 +309,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Organization"
+                                "$ref": "#/definitions/db.Organization"
                             }
                         }
                     }
@@ -332,7 +332,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Organization"
+                            "$ref": "#/definitions/db.Organization"
                         }
                     }
                 ],
@@ -340,7 +340,7 @@ var doc = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Organization"
+                            "$ref": "#/definitions/db.Organization"
                         }
                     }
                 }
@@ -370,7 +370,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Organization"
+                            "$ref": "#/definitions/db.Organization"
                         }
                     }
                 }
@@ -421,7 +421,7 @@ var doc = `{
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/models.Startup"
+                                "$ref": "#/definitions/db.Startup"
                             }
                         }
                     }
@@ -444,7 +444,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Startup"
+                            "$ref": "#/definitions/db.Startup"
                         }
                     }
                 ],
@@ -452,7 +452,7 @@ var doc = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Startup"
+                            "$ref": "#/definitions/db.Startup"
                         }
                     }
                 }
@@ -512,7 +512,7 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.Startup"
+                            "$ref": "#/definitions/db.Startup"
                         }
                     }
                 }
@@ -520,12 +520,11 @@ var doc = `{
         }
     },
     "definitions": {
-        "models.Banner": {
+        "db.Banner": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -534,17 +533,18 @@ var doc = `{
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 }
             }
         },
-        "models.Event": {
+        "db.Event": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -559,31 +559,27 @@ var doc = `{
                     "type": "string"
                 },
                 "scheduled_end": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "scheduled_start": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "youtube_id": {
                     "type": "string"
                 }
             }
         },
-        "models.Organization": {
+        "db.Organization": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -595,17 +591,15 @@ var doc = `{
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 }
             }
         },
-        "models.Startup": {
+        "db.Startup": {
             "type": "object",
             "properties": {
                 "created_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "description": {
                     "type": "string"
@@ -626,8 +620,7 @@ var doc = `{
                     "type": "string"
                 },
                 "updated_at": {
-                    "type": "string",
-                    "example": "2020-04-21T00:00:00Z"
+                    "type": "string"
                 },
                 "website": {
                     "type": "string"

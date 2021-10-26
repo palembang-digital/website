@@ -1,9 +1,12 @@
 package api
 
 import (
+	validation "github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/is"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
+	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/services"
 )
 
@@ -71,4 +74,29 @@ func (api *API) adminValidator(username, password string, c echo.Context) (bool,
 		return true, nil
 	}
 	return false, nil
+}
+
+func (api *API) eventValidator(event *db.Event) error {
+	return validation.ValidateStruct(event,
+		validation.Field(&event.ImageUrl, is.URL),
+		validation.Field(&event.RegistrationUrl, is.URL),
+	)
+}
+
+func (api *API) organizationValidator(organization *db.Organization) error {
+	return validation.ValidateStruct(organization,
+		validation.Field(&organization.ImageUrl, is.URL),
+	)
+}
+
+func (api *API) startupValidator(startup *db.Startup) error {
+	return validation.ValidateStruct(startup,
+		validation.Field(&startup.ImageUrl, is.URL),
+	)
+}
+
+func (api *API) bannerValidator(banner *db.Banner) error {
+	return validation.ValidateStruct(banner,
+		validation.Field(&banner.Text, validation.Required),
+	)
 }

@@ -5,8 +5,7 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo/v4"
-
-	"github.com/palembang-digital/website/pkg/models"
+	"github.com/palembang-digital/website/pkg/db"
 )
 
 // List organizations
@@ -15,7 +14,7 @@ import (
 // @Tags organizations
 // @ID list-organizations
 // @Produce json
-// @Success 200 {array} models.Organization
+// @Success 200 {array} db.Organization
 // @Router /organizations [get]
 func (api *API) listOrganizations(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -35,7 +34,7 @@ func (api *API) listOrganizations(c echo.Context) error {
 // @ID get-organization
 // @Produce json
 // @Param id path int true "Organization ID"
-// @Success 200 {object} models.Organization
+// @Success 200 {object} db.Organization
 // @Router /organizations/{id} [get]
 func (api *API) getOrganization(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -57,18 +56,18 @@ func (api *API) getOrganization(c echo.Context) error {
 // @Tags organizations
 // @ID create-organization
 // @Produce json
-// @Param organization body models.Organization true "Create organization"
-// @Success 201 {object} models.Organization
+// @Param organization body db.Organization true "Create organization"
+// @Success 201 {object} db.Organization
 // @Router /organizations [post]
 func (api *API) createOrganization(c echo.Context) error {
 	ctx := c.Request().Context()
 
-	organization := new(models.Organization)
+	organization := new(db.Organization)
 	if err := c.Bind(organization); err != nil {
 		return err
 	}
 
-	if err := c.Validate(organization); err != nil {
+	if err := api.organizationValidator(organization); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 

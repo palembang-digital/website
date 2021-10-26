@@ -1,22 +1,21 @@
 basePath: /api/v1
 definitions:
-  models.Banner:
+  db.Banner:
     properties:
       created_at:
-        example: "2020-04-21T00:00:00Z"
         type: string
       id:
         type: integer
       text:
         type: string
       updated_at:
-        example: "2020-04-21T00:00:00Z"
         type: string
     type: object
-  models.Event:
+  db.Event:
     properties:
       created_at:
-        example: "2020-04-21T00:00:00Z"
+        type: string
+      description:
         type: string
       id:
         type: integer
@@ -27,23 +26,19 @@ definitions:
       registration_url:
         type: string
       scheduled_end:
-        example: "2020-04-21T00:00:00Z"
         type: string
       scheduled_start:
-        example: "2020-04-21T00:00:00Z"
         type: string
       title:
         type: string
       updated_at:
-        example: "2020-04-21T00:00:00Z"
         type: string
       youtube_id:
         type: string
     type: object
-  models.Organization:
+  db.Organization:
     properties:
       created_at:
-        example: "2020-04-21T00:00:00Z"
         type: string
       id:
         type: integer
@@ -52,13 +47,11 @@ definitions:
       name:
         type: string
       updated_at:
-        example: "2020-04-21T00:00:00Z"
         type: string
     type: object
-  models.Startup:
+  db.Startup:
     properties:
       created_at:
-        example: "2020-04-21T00:00:00Z"
         type: string
       description:
         type: string
@@ -73,7 +66,6 @@ definitions:
       slug:
         type: string
       updated_at:
-        example: "2020-04-21T00:00:00Z"
         type: string
       website:
         type: string
@@ -101,7 +93,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/models.Banner'
+              $ref: '#/definitions/db.Banner'
             type: array
       summary: List banners
       tags:
@@ -115,14 +107,14 @@ paths:
         name: banner
         required: true
         schema:
-          $ref: '#/definitions/models.Banner'
+          $ref: '#/definitions/db.Banner'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/models.Banner'
+            $ref: '#/definitions/db.Banner'
       summary: Create a new banner
       tags:
       - banners
@@ -161,7 +153,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Banner'
+            $ref: '#/definitions/db.Banner'
       summary: Get an banner
       tags:
       - banners
@@ -176,7 +168,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/models.Event'
+              $ref: '#/definitions/db.Event'
             type: array
       summary: List events
       tags:
@@ -190,14 +182,14 @@ paths:
         name: event
         required: true
         schema:
-          $ref: '#/definitions/models.Event'
+          $ref: '#/definitions/db.Event'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/models.Event'
+            $ref: '#/definitions/db.Event'
       summary: Create a new event
       tags:
       - events
@@ -236,7 +228,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Event'
+            $ref: '#/definitions/db.Event'
       summary: Get an event
       tags:
       - events
@@ -254,14 +246,14 @@ paths:
         name: event
         required: true
         schema:
-          $ref: '#/definitions/models.Event'
+          $ref: '#/definitions/db.Event'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Event'
+            $ref: '#/definitions/db.Event'
       summary: Update an event
       tags:
       - events
@@ -276,7 +268,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/models.Organization'
+              $ref: '#/definitions/db.Organization'
             type: array
       summary: List organizations
       tags:
@@ -290,14 +282,14 @@ paths:
         name: organization
         required: true
         schema:
-          $ref: '#/definitions/models.Organization'
+          $ref: '#/definitions/db.Organization'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/models.Organization'
+            $ref: '#/definitions/db.Organization'
       summary: Create a new organization
       tags:
       - organizations
@@ -336,7 +328,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Organization'
+            $ref: '#/definitions/db.Organization'
       summary: Get an organization
       tags:
       - organizations
@@ -351,7 +343,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/models.Startup'
+              $ref: '#/definitions/db.Startup'
             type: array
       summary: List startups
       tags:
@@ -365,14 +357,14 @@ paths:
         name: startup
         required: true
         schema:
-          $ref: '#/definitions/models.Startup'
+          $ref: '#/definitions/db.Startup'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/models.Startup'
+            $ref: '#/definitions/db.Startup'
       summary: Create a new startup
       tags:
       - startups
@@ -412,7 +404,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.Startup'
+            $ref: '#/definitions/db.Startup'
       summary: Get an startup by slug
       tags:
       - startups
