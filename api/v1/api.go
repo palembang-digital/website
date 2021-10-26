@@ -83,20 +83,20 @@ func (api *API) eventValidator(event *db.Event) error {
 	)
 }
 
-func (api *API) organizationValidator(event *db.Organization) error {
-	return validation.ValidateStruct(event,
-		validation.Field(&event.ImageUrl, is.URL),
+func (api *API) organizationValidator(organization *db.Organization) error {
+	return validation.ValidateStruct(organization,
+		validation.Field(&organization.ImageUrl, is.URL),
 	)
 }
 
-func (api *API) startupValidator(event *db.Startup) error {
-	return validation.ValidateStruct(event,
-		validation.Field(&event.ImageUrl, is.URL),
+func (api *API) startupValidator(startup *db.Startup) error {
+	return validation.ValidateStruct(startup,
+		validation.Field(&startup.ImageUrl, is.URL),
 	)
 }
 
-func (api *API) bannerValidator(event *db.Banner) error {
-	return validation.ValidateStruct(event,
-		validation.Field(&event.Text, validation.Required),
+func (api *API) bannerValidator(banner *db.Banner) error {
+	return validation.ValidateStruct(banner,
+		validation.Field(&banner.Text, validation.Required),
 	)
 }
