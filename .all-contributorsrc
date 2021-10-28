@@ -1,24 +1,133 @@
 {
+  "projectName": "website",
+  "projectOwner": "palembang-digital",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
     "README.md"
   ],
   "imageSize": 100,
   "commit": false,
+  "commitConvention": "none",
   "contributors": [
     {
       "login": "ariefrahmansyah",
       "name": "Arief Rahmansyah",
       "avatar_url": "https://avatars.githubusercontent.com/u/8122852?v=4",
-      "profile": "https://ariefrahmansyah.dev",
+      "profile": "https://ariefrahmansyah.dev/",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "infra",
+        "review",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "lloistborn",
+      "name": "Faisal Morensya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4990180?v=4",
+      "profile": "https://github.com/lloistborn",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "azhry",
+      "name": "Azhary Arliansyah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9222583?v=4",
+      "profile": "https://www.linkedin.com/in/azhary-arliansyah",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "usernamesalah",
+      "name": "Rezi Apriliansyah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11488520?v=4",
+      "profile": "https://github.com/usernamesalah",
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "maximalyono",
+      "name": "maximalyono",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54436207?v=4",
+      "profile": "https://github.com/maximalyono",
+      "contributions": [
+        "infra"
+      ]
+    },
+    {
+      "login": "taufik230301",
+      "name": "Taufiiqul Hakim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51141717?v=4",
+      "profile": "https://taufik.netlify.app/",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "mistikel",
+      "name": "Agus Mistiawan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9096293?v=4",
+      "profile": "https://mistikel.github.io/",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "syahroyni",
+      "name": "GlenRomance",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21373128?v=4",
+      "profile": "https://github.com/syahroyni",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "aemiralfath",
+      "name": "Ahmad Emir Alfatah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30483373?v=4",
+      "profile": "https://www.linkedin.com/in/aemiralfath/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kmhalpin",
+      "name": "Kemas M Husein Alviansyah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53615235?v=4",
+      "profile": "https://github.com/kmhalpin",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "FadellMuhammad",
+      "name": "Fadel Muhammad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57484725?v=4",
+      "profile": "https://github.com/FadellMuhammad",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jeeshakira",
+      "name": "Julia Shakira Pratiwi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71561539?v=4",
+      "profile": "https://dribbble.com/jeeshakira",
+      "contributions": [
+        "design"
+      ]
     }
   ],
-  "contributorsPerLine": 7,
-  "projectName": "website",
-  "projectOwner": "palembang-digital",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "skipCi": true
+  "contributorsPerLine": 7
 }
