@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ariefrahmansyah",
+      "name": "Arief Rahmansyah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8122852?v=4",
+      "profile": "https://ariefrahmansyah.dev",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "website",
+  "projectOwner": "palembang-digital",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
