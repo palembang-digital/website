@@ -41,6 +41,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/kmhalpin"><img src="https://avatars.githubusercontent.com/u/53615235?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kemas M Husein Alviansyah</b></sub></a><br /><a href="https://github.com/palembang-digital/website/commits?author=kmhalpin" title="Code">💻</a> <a href="https://github.com/palembang-digital/website/commits?author=kmhalpin" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/FadellMuhammad"><img src="https://avatars.githubusercontent.com/u/57484725?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fadel Muhammad</b></sub></a><br /><a href="https://github.com/palembang-digital/website/commits?author=FadellMuhammad" title="Code">💻</a></td>
     <td align="center"><a href="https://dribbble.com/jeeshakira"><img src="https://avatars.githubusercontent.com/u/71561539?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Julia Shakira Pratiwi</b></sub></a><br /><a href="#design-jeeshakira" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/riskatrim"><img src="https://avatars.githubusercontent.com/u/71475649?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Riska T. Mardilah</b></sub></a><br /><a href="https://github.com/palembang-digital/website/commits?author=riskatrim" title="Code">💻</a></td>
   </tr>
 </table>
 
