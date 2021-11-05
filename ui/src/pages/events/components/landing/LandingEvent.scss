@@ -1,0 +1,128 @@
+h1 {
+  font-size: 60px;
+}
+h2 {
+  font-size: 36px;
+}
+h3 {
+  font-size: 24px;
+}
+.carousel-content {
+  background-color: #2c6471;
+  padding: 30px;
+  padding-bottom: 55px;
+  border-radius: 20px;
+  color: white;
+  h1,
+  h2,
+  h3 {
+    color: white;
+    font-weight: 700;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  button {
+    color: #2c6471;
+    background-color: white;
+    border-radius: 50px;
+    font-size: 36px;
+    font-weight: 700;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    box-shadow: 10px 10px #1f4750;
+  }
+  button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+  }
+}
+
+.text {
+  text-align: center;
+  h1 {
+    margin: 0px;
+    color: #2c6471;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 28px;
+    padding: 0px 15vw;
+    margin: 0px;
+
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+.cardContent {
+  display: flex;
+
+  color: #121212;
+
+  h1 {
+    color: #2c6471;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0px;
+  }
+  h2 {
+    color: #2c6471;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0px;
+  }
+  p {
+    color: #121212;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0px;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 20px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .carousel-content {
+    h1 {
+      font-size: 34px;
+    }
+    h2 {
+      font-size: 22px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    button {
+      font-size: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .carousel-content {
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    h3 {
+      font-size: 12px;
+    }
+    button {
+      font-size: 18px;
+    }
+  }
+}

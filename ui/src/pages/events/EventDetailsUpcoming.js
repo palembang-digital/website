@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row, Button } from "antd";
-import Register from "./component/Register";
+import Register from "./components/Register";
 import "./EventDetails.scss";
 
 const EventDetailsUpcoming = ({ event }) => {

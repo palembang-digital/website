@@ -13,30 +13,37 @@ const Header = () => {
   const { isMobile } = useContext(SiteContext);
   const menuMode = isMobile ? "inline" : "horizontal";
 
-  const menuItems = useMemo(() => [
-    {
-      title: "Belajar",
-      href: "https://belajar.palembangdigital.org",
-      externalLink: true,
-    },
-    {
-      title: "Startup",
-      href: "/startups",
-    },
-    {
-      title: "Organisasi",
-      href: "/organizations",
-    },
-    {
-      title: "Tentang",
-      href: "/about",
-    },
-    {
-      title: "Dukung Kami",
-      href: "https://saweria.co/palembangdigital",
-      externalLink: true,
-    },
-  ], []);
+  const menuItems = useMemo(
+    () => [
+      {
+        title: "Belajar",
+        href: "https://belajar.palembangdigital.org",
+        externalLink: true,
+      },
+      {
+        title: "Events",
+        href: "/events",
+      },
+      {
+        title: "Startup",
+        href: "/startups",
+      },
+      {
+        title: "Organisasi",
+        href: "/organizations",
+      },
+      {
+        title: "Tentang",
+        href: "/about",
+      },
+      {
+        title: "Dukung Kami",
+        href: "https://saweria.co/palembangdigital",
+        externalLink: true,
+      },
+    ],
+    []
+  );
 
   const selectedKeys = useMemo(() => {
     if (typeof window !== "undefined") {
@@ -70,7 +77,8 @@ const Header = () => {
         <Row
           align="middle"
           justify="space-between"
-          style={{ flexFlow: "nowrap", height: 96 }}>
+          style={{ flexFlow: "nowrap", height: 96 }}
+        >
           <Col>
             <Logo />
           </Col>
@@ -82,7 +90,8 @@ const Header = () => {
                 placement="bottomRight"
                 trigger="click"
                 content={navigation}
-                arrowPointAtCenter>
+                arrowPointAtCenter
+              >
                 <MenuOutlined style={{ fontSize: "20px" }} />
               </Popover>
             ) : (
