@@ -1,6 +1,13 @@
 package main
 
-import "github.com/kelseyhightower/envconfig"
+import (
+	"context"
+
+	firebase "firebase.google.com/go"
+	"firebase.google.com/go/auth"
+	"github.com/kelseyhightower/envconfig"
+	"google.golang.org/api/option"
+)
 
 // Config stores the application configurations.
 type Config struct {
@@ -27,4 +34,22 @@ func ReadConfig() (Config, error) {
 		return Config{}, err
 	}
 	return cfg, nil
+}
+
+func SetupFirebase() *auth.Client {
+	opt := option.WithCredentialsFile("firebase_secret_admin_key.json")
+	// opt := option.WithCredentialsJSON(read from env)
+
+	// Firebase Admin SDK
+	app, err := firebase.NewApp(context.Background(), nil, opt)
+	if err != nil {
+		panic("Firebase load error")
+	}
+
+	// Firebase Auth
+	auth, err := app.Auth(context.Background())
+	if err != nil {
+		panic("Firebase load error")
+	}
+	return auth
 }

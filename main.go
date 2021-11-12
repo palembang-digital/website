@@ -17,6 +17,7 @@ import (
 
 	"github.com/palembang-digital/website/api/v1"
 	_ "github.com/palembang-digital/website/api/v1/docs"
+	apiMiddleware "github.com/palembang-digital/website/api/v1/middleware"
 	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/services"
 )
@@ -40,6 +41,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	log.Println("Setup firebase ...")
+	firebaseAuth := SetupFirebase()
 
 	log.Println("Migrating the database ...")
 	m, err := migrate.New(cfg.Database.MigrationsPath, cfg.Database.URL)
@@ -67,6 +71,15 @@ func main() {
 	log.Println("Initializing the web server ...")
 	e := echo.New()
 	e.Pre(middleware.RemoveTrailingSlash())
+
+	// Add firebase auth client to context
+	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			c.Set("firebaseAuth", firebaseAuth)
+			return next(c)
+		}
+	})
+
 	e.Use(middleware.Recover())
 
 	// Utility endpoints
@@ -74,6 +87,7 @@ func main() {
 	e.GET("/docs/api/v1/doc.json", echoSwagger.WrapHandler)
 	e.GET("/docs/api/v1/*", echoSwagger.WrapHandler)
 	e.GET("/ping", ping)
+	e.GET("/ping2", pingAuth, apiMiddleware.Auth)
 
 	// Serve API
 	api := api.NewAPI(bannersService, eventsService, organizationsService, startupsService, cfg.AdminUsername, cfg.AdminPassword)
@@ -98,4 +112,10 @@ func main() {
 // ping write pong to http.ResponseWriter.
 func ping(c echo.Context) error {
 	return c.String(http.StatusOK, "pong")
+}
+
+// ping write pong to http.ResponseWriter.
+func pingAuth(c echo.Context) error {
+	uuid := c.Get("UUID").(string)
+	return c.String(http.StatusOK, "pong: "+uuid)
 }
