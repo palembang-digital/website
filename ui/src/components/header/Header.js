@@ -8,6 +8,7 @@ import SiteContext from "../../providers/site/SiteContext";
 
 import "./Header.scss";
 import Banner from "./Banner";
+import ProfileButton from "./ProfileButton";
 
 const Header = () => {
   const { isMobile } = useContext(SiteContext);
@@ -47,7 +48,7 @@ const Header = () => {
   }, [menuItems]);
 
   const navigation = (
-    <Menu mode={menuMode} className="header-menu" selectedKeys={selectedKeys}>
+    <Menu mode={menuMode} disabledOverflow={true} className="header-menu" selectedKeys={selectedKeys}>
       {menuItems.map((item, idx) => (
         <Menu.Item key={idx}>
           {item.externalLink ? (
@@ -76,6 +77,9 @@ const Header = () => {
           </Col>
 
           <Col>
+            <Row align="middle" justify="space-between" wrap={false}>
+
+          <Col>
             {isMobile ? (
               <Popover
                 overlayClassName="popover-menu"
@@ -88,6 +92,12 @@ const Header = () => {
             ) : (
               navigation
             )}
+          </Col>
+
+              <Col>
+                <ProfileButton/>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </header>

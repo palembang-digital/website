@@ -3,11 +3,24 @@ import { Button, Col, Row, Typography } from "antd";
 import { RightOutlined } from '@ant-design/icons';
 
 import SiteContext from "../../providers/site/SiteContext";
+import Firebase from "../../providers/firebase/FirebaseContext";
+import { navigate } from "@reach/router";
 
 const { Paragraph, Text, Title } = Typography;
 
 const Banner = () => {
   const { isMobile } = useContext(SiteContext);
+  const { setIsSignInModalVisible, authUser, userInfo } = useContext(Firebase);
+
+  const handleJoinButton = () => {
+    if (!authUser) {
+      setIsSignInModalVisible(true);
+    } else if (authUser && !userInfo) {
+      navigate('/registration');
+    } else {
+
+    }
+  }
 
   return (
     <Row
@@ -31,9 +44,7 @@ const Banner = () => {
         <Button
           type="primary"
           size="large"
-          href="https://bit.ly/web-join-patal"
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleJoinButton}
           style={{ paddingLeft: "25px", paddingRight: "25px" }}>
           Bergabung Sekarang <RightOutlined style={{ fontSize: 14 }} />
         </Button>
@@ -46,7 +57,7 @@ const Banner = () => {
           style={{ maxWidth: 300 }}
           height={240}
           width={300}
-          />
+        />
       </Col>
     </Row>
   );

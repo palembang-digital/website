@@ -8,6 +8,7 @@ import EventDetails from "./events/EventDetails";
 import EventsDetailUpcoming from "./events/EventDetailsUpcoming";
 import EventsDetailDone from "./events/EventDetailsDone";
 import StartupDetails from "./startups/StartupDetails";
+import Registration from "./registration/Registration"
 
 export {
   About,
@@ -20,4 +21,5 @@ export {
   Organizations,
   Startups,
   StartupDetails,
+  Registration,
 };
