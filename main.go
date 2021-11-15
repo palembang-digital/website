@@ -43,7 +43,7 @@ func main() {
 	}
 
 	log.Println("Setup firebase ...")
-	firebaseAuth := SetupFirebase()
+	firebaseAuth := SetupFirebase(cfg.FirebaseCredential)
 
 	log.Println("Migrating the database ...")
 	m, err := migrate.New(cfg.Database.MigrationsPath, cfg.Database.URL)
@@ -67,6 +67,7 @@ func main() {
 	eventsService := services.NewEventsService(queries)
 	organizationsService := services.NewOrganizationsService(queries)
 	startupsService := services.NewStartupsService(queries)
+	usersService := services.NewUsersService(queries)
 
 	log.Println("Initializing the web server ...")
 	e := echo.New()
@@ -90,7 +91,7 @@ func main() {
 	e.GET("/ping2", pingAuth, apiMiddleware.Auth)
 
 	// Serve API
-	api := api.NewAPI(bannersService, eventsService, organizationsService, startupsService, cfg.AdminUsername, cfg.AdminPassword)
+	api := api.NewAPI(bannersService, eventsService, organizationsService, startupsService, usersService, cfg.AdminUsername, cfg.AdminPassword)
 	api.Register(e.Group("/api/v1", middleware.Logger()))
 
 	// Serve UI

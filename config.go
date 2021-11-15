@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"path/filepath"
 
 	firebase "firebase.google.com/go"
 	"firebase.google.com/go/auth"
@@ -17,7 +18,8 @@ type Config struct {
 	AdminUsername string `envconfig:"ADMIN_USERNAME" default:"admin"`
 	AdminPassword string `envconfig:"ADMIN_PASSWORD" default:"admin"`
 
-	Database DatabaseConfig
+	FirebaseCredential string `envconfig:"FIREBASE_CREDENTIAL" default:""`
+	Database           DatabaseConfig
 }
 
 // DatabaseConfig stores database configurations.
@@ -36,9 +38,13 @@ func ReadConfig() (Config, error) {
 	return cfg, nil
 }
 
-func SetupFirebase() *auth.Client {
-	opt := option.WithCredentialsFile("firebase_secret_admin_key.json")
-	// opt := option.WithCredentialsJSON(read from env)
+func SetupFirebase(firebaseCredential string) *auth.Client {
+	var opt option.ClientOption
+	if serviceAccountKeyFilePath, err := filepath.Abs("./firebase_secret_admin_key.json"); err != nil {
+		opt = option.WithCredentialsJSON([]byte(firebaseCredential))
+	} else {
+		opt = option.WithCredentialsFile(serviceAccountKeyFilePath)
+	}
 
 	// Firebase Admin SDK
 	app, err := firebase.NewApp(context.Background(), nil, opt)

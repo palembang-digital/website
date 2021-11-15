@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"strings"
 
 	"firebase.google.com/go/auth"
@@ -16,12 +17,12 @@ func Auth(next echo.HandlerFunc) echo.HandlerFunc {
 		auth := c.Request().Header.Get("Authorization")
 		idToken := strings.TrimSpace(strings.Replace(auth, "Bearer", "", 1))
 		if idToken == "" {
-			return fmt.Errorf("id token not available")
+			return echo.NewHTTPError(http.StatusBadRequest, fmt.Errorf("id token not available"))
 		}
 
 		token, err := client.VerifyIDToken(context.Background(), idToken)
 		if err != nil {
-			return err
+			return echo.NewHTTPError(http.StatusUnauthorized, err.Error())
 		}
 
 		c.Set("UUID", token.UID)

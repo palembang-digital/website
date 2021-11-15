@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
+	apiMiddleware "github.com/palembang-digital/website/api/v1/middleware"
 	"github.com/palembang-digital/website/pkg/db"
 	"github.com/palembang-digital/website/pkg/services"
 )
@@ -17,6 +18,7 @@ type API struct {
 	eventsService        services.EventsService
 	organizationsService services.OrganizationsService
 	startupsService      services.StartupsService
+	usersService         services.UsersService
 
 	adminUsername string
 	adminPassword string
@@ -28,6 +30,7 @@ func NewAPI(
 	eventsService services.EventsService,
 	organizationsService services.OrganizationsService,
 	startupsService services.StartupsService,
+	usersService services.UsersService,
 	adminUsername, adminPassword string,
 ) *API {
 	return &API{
@@ -35,6 +38,7 @@ func NewAPI(
 		eventsService:        eventsService,
 		organizationsService: organizationsService,
 		startupsService:      startupsService,
+		usersService:         usersService,
 
 		adminUsername: adminUsername,
 		adminPassword: adminPassword,
@@ -67,6 +71,11 @@ func (api *API) Register(g *echo.Group) {
 	g.GET("/startups/:slug", api.getStartupBySlug)
 	g.POST("/startups", api.createStartup, middleware.BasicAuth(api.adminValidator))
 	g.DELETE("/startups/:id", api.deleteStartup, middleware.BasicAuth(api.adminValidator))
+
+	// Users API
+	g.GET("/users/:uid", api.getUser, apiMiddleware.Auth)
+	g.POST("/users", api.createUser, apiMiddleware.Auth)
+	g.DELETE("/users/:uid", api.deleteUser, middleware.BasicAuth(api.adminValidator))
 }
 
 func (api *API) adminValidator(username, password string, c echo.Context) (bool, error) {
@@ -99,4 +108,52 @@ func (api *API) bannerValidator(banner *db.Banner) error {
 	return validation.ValidateStruct(banner,
 		validation.Field(&banner.Text, validation.Required),
 	)
+}
+
+type rawUser struct {
+	db.User
+	Term bool   `json:"term"`
+	Job  uint32 `json:"job"`
+}
+
+const HAS_JOB uint32 = 0
+const SCHOOL uint32 = 1
+const FIND_JOB uint32 = 2
+
+func (api *API) userValidator(user *rawUser) error {
+	validations := []*validation.FieldRules{
+		validation.Field(&user.Email, is.Email, validation.Required),
+	}
+
+	if user.Term {
+		validations = append(
+			validations,
+			validation.Field(&user.Name, validation.Required),
+			validation.Field(&user.Residence, validation.Required),
+			validation.Field(&user.Job, validation.In(HAS_JOB, SCHOOL, FIND_JOB)),
+			validation.Field(&user.WhatsappNumber, validation.Required),
+			validation.Field(&user.TelegramNumber, validation.Required),
+			validation.Field(&user.InformationSource, validation.Required),
+		)
+		switch user.Job {
+		case HAS_JOB:
+			validations = append(
+				validations,
+				validation.Field(&user.JobProfession, validation.Required),
+			)
+		case SCHOOL:
+			validations = append(
+				validations,
+				validation.Field(&user.SchoolName, validation.Required),
+				validation.Field(&user.SchoolSemester, validation.Required),
+				validation.Field(&user.SchoolMajor, validation.Required),
+			)
+		case FIND_JOB:
+			validations = append(
+				validations,
+				validation.Field(&user.FindJobProfession, validation.Required),
+			)
+		}
+	}
+	return validation.ValidateStruct(user, validations...)
 }
