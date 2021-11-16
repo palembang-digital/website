@@ -28,9 +28,13 @@ export default app;
 
 export const auth = getAuth(app);
 export const onAuthListener = (next, fallback) =>
-  auth.onAuthStateChanged(authUser => {
+  auth.onIdTokenChanged(authUser => {
     if (authUser) {
-      next(authUser);
+      authUser.getIdToken().then(
+        token => {
+          next(authUser, token);
+        }
+      ).catch(console.log);
     } else {
       fallback();
     }

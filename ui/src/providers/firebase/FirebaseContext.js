@@ -7,6 +7,7 @@ import { signInWithFacebook, signInWithGoogle, onAuthListener } from "../../util
 const Firebase = React.createContext({
   authUser: null,
   userInfo: null,
+  AccessToken: '',
   isUserInfoLoading: false,
   setUserInfo: () => null,
   setIsSignInModalVisible: () => null,
@@ -17,16 +18,17 @@ export default Firebase;
 export const withFirebase = Component => props => {
   const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('authUser')));
   const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
+  const [AccessToken, setAccessToken] = useState('');
   const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
 
   const [isUserInfoLoading, setIsUserInfoLoading] = useState(false);
 
-  const { run: getUserInfo } = useRequest((auth) => {
+  const { run: getUserInfo } = useRequest((auth, token) => {
     setIsUserInfoLoading(true);
     return {
       url: `/api/v1/users/${auth.uid}`,
       headers: {
-        'Authorization': `Bearer ${auth.getIdToken()}`,
+        'Authorization': `Bearer ${token}`,
       },
     }
   }, {
@@ -46,10 +48,11 @@ export const withFirebase = Component => props => {
   });
 
   useEffect(() => onAuthListener(
-    (authUser) => {
+    (authUser, token) => {
       localStorage.setItem('authUser', JSON.stringify(authUser));
       setAuthUser(authUser);
-      getUserInfo(authUser);
+      setAccessToken(token);
+      getUserInfo(authUser, token);
     },
     error => {
       localStorage.removeItem('authUser');
@@ -73,6 +76,7 @@ export const withFirebase = Component => props => {
   return (<Firebase.Provider value={{
     authUser,
     userInfo,
+    AccessToken,
     isUserInfoLoading,
     setUserInfo,
     setIsSignInModalVisible,
