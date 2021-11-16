@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "antd";
 
-import Register from "./component/Register";
+import Register from "./components/Register";
 import "./EventDetails.scss";
 
 const EventDetailsDone = ({ event }) => {

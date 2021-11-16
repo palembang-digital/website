@@ -171,11 +171,38 @@
   },
   {
     "name": "Riska T. Mardilah",
-    "job": "Student Partner",
+    "job": "Frontend Developer",
     "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1598704641/patal/teams/Riska_mvc7yo_ob4bds.jpg",
     "links": {
       "linkedin": "https://www.linkedin.com/in/riskaatm",
       "instagram": "https://instagram.com/riskaa.tm"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Julia Shakira Pratiwi Hutauruk",
+    "job": "UI/UX Designer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1636631521/patal/teams/Julia_Shakira_Pratiwi_Hutauruk_kxc1ri.jpg",
+    "links": {
+      "instagram": "https://instagram.com/jeeshakira"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Kemas M. Husein Alviansyah",
+    "job": "Backend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1636631508/patal/teams/Kemas_M_Husein_Alviansyah_xaoum1.jpg",
+    "links": {
+      "github": "https://github.com/kmhalpin"
+    },
+    "status": "active"
+  },
+  {
+    "name": "Fadel Muhammad",
+    "job": "Frontend Developer",
+    "imageUrl": "https://res.cloudinary.com/patal/image/upload/v1636631512/patal/teams/Fadel_Muhammad_wgs9wl.jpg",
+    "links": {
+      "github": "https://github.com/FadellMuhammad"
     },
     "status": "active"
   },
