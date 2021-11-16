@@ -32,14 +32,15 @@ export const withFirebase = Component => props => {
   }, {
     manual: true,
     onSuccess: (data) => {
-      if (data.id) {
+      if (data.uid) {
         localStorage.setItem('userInfo', JSON.stringify(authUser));
         setUserInfo(data);
       }
       setIsUserInfoLoading(false);
     },
     onError: (error) => {
-      Modal.error({ content: error.message });
+      // Modal.error({ content: error.message });
+      console.log(error);
       setIsUserInfoLoading(false);
     }
   });

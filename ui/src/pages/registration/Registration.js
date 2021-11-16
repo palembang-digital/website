@@ -7,6 +7,7 @@ import {
   Checkbox,
   Form,
   Input,
+  InputNumber,
   Modal,
   Radio,
   Space,
@@ -49,6 +50,7 @@ const Registration = () => {
           registration.school_name
           && registration.school_major
           && registration.school_semester
+          && typeof registration.school_semester === 'number'
           : true)
 
         && (registration.job === 2 ?
@@ -74,12 +76,30 @@ const Registration = () => {
         'Authorization': `Bearer ${authUser.getIdToken()}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(registration),
+      body: JSON.stringify({
+        email: registration.email,
+        term: registration.term,
+        name: registration.name,
+        job: registration.job,
+        residence: registration.residence === 'Other' ? registration.residence_other : registration.residence,
+        job_profession: registration.job_profession,
+        school_name: registration.school_name,
+        school_major: registration.school_major,
+        school_semester: registration.school_semester,
+        find_job_profession: registration.find_job_profession,
+        whatsapp_number: registration.whatsapp_number,
+        telegram_number: registration.telegram_number,
+        motivation: registration.motivation,
+        information_source: registration.information_source.indexOf('Other') > -1
+          ? registration.information_source
+            .map(source => source === 'Other' ? registration.information_source_other : source)
+          : registration.information_source,
+      }),
     }),
     {
       manual: true,
       onSuccess: (data) => {
-        data.id && navigate("/");
+        data.uid && navigate("/");
         setUserInfo(data);
       },
       onError: (error) => {
@@ -248,15 +268,15 @@ const Registration = () => {
     </Form.Item>
 
     <Form.Item
-      label="Jurusan Kuliah / Sekolah"
+      label="Kelas / Semester Anda sekarang"
       name="schoolSemester"
       rules={[
-        { required: true, message: "Please input your semester / class!" },
+        { required: true, type: 'number', message: "Please input your semester / class!" },
       ]}
     >
-      <Input
-        onChange={(e) =>
-          setRegistration({ ...registration, school_semester: e.target.value })
+      <InputNumber
+        onChange={(value) =>
+          setRegistration({ ...registration, school_semester: value })
         }
       />
     </Form.Item>
