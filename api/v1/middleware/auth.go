@@ -17,7 +17,7 @@ func Auth(next echo.HandlerFunc) echo.HandlerFunc {
 		auth := c.Request().Header.Get("Authorization")
 		idToken := strings.TrimSpace(strings.Replace(auth, "Bearer", "", 1))
 		if idToken == "" {
-			return echo.NewHTTPError(http.StatusBadRequest, fmt.Errorf("id token not available"))
+			return echo.NewHTTPError(http.StatusBadRequest, fmt.Errorf("id token not available").Error())
 		}
 
 		token, err := client.VerifyIDToken(context.Background(), idToken)

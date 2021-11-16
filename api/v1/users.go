@@ -18,6 +18,7 @@ import (
 func (api *API) getUser(c echo.Context) error {
 	ctx := c.Request().Context()
 
+	// uidParam := c.Param("uid")
 	uid := c.Get("UUID").(string)
 
 	user, err := api.usersService.GetUser(ctx, uid)
