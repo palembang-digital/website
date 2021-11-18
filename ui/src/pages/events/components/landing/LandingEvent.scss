@@ -55,86 +55,95 @@ h3 {
     height: 20%;
     margin-bottom: 10px;
   }
+}
 
-  .text {
-    text-align: center;
-    h1 {
-      margin: 0px;
-      color: #2c6471;
-      font-weight: 700;
-    }
-
-    h3 {
-      font-size: 28px;
-      padding: 0px 15vw;
-      margin: 0px;
-
-      span {
-        font-weight: 700;
-      }
-    }
+.text {
+  text-align: center;
+  h1 {
+    margin: 0px;
+    color: #2c6471;
+    font-weight: 700;
   }
 
-  .cardContent {
-    display: flex;
+  h3 {
+    font-size: 28px;
+    padding: 0px 15vw;
+    margin: 0px;
 
-    color: #121212;
-
-    h1 {
-      color: #2c6471;
+    span {
       font-weight: 700;
-      font-size: 24px;
-      margin: 0px;
     }
-    h2 {
-      color: #2c6471;
-      font-weight: 500;
-      font-size: 18px;
-      margin: 0px;
-    }
-    p {
-      color: #121212;
-      font-weight: 500;
-      font-size: 18px;
-      margin: 0px;
-    }
+  }
+}
 
+.cardContent {
+  display: flex;
+
+  color: #121212;
+
+  h1 {
+    color: #2c6471;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  h2 {
+    color: #2c6471;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0px;
+  }
+  h3 {
+    color: #121212;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0px;
+  }
+
+  .details {
+    img {
+      width: 15%;
+      height: 20%;
+      margin-bottom: 10px;
+    }
+  }
+  .imgCard {
     img {
       width: 100%;
       border-radius: 20px;
     }
   }
-  @media screen and (max-width: 1300px) {
-    .carousel-content {
-      h1 {
-        font-size: 34px;
-      }
-      h2 {
-        font-size: 22px;
-      }
-      h3 {
-        font-size: 20px;
-      }
-      button {
-        font-size: 20px;
-      }
+}
+@media screen and (max-width: 1300px) {
+  .carousel-content {
+    h1 {
+      font-size: 34px;
+    }
+    h2 {
+      font-size: 22px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    button {
+      font-size: 20px;
     }
   }
+}
 
-  @media screen and (max-width: 900px) {
-    .carousel-content {
-      h1 {
-        font-size: 30px;
-      }
-      h2 {
-        font-size: 18px;
-      }
-      h3 {
-        font-size: 12px;
-      }
-      button {
-        font-size: 18px;
-      }
+@media screen and (max-width: 900px) {
+  .carousel-content {
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    h3 {
+      font-size: 12px;
+    }
+    button {
+      font-size: 18px;
     }
   }
 }
