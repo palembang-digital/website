@@ -1,8 +1,6 @@
+import { Skeleton } from "antd";
 import React from "react";
 import { Fragment } from "react";
-import iconDate from '../../../assets/icons/UpcomingIcons/Date.png'
-import iconPayments from '../../../assets/icons/UpcomingIcons/payments.png'
-import iconTime from '../../../assets/icons/UpcomingIcons/Time.png'
 
 const Register = (props) => {
 
@@ -15,7 +13,7 @@ const Register = (props) => {
         const month = date.getMonth()
         const day = date.getDay()
         let days = day;
-        if (day < 10){
+        if (day < 10) {
             days = `0${days}`
         } else {
             days = day
@@ -28,7 +26,7 @@ const Register = (props) => {
         const hour = time.getHours()
         const minute = time.getMinutes()
         let minutes = minute;
-        if (minute < 10){
+        if (minute < 10) {
             minutes = `0${minute}`
         } else {
             minutes = minute
@@ -38,13 +36,13 @@ const Register = (props) => {
     }
 
     const FormatDateEvent = () => {
-        const date = new Date(props.scheduled_end) 
+        const date = new Date(props.scheduled_end)
         const dateEvent = FormatDate(date)
         return dateEvent
     }
 
     const FormatTimeEvent = () => {
-        const date = new Date(props.scheduled_end) 
+        const date = new Date(props.scheduled_end)
         const TimeEvent = FormatTime(date)
         return TimeEvent
     }
@@ -52,9 +50,15 @@ const Register = (props) => {
     return (
         <Fragment>
             <div className="register">
-                <p><img src={iconDate} alt="iconDate" />{FormatDateEvent()}</p>
-                <p><img src={iconTime} alt="iconTime" />{FormatTimeEvent()} WIB</p>
-                <p><img src={iconPayments} alt="iconPaid" />{props.fee}</p>
+                <Skeleton />
+                <p>{props.description}</p>
+                <p><img src='https://res.cloudinary.com/patal/image/upload/v1635988813/patal/icons/Date_xjdhjf.png' alt="iconDate" />{FormatDateEvent()}</p>
+                <p><img src='https://res.cloudinary.com/patal/image/upload/v1635988813/patal/icons/Time_fdpafr.png' alt="iconTime" />{FormatTimeEvent()} WIB</p>
+                <p><img src='https://res.cloudinary.com/patal/image/upload/v1635988813/patal/icons/Paid_dt8ini.png' alt="iconPaid" />{props.fee}</p>
+                <div className="youtube">
+                    <p><img src='https://res.cloudinary.com/patal/image/upload/v1635988813/patal/icons/Youtube_mn5xxe.png' alt="iconYoutube" /></p>
+                    <iframe src={props.youtube_id} title={props.title} />
+                </div>
             </div>
         </Fragment>
     )

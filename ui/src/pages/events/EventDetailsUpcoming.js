@@ -20,6 +20,8 @@ const EventDetailsUpcoming = ({ event }) => {
                 <Register
                   fee={event.registration_fee}
                   scheduled_end={event.scheduled_end}
+                  youtube_id={event.youtube_id}
+                  title={event.title}
                 />
               </div>
             </Col>
