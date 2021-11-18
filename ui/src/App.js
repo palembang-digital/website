@@ -41,10 +41,8 @@ const App = () => {
       <LocationProvider>
         <Router>
           <PublicRoute path="/" render={PublicLayout(Landing)} />
-
           <PublicRoute path="/events" render={PublicLayout(Events)} />
           <PublicRoute path="/events/:id" render={PublicLayout(EventDetails)} />
-
           <PublicRoute path="/startups" render={PublicLayout(Startups)} />
           <PublicRoute
             path="/startups/:startupSlug"

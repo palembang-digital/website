@@ -9,7 +9,6 @@ const EventDetailsUpcoming = ({ event }) => {
       <div className="container">
         <div className="title">
           <h1>{event.title}</h1>
-          {/* <h3>Melihat Peluang Karir Talenta Digital di Era Sekarang</h3> */}
         </div>
         <div className="content">
           <Row>
@@ -18,17 +17,11 @@ const EventDetailsUpcoming = ({ event }) => {
             </Col>
             <Col md={12}>
               <div className="content-desc">
-                {/* <div className="text">
-                                    <p>Buat kalian yang saat ini ingin cari tau bagaimana sih sebenarny peluang karir dibidang digital seperti programming, digital marketing dan lain sebagainya dan juga kalian ingin tau bagaimana sih budaya kerja di perusahaan teknologi / digital..
-                                        <br /> <br />
-
-                                        Ikuti webinar Palembang digital sharing session dengan tema " Melihat peluang karir talenta digital diera sekarang"<br /> <br />
-
-                                        Dengan Narasumber Riski Jaka Lalana, beliau merupakan GM human Capital di 3(Tri) Indonesia dan juga beliau meruapakan co. founder dari Komunitas dimeja kantor.</p>
-                                </div> */}
                 <Register
                   fee={event.registration_fee}
                   scheduled_end={event.scheduled_end}
+                  youtube_id={event.youtube_id}
+                  title={event.title}
                 />
               </div>
             </Col>
