@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import { useRequest } from "ahooks";
 import axios from "axios";
 import { Avatar, Button, Divider, Modal, Space, Table } from "antd";
@@ -127,6 +127,12 @@ const Events = () => {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
+          <Button
+            type="link"
+            onClick={() => navigate(`/admin/events/${record.id}/edit`)}
+          >
+            Edit
+          </Button>
           <Button type="link" onClick={() => showDeleteConfirm(record)}>
             Delete
           </Button>

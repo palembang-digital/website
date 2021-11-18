@@ -22,7 +22,7 @@ const Admin = () => {
       routes: [
         <Banners path="/banners" />,
         <CreateBanner path="/banners/create" />,
-      ]
+      ],
     },
     {
       label: "Events",
@@ -30,7 +30,7 @@ const Admin = () => {
       routes: [
         <Events path="/events" />,
         <CreateEvent path="/events/create" />,
-      ]
+      ],
     },
     {
       label: "Organizations",
@@ -38,7 +38,7 @@ const Admin = () => {
       routes: [
         <Organizations path="/organizations" />,
         <CreateOrganization path="/organizations/create" />,
-      ]
+      ],
     },
     {
       label: "Startup",
@@ -46,9 +46,9 @@ const Admin = () => {
       routes: [
         <Startups path="/startups" />,
         <CreateStartup path="/startups/create" />,
-      ]
+      ],
     },
-  ]
+  ];
   return (
     <Layout theme="light">
       <Header>
@@ -71,11 +71,9 @@ const Admin = () => {
           style={{ background: "#fff", padding: "24px", minHeight: "280px" }}
         >
           <Router>
-            {menuItems.map(item => (
-              item.routes && item.routes.map(route => (
-                route
-              ))
-            ))}
+            {menuItems.map(
+              (item) => item.routes && item.routes.map((route) => route)
+            )}
           </Router>
         </Layout>
       </Content>
