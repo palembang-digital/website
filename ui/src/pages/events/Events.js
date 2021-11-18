@@ -4,16 +4,14 @@ import { Skeleton, Pagination } from "antd";
 import EventsCarousel from "./components/EventsCarousel";
 import LandingUpcomingEvents from "./components/landing/EventCards";
 import Grid from "antd/lib/card/Grid";
-import { Helmet } from "react-helmet";
+import SEO from "../../components/seo/SEO";
 
 const Events = () => {
   const { data: events } = useRequest("/api/v1/events");
 
   return (
     <>
-      <Helmet>
-        <title>Events</title>
-      </Helmet>
+      <SEO title="Events" description="Kegiatan-kegiatan Palembang Digital" />
 
       <div className="main">
         {events && events.length > 0 ? (

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useRequest } from "ahooks";
 import { Card, Col, Row, Skeleton, Typography } from "antd";
-import { Helmet } from "react-helmet";
 
 import SiteContext from "../../providers/site/SiteContext";
+import SEO from "../../components/seo/SEO";
 
 const { Paragraph, Title } = Typography;
 
@@ -14,9 +14,10 @@ const Organizations = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Organisasi</title>
-      </Helmet>
+      <SEO
+        title="Organisasi"
+        description="Komunitas dan organisasi lokal yang siap berkolaborasi untuk Palembang."
+      />
 
       <div className="container">
         <Title className="center">Organisasi</Title>
@@ -35,7 +36,8 @@ const Organizations = () => {
                 <Col
                   key={index}
                   className="gutter-row"
-                  span={isMobile ? 24 : 6}>
+                  span={isMobile ? 24 : 6}
+                >
                   <Card
                     bordered={false}
                     hoverable
@@ -48,7 +50,8 @@ const Organizations = () => {
                           width={200}
                         />
                       </div>
-                    }>
+                    }
+                  >
                     <Card.Meta
                       title={<div className="center">{organization.name}</div>}
                     />

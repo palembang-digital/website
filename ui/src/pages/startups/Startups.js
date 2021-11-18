@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "@reach/router";
 import { useRequest } from "ahooks";
 import { Card, Col, Row, Skeleton, Typography } from "antd";
-import { Helmet } from "react-helmet";
 
 import SiteContext from "../../providers/site/SiteContext";
+import SEO from "../../components/seo/SEO";
 
 const { Paragraph, Title } = Typography;
 
@@ -15,9 +15,10 @@ const Startups = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Startup</title>
-      </Helmet>
+      <SEO
+        title="Startups"
+        description="Perusahaan-perusahaan rintisan lokal yang harus kita dukung"
+      />
 
       <div className="container">
         <Title className="center">Startup</Title>
