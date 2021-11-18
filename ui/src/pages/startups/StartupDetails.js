@@ -1,22 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useRequest } from "ahooks";
 import { Image, Typography } from "antd";
-import { Helmet } from "react-helmet";
 
-import SiteContext from "../../providers/site/SiteContext";
+import SEO from "../../components/seo/SEO";
 
 const { Title } = Typography;
 
 const StartupDetails = ({ startupSlug }) => {
-  const { isMobile } = useContext(SiteContext);
-
   const { data: startup } = useRequest(`/api/v1/startups/${startupSlug}`);
 
   return (
     <>
-      <Helmet>
-        <title>{startup ? `${startup.name}` : "Startup"}</title>
-      </Helmet>
+      {startup && <SEO title={startup.name} description={startup.one_liner} />}
 
       <div className="container">
         {startup ? (

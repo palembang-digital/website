@@ -1,18 +1,16 @@
 import React from "react";
 import { Divider } from "antd";
-import { Helmet } from "react-helmet";
 
 import AboutPatal from "./AboutPatal";
 import Contact from "./Contact";
 import Team from "./Team";
 import VisionMission from "./VisionMission";
+import SEO from "../../components/seo/SEO";
 
 const About = () => {
   return (
     <>
-      <Helmet>
-        <title>Tentang</title>
-      </Helmet>
+      <SEO title="Tentang" description="Tentang Palembang Digital" />
 
       <div className="container">
         <AboutPatal />
