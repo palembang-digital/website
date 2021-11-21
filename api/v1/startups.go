@@ -17,9 +17,10 @@ import (
 // @Success 200 {array} db.Startup
 // @Router /startups [get]
 func (api *API) listStartups(c echo.Context) error {
+	category := c.QueryParam("category")
 	ctx := c.Request().Context()
 
-	startups, err := api.startupsService.ListStartups(ctx)
+	startups, err := api.startupsService.ListStartups(ctx, category)
 	if err != nil {
 		return err
 	}
