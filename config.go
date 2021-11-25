@@ -1,13 +1,7 @@
 package main
 
 import (
-	"context"
-	"path/filepath"
-
-	firebase "firebase.google.com/go"
-	"firebase.google.com/go/auth"
 	"github.com/kelseyhightower/envconfig"
-	"google.golang.org/api/option"
 )
 
 // Config stores the application configurations.
@@ -18,8 +12,9 @@ type Config struct {
 	AdminUsername string `envconfig:"ADMIN_USERNAME" default:"admin"`
 	AdminPassword string `envconfig:"ADMIN_PASSWORD" default:"admin"`
 
-	FirebaseCredential string `envconfig:"FIREBASE_CREDENTIAL" default:""`
-	Database           DatabaseConfig
+	Database DatabaseConfig
+	Firebase FirebaseConfig
+	ReactApp ReactAppConfig
 }
 
 // DatabaseConfig stores database configurations.
@@ -29,6 +24,21 @@ type DatabaseConfig struct {
 	MigrationsPath string `envconfig:"DATABASE_MIGRATIONS_PATH" required:"true" default:"file://sql/schema"`
 }
 
+type FirebaseConfig struct {
+	CredentialType  string `envconfig:"FIREBASE_CREDENTIAL_TYPE"`
+	CredentialValue string `envconfig:"FIREBASE_CREDENTIAL_VALUE"`
+}
+
+type ReactAppConfig struct {
+	FirebaseApiKey            string `envconfig:"REACT_APP_FIREBASE_API_KEY" json:"REACT_APP_FIREBASE_API_KEY"`
+	FirebaseAuthDomain        string `envconfig:"REACT_APP_FIREBASE_AUTH_DOMAIN" json:"REACT_APP_FIREBASE_AUTH_DOMAIN"`
+	FirebaseProjectID         string `envconfig:"REACT_APP_FIREBASE_PROJECT_ID" json:"REACT_APP_FIREBASE_PROJECT_ID"`
+	FirebaseStorageBucket     string `envconfig:"REACT_APP_FIREBASE_STORAGE_BUCKET" json:"REACT_APP_FIREBASE_STORAGE_BUCKET"`
+	FirebaseMessagingSenderID string `envconfig:"REACT_APP_FIREBASE_MESSAGING_SENDER_ID" json:"REACT_APP_FIREBASE_MESSAGING_SENDER_ID"`
+	FirebaseAppID             string `envconfig:"REACT_APP_FIREBASE_APP_ID" json:"REACT_APP_FIREBASE_APP_ID"`
+	FirebaseMeasurementID     string `envconfig:"REACT_APP_FIREBASE_MEASUREMENT_ID" json:"REACT_APP_FIREBASE_MEASUREMENT_ID"`
+}
+
 // ReadConfig populates configurations from environment variables.
 func ReadConfig() (Config, error) {
 	var cfg Config
@@ -36,26 +46,4 @@ func ReadConfig() (Config, error) {
 		return Config{}, err
 	}
 	return cfg, nil
-}
-
-func SetupFirebase(firebaseCredential string) *auth.Client {
-	var opt option.ClientOption
-	if serviceAccountKeyFilePath, err := filepath.Abs("./firebase_secret_admin_key.json"); err != nil {
-		opt = option.WithCredentialsJSON([]byte(firebaseCredential))
-	} else {
-		opt = option.WithCredentialsFile(serviceAccountKeyFilePath)
-	}
-
-	// Firebase Admin SDK
-	app, err := firebase.NewApp(context.Background(), nil, opt)
-	if err != nil {
-		panic("Firebase load error")
-	}
-
-	// Firebase Auth
-	auth, err := app.Auth(context.Background())
-	if err != nil {
-		panic("Firebase load error")
-	}
-	return auth
 }

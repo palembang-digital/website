@@ -1,6 +1,3 @@
-include .env.sample
-export
-
 API_DOCS_PATH = api/v1/docs
 BIN_NAME=patal
 UI_PATH = ui
