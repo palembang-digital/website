@@ -1,16 +1,19 @@
 import { navigate } from "@reach/router";
 import { useRequest } from "ahooks";
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 import React, { useContext, useEffect, useState } from "react";
-import { signInWithFacebook, signInWithGoogle, onAuthListener } from "../../utils/FirebaseService";
+import { emailProvider, onAuthListener } from "../../utils/FirebaseService";
+import SignModal from "./SignModal";
 
 const Firebase = React.createContext({
   authUser: null,
   userInfo: null,
-  AccessToken: '',
+  isEmailVerified: false,
+  accessToken: '',
   isUserInfoLoading: false,
   setUserInfo: () => null,
-  setIsSignInModalVisible: () => null,
+  isSignModalVisible: false,
+  setIsSignModalVisible: () => null,
 });
 
 export default Firebase;
@@ -18,8 +21,9 @@ export default Firebase;
 export const withFirebase = Component => props => {
   const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem('authUser')));
   const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
-  const [AccessToken, setAccessToken] = useState('');
-  const [isSignInModalVisible, setIsSignInModalVisible] = useState(false);
+  const [accessToken, setAccessToken] = useState('');
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isSignModalVisible, setIsSignModalVisible] = useState(false);
 
   const [isUserInfoLoading, setIsUserInfoLoading] = useState(false);
 
@@ -52,7 +56,6 @@ export const withFirebase = Component => props => {
       localStorage.setItem('authUser', JSON.stringify(authUser));
       setAuthUser(authUser);
       setAccessToken(token);
-      getUserInfo(authUser, token);
     },
     error => {
       localStorage.removeItem('authUser');
@@ -64,28 +67,34 @@ export const withFirebase = Component => props => {
       }
       setIsUserInfoLoading(false);
     }
-  ), [getUserInfo]);
+  ), []);
 
-  const afterSignUp = (additionalUserInfo) => {
-    setIsSignInModalVisible(false);
-    if (additionalUserInfo) {
-      additionalUserInfo.isNewUser && navigate('/registration');
+  useEffect(() => {
+    if (authUser && accessToken) {
+      getUserInfo(authUser, accessToken);
     }
-  }
+    if (authUser) {
+      const hasEmailProvider = authUser.providerData
+        .map(provider => provider.providerId)
+        .includes(emailProvider.providerId);
+      setIsEmailVerified(
+        (authUser.emailVerified && hasEmailProvider) || !hasEmailProvider
+      )
+    }
+  }, [getUserInfo, authUser, accessToken])
 
   return (<Firebase.Provider value={{
     authUser,
     userInfo,
-    AccessToken,
+    isEmailVerified,
+    accessToken,
     isUserInfoLoading,
     setUserInfo,
-    setIsSignInModalVisible,
+    isSignModalVisible,
+    setIsSignModalVisible,
   }}>
     <Component {...props} />
-    <Modal title="Sign In with" visible={isSignInModalVisible} onCancel={() => setIsSignInModalVisible(false)} footer={null}>
-      <Button onClick={() => signInWithGoogle(afterSignUp)}>Google</Button>
-      <Button onClick={() => signInWithFacebook(afterSignUp)}>Facebook</Button>
-    </Modal>
+    {isSignModalVisible && <SignModal />}
   </Firebase.Provider>);
 }
 

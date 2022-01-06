@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Popover, Skeleton } from "antd";
+import { Button, Popover, Skeleton, Modal } from "antd";
 import Firebase from "../../providers/firebase/FirebaseContext";
-import { signOut, linkSocialLogin, fetchSignInMethods, googleProvider, unlinkSocialLogin, facebookProvider } from "../../utils/FirebaseService";
+import { signOut, linkSocialLogin, fetchSignInMethods, googleProvider, unlinkLogin, facebookProvider, emailProvider } from "../../utils/FirebaseService";
+import SignUpForm from "../../providers/firebase/SignUpForm";
 
 const ProfileButton = () => {
-  const { setIsSignInModalVisible, authUser } = useContext(Firebase);
+  const { setIsSignModalVisible, authUser } = useContext(Firebase);
 
   return (authUser ?
     <Popover
@@ -23,14 +24,14 @@ const ProfileButton = () => {
       </Button>
     </Popover>
     :
-    <Button onClick={() => setIsSignInModalVisible(true)} type='primary' shape='circle' size='large' style={{ marginLeft: '20px' }}>
+    <Button onClick={() => setIsSignModalVisible(true)} type='primary' shape='circle' size='large' style={{ marginLeft: '20px' }}>
       A
     </Button>
   );
 };
 
 const SocialLoginLinkList = () => {
-  const { authUser } = useContext(Firebase);
+  const { authUser, isEmailVerified } = useContext(Firebase);
   const [activeSignInMethods, setActiveSignInMethods] = useState([]);
   const [fetchSignInMethodsLoading, setfetchSignInMethodsLoading] = useState(true);
 
@@ -49,6 +50,7 @@ const SocialLoginLinkList = () => {
   const onlyOneLeft = activeSignInMethods.length === 1;
 
   return (<>
+    <p>{isEmailVerified ? 'email is verified' : 'email is not verified!'}</p>
     {!fetchSignInMethodsLoading ? (
       <>
         <GoogleLoginLink
@@ -61,9 +63,34 @@ const SocialLoginLinkList = () => {
           fetchSignIn={fetchSignIn}
           onlyOneLeft={onlyOneLeft}
         />
+        <PasswordLoginLink
+          activeSignInMethods={activeSignInMethods}
+          fetchSignIn={fetchSignIn}
+          onlyOneLeft={onlyOneLeft}
+        />
       </>
     ) : <Skeleton active />}
   </>);
+}
+
+const PasswordLoginLink = ({ activeSignInMethods, fetchSignIn, onlyOneLeft }) => {
+  const { authUser } = useContext(Firebase);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const isEnabled = activeSignInMethods.includes(
+    emailProvider.providerId,
+  );
+  return (<>
+    {isEnabled
+      ? <Button disabled={onlyOneLeft} onClick={
+        () => unlinkLogin(authUser, emailProvider.providerId)
+          .then(fetchSignIn)
+      }>Unlink Password Login</Button>
+      : <Button onClick={() => setIsModalVisible(true)}>Link Password Login</Button>
+    }
+    <Modal title='Link Password Login' visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null}>
+      <SignUpForm afterSigning={fetchSignIn}/>
+    </Modal>
+    </>)
 }
 
 const GoogleLoginLink = ({ activeSignInMethods, fetchSignIn, onlyOneLeft }) => {
@@ -73,7 +100,7 @@ const GoogleLoginLink = ({ activeSignInMethods, fetchSignIn, onlyOneLeft }) => {
   );
   return isEnabled
     ? <Button disabled={onlyOneLeft} onClick={
-      () => unlinkSocialLogin(authUser, googleProvider)
+      () => unlinkLogin(authUser, googleProvider.providerId)
         .then(fetchSignIn)
     }>Unlink Google</Button>
     : <Button onClick={
@@ -89,7 +116,7 @@ const FacebookLoginLink = ({ activeSignInMethods, fetchSignIn, onlyOneLeft }) =>
   );
   return isEnabled
     ? <Button disabled={onlyOneLeft} onClick={
-      () => unlinkSocialLogin(authUser, facebookProvider)
+      () => unlinkLogin(authUser, facebookProvider.providerId)
         .then(fetchSignIn)
     }>Unlink Facebook</Button>
     : <Button onClick={
