@@ -29,6 +29,9 @@ const EventCards = ({ events }) => {
 
 const EventCard = ({ event }) => {
   const iconStyle = { display: "inline", marginRight: "10px" };
+  const date = new Date(event.scheduled_end).toDateString();
+  const hour = new Date(event.scheduled_end).getHours();
+
   return (
     <Col span={12}>
       <Card
@@ -48,11 +51,11 @@ const EventCard = ({ event }) => {
                   <Col span={14}>
                     <h3>
                       <img src={gambar1} style={iconStyle} />
-                      {event.scheduled_end}
+                      {date}
                     </h3>
                     <h3>
                       <img src={gambar2} style={iconStyle} />
-                      19.00 WIB
+                      {hour}:00 WIB
                     </h3>
                     <h3>
                       <img src={gambar3} style={iconStyle} />
