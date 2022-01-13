@@ -20,6 +20,10 @@ h3 {
     font-weight: 700;
   }
 
+  h2 {
+    height: 20%;
+  }
+
   img {
     width: 100%;
     border-radius: 20px;
@@ -42,6 +46,14 @@ h3 {
   button:active {
     transform: translateY(4px);
     box-shadow: none;
+  }
+}
+
+.details {
+  img {
+    width: 10%;
+    height: 10%;
+    margin-bottom: 10px;
   }
 }
 
@@ -73,7 +85,7 @@ h3 {
     color: #2c6471;
     font-weight: 700;
     font-size: 24px;
-    margin: 0px;
+    margin-bottom: 30px;
   }
   h2 {
     color: #2c6471;
@@ -81,16 +93,25 @@ h3 {
     font-size: 18px;
     margin: 0px;
   }
-  p {
+  h3 {
     color: #121212;
     font-weight: 500;
     font-size: 18px;
     margin: 0px;
   }
 
-  img {
-    width: 100%;
-    border-radius: 20px;
+  .details {
+    img {
+      width: 8%;
+      height: 8%;
+      margin-bottom: 10px;
+    }
+  }
+  .imgCard {
+    img {
+      width: 100%;
+      border-radius: 20px;
+    }
   }
 }
 @media screen and (max-width: 1300px) {

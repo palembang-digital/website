@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { useRequest } from "ahooks";
 import { Skeleton, Pagination } from "antd";
 import EventsCarousel from "./components/EventsCarousel";
-import LandingUpcomingEvents from "./components/landing/EventCards";
+import EventCards from "./components/landing/EventCards";
 import Grid from "antd/lib/card/Grid";
 import SEO from "../../components/seo/SEO";
 
@@ -25,7 +25,7 @@ const Events = () => {
                 <span>Palembang Digital!</span>
               </h3>
             </div>
-            <LandingUpcomingEvents events={events} />
+            <EventCards events={events} />
           </>
         ) : (
           <div className="container">
@@ -33,15 +33,15 @@ const Events = () => {
           </div>
         )}
         {/* <div
-          className="container"
-          style={{
-            marginTop: "3rem",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <Pagination />
-        </div> */}
+        className="container"
+        style={{
+          marginTop: "3rem",
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
+        <Pagination />
+      </div> */}
       </div>
     </>
   );
