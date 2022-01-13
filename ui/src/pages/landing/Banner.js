@@ -10,11 +10,11 @@ const { Paragraph, Text, Title } = Typography;
 
 const Banner = () => {
   const { isMobile } = useContext(SiteContext);
-  const { setIsSignInModalVisible, authUser, userInfo } = useContext(Firebase);
+  const { setIsSignModalVisible, authUser, userInfo } = useContext(Firebase);
 
   const handleJoinButton = () => {
     if (!authUser) {
-      setIsSignInModalVisible(true);
+      setIsSignModalVisible(true);
     } else if (authUser && !userInfo) {
       navigate('/registration');
     } else {

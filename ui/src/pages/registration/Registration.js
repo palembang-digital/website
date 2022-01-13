@@ -22,7 +22,7 @@ const Registration = () => {
   const {
     authUser,
     userInfo,
-    AccessToken,
+    accessToken,
     isUserInfoLoading,
     setUserInfo
   } = useContext(Firebase);
@@ -74,7 +74,7 @@ const Registration = () => {
       url: "/api/v1/users",
       method: "post",
       headers: {
-        'Authorization': `Bearer ${AccessToken}`,
+        'Authorization': `Bearer ${accessToken}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
