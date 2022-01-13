@@ -20,7 +20,7 @@ const EventCards = ({ events }) => {
               (Date.now() - new Date(b.scheduled_start))
           )
           .map((event, index) => (
-            <EventCard event={event} />
+            <EventCard key={index} event={event} />
           ))}
       </Row>
     </div>

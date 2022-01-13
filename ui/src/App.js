@@ -1,10 +1,10 @@
 import React from "react";
+import ReactGA from "react-ga";
 import loadable from "@loadable/component";
 import { Location, LocationProvider, Router } from "@reach/router";
-import ReactGA from "react-ga";
-import { Helmet } from "react-helmet";
 
 import PublicLayout from "./components/layouts/PublicLayout";
+import SEO from "./components/seo/SEO";
 
 import {
   About,
@@ -18,33 +18,31 @@ import {
 
 const Admin = loadable(() => import("./pages").then((c) => c.Admin));
 
-ReactGA.initialize("UA-169186060-1", {
-  testMode: process.env.NODE_ENV === "test",
-});
-
 const PublicRoute = ({ render, ...props }) => {
   return render(props);
 };
 
-const trackPageView = (location) => {
-  ReactGA.pageview(location.pathname + location.search);
-};
+ReactGA.initialize("UA-169186060-1", {
+  testMode: process.env.NODE_ENV === "test",
+});
 
 const App = () => {
   return (
     <>
-      <Helmet
-        defaultTitle="Palembang Digital"
-        titleTemplate="%s · Palembang Digital"
-      />
+      {/* <Helmet
+        titleTemplate={`%s · ${websiteConfig.title}`}
+        defaultTitle={websiteConfig.title}
+      /> */}
 
       <LocationProvider>
+        <Location>
+          {({ location }) => <SEO path={location.pathname + location.search} />}
+        </Location>
+
         <Router>
           <PublicRoute path="/" render={PublicLayout(Landing)} />
-
           <PublicRoute path="/events" render={PublicLayout(Events)} />
           <PublicRoute path="/events/:id" render={PublicLayout(EventDetails)} />
-
           <PublicRoute path="/startups" render={PublicLayout(Startups)} />
           <PublicRoute
             path="/startups/:startupSlug"
@@ -60,8 +58,6 @@ const App = () => {
 
           <Admin path="/admin/*" />
         </Router>
-
-        <Location children={(context) => trackPageView(context.location)} />
       </LocationProvider>
     </>
   );

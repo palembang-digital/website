@@ -1,17 +1,8 @@
 import React, { useState } from "react";
 import { navigate } from "@reach/router";
 import { useRequest } from "ahooks";
-import {
-  Button,
-  Form,
-  Input,
-  Modal,
-  Space,
-  Typography,
-} from "antd";
+import { Button, Form, Modal, Typography } from "antd";
 import BannerTextEditor from "./BannerTextEditor";
-
-const { TextArea } = Input;
 
 const { Title } = Typography;
 
@@ -52,7 +43,11 @@ const CreateBanner = () => {
           name="text"
           rules={[{ required: true, message: "Please input the text!" }]}
         >
-          <BannerTextEditor onChange={content => { setBanner({ ...banner, text: content }) }} />
+          <BannerTextEditor
+            onChange={(content) => {
+              setBanner({ ...banner, text: content });
+            }}
+          />
           <div>{banner.text}</div>
         </Form.Item>
 
