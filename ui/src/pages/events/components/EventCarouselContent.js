@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate } from "@reach/router";
 import { Row, Col } from "antd";
 import "antd/dist/antd.css";
 // TODO: Refactor: Rename and move to the same directory.
@@ -11,28 +12,36 @@ import gambar4 from "../../../assets/icons/CarouselIcons/location_on.png";
 
 const EventCarouselContent = ({ event }) => {
   const iconStyle = { display: "inline", marginRight: "10px" };
-  const date = new Date(event.scheduled_end).toDateString();
-  const hour = new Date(event.scheduled_end).getHours();
+  const date = new Date(event.scheduled_end);
+  const day = new Intl.DateTimeFormat("id", { dateStyle: "full" }).format(date);
+  const time = new Intl.DateTimeFormat("id", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short",
+  }).format(date);
 
   return (
     <div className="carousel-content">
       <Row>
         <Col span={13}>
           <h2>{event.title}</h2>
+          <br />
           <div className="details">
             <Row>
-              <Col span={14}>
+              <Col>
                 <h3>
                   <img src={gambar1} style={iconStyle} />
-                  {date}
+                  {day}
                 </h3>
                 <h3>
                   <img src={gambar2} style={iconStyle} />
-                  {hour}:00 WIB
+                  {time}
                 </h3>
                 <h3>
                   <img src={gambar3} style={iconStyle} />
-                  {event.registration_fee}
+                  {event.registration_fee
+                    ? `Rp ${event.registration_fee},-`
+                    : "FREE"}
                 </h3>
                 <h3>
                   <img src={gambar4} style={iconStyle} />
@@ -41,7 +50,10 @@ const EventCarouselContent = ({ event }) => {
               </Col>
             </Row>
           </div>
-          <button href={event.registration_url}>Daftar Sekarang</button>
+          <br />
+          <button onClick={() => navigate(event.registration_url)}>
+            Daftar Sekarang
+          </button>
         </Col>
         <Col span={11}>
           <img src={event.image_url} />

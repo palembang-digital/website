@@ -29,8 +29,13 @@ const EventCards = ({ events }) => {
 
 const EventCard = ({ event }) => {
   const iconStyle = { display: "inline", marginRight: "10px" };
-  const date = new Date(event.scheduled_end).toDateString();
-  const hour = new Date(event.scheduled_end).getHours();
+  const date = new Date(event.scheduled_end);
+  const day = new Intl.DateTimeFormat("id", { dateStyle: "full" }).format(date);
+  const time = new Intl.DateTimeFormat("id", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short",
+  }).format(date);
 
   return (
     <Col span={12}>
@@ -48,23 +53,27 @@ const EventCard = ({ event }) => {
               <h1>{event.title}</h1>
               <div className="details">
                 <Row>
-                  <Col span={14}>
+                  <Col>
                     <h3>
                       <img src={gambar1} style={iconStyle} />
-                      {date}
+                      {day}
                     </h3>
                     <h3>
                       <img src={gambar2} style={iconStyle} />
-                      {hour}:00 WIB
+                      {time}
                     </h3>
                     <h3>
                       <img src={gambar3} style={iconStyle} />
-                      {event.registration_fee}
+                      {event.registration_fee
+                        ? `Rp ${event.registration_fee},-`
+                        : "FREE"}
                     </h3>
-                    <h3>
-                      <img src={gambar4} style={iconStyle} />
-                      {event.youtube_id}
-                    </h3>
+                    {event.youtube_id && (
+                      <h3>
+                        <img src={gambar4} style={iconStyle} />
+                        {event.youtube_id}
+                      </h3>
+                    )}
                   </Col>
                 </Row>
               </div>
