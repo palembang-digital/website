@@ -1,60 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card } from "antd";
 import { Row, Col } from "antd";
 import "./LandingEvent.scss";
 
-const data = [
-  {
-    title: "Spesial Session",
-    desc: "Tips & Trik Diterima Magang/Kerja di Sebuah Startup",
-    date: "Jum’at, 04 September 2021",
-    time: "19.00 WIB",
-    fee: "Free",
-    platform: "Palembang Digital",
-    imgUrl:
-      "https://res.cloudinary.com/patal/image/upload/v1634822225/patal/events/tommy_wordpress_hnnumg.jpg",
-  },
-  {
-    title: "Spesial Session",
-    desc: "Tips & Trik Diterima Magang/Kerja di Sebuah Startup",
-    date: "Jum’at, 04 September 2021",
-    time: "19.00 WIB",
-    fee: "Free",
-    platform: "Palembang Digital",
-    imgUrl:
-      "https://res.cloudinary.com/patal/image/upload/v1634822225/patal/events/tommy_wordpress_hnnumg.jpg",
-  },
-  {
-    title: "Spesial Session",
-    desc: "Tips & Trik Diterima Magang/Kerja di Sebuah Startup",
-    date: "Jum’at, 04 September 2021",
-    time: "19.00 WIB",
-    fee: "Free",
-    platform: "Palembang Digital",
-    imgUrl:
-      "https://res.cloudinary.com/patal/image/upload/v1634822225/patal/events/tommy_wordpress_hnnumg.jpg",
-  },
-  {
-    title: "Spesial Session",
-    desc: "Tips & Trik Diterima Magang/Kerja di Sebuah Startup",
-    date: "Jum’at, 04 September 2021",
-    time: "19.00 WIB",
-    fee: "Free",
-    platform: "Palembang Digital",
-    imgUrl:
-      "https://res.cloudinary.com/patal/image/upload/v1634822225/patal/events/tommy_wordpress_hnnumg.jpg",
-  },
-  {
-    title: "Spesial Session",
-    desc: "Tips & Trik Diterima Magang/Kerja di Sebuah Startup",
-    date: "Jum’at, 04 September 2021",
-    time: "19.00 WIB",
-    fee: "Free",
-    platform: "Palembang Digital",
-    imgUrl:
-      "https://res.cloudinary.com/patal/image/upload/v1634822225/patal/events/tommy_wordpress_hnnumg.jpg",
-  },
-];
+import gambar1 from "../../../../assets/icons/UpcomingIcons/Date.png";
+import gambar2 from "../../../../assets/icons/UpcomingIcons/Time.png";
+import gambar3 from "../../../../assets/icons/UpcomingIcons/payments.png";
+import gambar4 from "../../../../assets/icons/UpcomingIcons/Youtube.png";
 
 const EventCards = ({ events }) => {
   return (
@@ -68,7 +20,7 @@ const EventCards = ({ events }) => {
               (Date.now() - new Date(b.scheduled_start))
           )
           .map((event, index) => (
-            <EventCard event={event} />
+            <EventCard key={index} event={event} />
           ))}
       </Row>
     </div>
@@ -76,6 +28,15 @@ const EventCards = ({ events }) => {
 };
 
 const EventCard = ({ event }) => {
+  const iconStyle = { display: "inline", marginRight: "10px" };
+  const date = new Date(event.scheduled_end);
+  const day = new Intl.DateTimeFormat("id", { dateStyle: "full" }).format(date);
+  const time = new Intl.DateTimeFormat("id", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZoneName: "short",
+  }).format(date);
+
   return (
     <Col span={12}>
       <Card
@@ -90,14 +51,37 @@ const EventCard = ({ event }) => {
           <Row>
             <Col span={14}>
               <h1>{event.title}</h1>
-              {/* <h2>{event.desc}</h2>
-              <p>{event.date}</p>
-              <p>{event.time}</p> */}
-              <p>{event.registration_fee}</p>
-              <p>{event.youtube_id}</p>
+              <div className="details">
+                <Row>
+                  <Col>
+                    <h3>
+                      <img src={gambar1} style={iconStyle} />
+                      {day}
+                    </h3>
+                    <h3>
+                      <img src={gambar2} style={iconStyle} />
+                      {time}
+                    </h3>
+                    <h3>
+                      <img src={gambar3} style={iconStyle} />
+                      {event.registration_fee
+                        ? `Rp ${event.registration_fee},-`
+                        : "FREE"}
+                    </h3>
+                    {event.youtube_id && (
+                      <h3>
+                        <img src={gambar4} style={iconStyle} />
+                        {event.youtube_id}
+                      </h3>
+                    )}
+                  </Col>
+                </Row>
+              </div>
             </Col>
             <Col span={10}>
-              <img src={event.image_url} />
+              <div className="imgCard">
+                <img src={event.image_url} />
+              </div>
             </Col>
           </Row>
         </div>
