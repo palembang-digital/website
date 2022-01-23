@@ -8,7 +8,7 @@ import SiteContext from "../../providers/site/SiteContext";
 
 import "./Header.scss";
 import Banner from "./Banner";
-import ProfileButton from "./ProfileButton";
+// import ProfileButton from "./ProfileButton";
 
 const Header = () => {
   const { isMobile } = useContext(SiteContext);
@@ -84,8 +84,8 @@ const Header = () => {
             <Logo />
           </Col>
 
-          <Col>
-            <Row align="middle" justify="space-between" wrap={false}>
+          {/* <Col>
+            <Row align="middle" justify="space-between" wrap={false}> */}
 
           <Col>
             {isMobile ? (
@@ -103,11 +103,11 @@ const Header = () => {
             )}
           </Col>
 
-              <Col>
+              {/* <Col>
                 <ProfileButton/>
               </Col>
             </Row>
-          </Col>
+          </Col> */}
         </Row>
       </header>
     </>

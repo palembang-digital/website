@@ -1,22 +1,25 @@
+import { navigate } from "@reach/router";
 import { Button, Form, Input } from "antd";
 import { useContext, useState } from "react";
-import { createUserEmailAndPassword, linkDefaultLogin } from "../../utils/FirebaseService";
+import { linkDefaultLogin } from "../../utils/FirebaseService";
 import Firebase from "./FirebaseContext";
 import TranslateErrorCodes from "./TranslateErrorCodes";
 
-const SignUpForm = (props) => {
+const LinkEmail = () => {
   const { authUser } = useContext(Firebase);
 
-  const [signUp, setSignUp] = useState({});
+  const [link, setLink] = useState({});
 
   const [form] = Form.useForm();
 
-  const signUpValid = (signUp) => signUp.email
-    && signUp.password
-    && signUp.confirm
-    && (signUp.password === signUp.confirm);
+  const linkValid = (link) => link.email
+    && link.password
+    && link.confirm
+    && (link.password === link.confirm);
 
-  const signUpError = error => {
+  const afterLink = () => navigate('/');
+
+  const linkError = error => {
     console.log({ ...error })
 
     const translate = TranslateErrorCodes(error.code, error.message);
@@ -28,39 +31,35 @@ const SignUpForm = (props) => {
       ])
   };
 
-  const signUpUser = (signUp) => {
+  const linkUser = (link) => {
     if (authUser)
-      linkDefaultLogin(authUser, signUp.email, signUp.password)
-        .then(props.afterSigning)
-        .catch(signUpError)
-    else
-      createUserEmailAndPassword(signUp.email, signUp.password)
-        .then(props.afterSigning)
-        .catch(signUpError)
+      linkDefaultLogin(authUser, link.email, link.password)
+        .then(afterLink)
+        .catch(linkError)
   }
 
   return (
-    <Form form={form} name="signUp" wrapperCol={{ span: 8 }}>
+    <Form form={form} name="link" wrapperCol={{ span: 8 }}>
       <Form.Item
         label="Email"
         name="email"
         rules={[{ required: true, message: "Please input your email!" }]}
-        initialValue={signUp.email}
+        initialValue={link.email}
       >
         <Input
-          value={signUp.email}
-          onChange={(e) => setSignUp({ ...signUp, email: e.target.value })}
+          value={link.email}
+          onChange={(e) => setLink({ ...link, email: e.target.value })}
         />
       </Form.Item>
       <Form.Item
         label="Password"
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
-        initialValue={signUp.password}
+        initialValue={link.password}
       >
         <Input.Password
-          value={signUp.password}
-          onChange={(e) => setSignUp({ ...signUp, password: e.target.value })}
+          value={link.password}
+          onChange={(e) => setLink({ ...link, password: e.target.value })}
         />
       </Form.Item>
       <Form.Item
@@ -79,18 +78,18 @@ const SignUpForm = (props) => {
             }
           })
         ]}
-        initialValue={signUp.confirm}
+        initialValue={link.confirm}
       >
         <Input.Password
-          value={signUp.confirm}
-          onChange={(e) => setSignUp({ ...signUp, confirm: e.target.value })}
+          value={link.confirm}
+          onChange={(e) => setLink({ ...link, confirm: e.target.value })}
         />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 4 }}>
         <Button
           type="primary"
           htmlType="submit"
-          onClick={() => signUpValid(signUp) && signUpUser(signUp)}
+          onClick={() => linkValid(link) && linkUser(link)}
         >
           Sign Up
         </Button>
@@ -98,4 +97,4 @@ const SignUpForm = (props) => {
     </Form>)
 }
 
-export default SignUpForm;
+export default LinkEmail;

@@ -31,6 +31,7 @@ const TranslateErrorCodes = (code, message) => {
     case AuthErrorCodes.EXPIRED_POPUP_REQUEST:
     case AuthErrorCodes.POPUP_CLOSED_BY_USER:
       return 'Social login error'
+    case AuthErrorCodes.INTERNAL_ERROR:
     default:
       return 'Input Salah'
   }

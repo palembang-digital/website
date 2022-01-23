@@ -3,7 +3,6 @@ import { useRequest } from "ahooks";
 import { Modal } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { emailProvider, onAuthListener } from "../../utils/FirebaseService";
-import SignModal from "./SignModal";
 
 const Firebase = React.createContext({
   authUser: null,
@@ -12,8 +11,6 @@ const Firebase = React.createContext({
   accessToken: '',
   isUserInfoLoading: false,
   setUserInfo: () => null,
-  isSignModalVisible: false,
-  setIsSignModalVisible: () => null,
 });
 
 export default Firebase;
@@ -23,7 +20,6 @@ export const withFirebase = Component => props => {
   const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
   const [accessToken, setAccessToken] = useState('');
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [isSignModalVisible, setIsSignModalVisible] = useState(false);
 
   const [isUserInfoLoading, setIsUserInfoLoading] = useState(false);
 
@@ -90,11 +86,8 @@ export const withFirebase = Component => props => {
     accessToken,
     isUserInfoLoading,
     setUserInfo,
-    isSignModalVisible,
-    setIsSignModalVisible,
   }}>
     <Component {...props} />
-    {isSignModalVisible && <SignModal />}
   </Firebase.Provider>);
 }
 

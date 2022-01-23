@@ -1,18 +1,22 @@
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import { signInEmailAndPassword } from "../../utils/FirebaseService";
-import TranslateErrorCodes from "./TranslateErrorCodes";
+import TranslateErrorCodes from "../../providers/firebase/TranslateErrorCodes";
+import { navigate } from "@reach/router";
+import SocialAuth from "./SocialAuth";
 
-const SignInForm = (props) => {
+const SignIn = () => {
   const [signIn, setSignIn] = useState({});
 
   const [form] = Form.useForm();
 
   const signInValid = (signIn) => signIn.email && signIn.password;
 
+  const afterSignIn = () => navigate('/');
+
   const signInUser = (signIn) => {
     signInEmailAndPassword(signIn.email, signIn.password)
-      .then(props.afterSigning)
+      .then(afterSignIn)
       .catch(error => {
         console.log({ ...error })
 
@@ -28,6 +32,7 @@ const SignInForm = (props) => {
 
   return (
     <Form form={form} name="signIn" wrapperCol={{ span: 8 }}>
+      <SocialAuth/>
       <Form.Item
         label="Email"
         name="email"
@@ -56,8 +61,13 @@ const SignInForm = (props) => {
         >
           Sign In
         </Button>
+        <Button
+          type="text"
+          onClick={() => navigate('/register')}>
+          Tidak ada akun?
+        </Button>
       </Form.Item>
     </Form>)
 }
 
-export default SignInForm;
+export default SignIn;
