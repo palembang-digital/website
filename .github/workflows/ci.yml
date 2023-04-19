@@ -4,37 +4,19 @@ jobs:
   test-server:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-go@v2
-      with:
-        go-version: '1.16'
-    - name: Test server
-      run: make test-server
-    - name: Publish server's test coverage
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./cover.out
-        flags: server
-        name: server-coverage
-
-  build-push-docker-image:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set tag
-      id: tags
-      run: echo ::set-output name=tag::${GITHUB_SHA}
-    - name: Login to hub.docker.com
-      uses: azure/docker-login@v1
-      with:
-        login-server: https://index.docker.io/v1/
-        username: palembangdigital
-        password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-    - name: Build docker image
-      run: docker build -t palembangdigital/website:${{ steps.tags.outputs.tag }} .
-    - name: Push docker image
-      run: docker push palembangdigital/website:${{ steps.tags.outputs.tag }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.16"
+      - name: Test server
+        run: make test-server
+      - name: Publish server's test coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./cover.out
+          flags: server
+          name: server-coverage
 
   lighthouse:
     runs-on: ubuntu-latest
@@ -44,10 +26,10 @@ jobs:
         uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
-            https://palembang-digital.herokuapp.com/
-            https://palembang-digital.herokuapp.com/patal-team
-            https://palembang-digital.herokuapp.com/admin/events
-            https://palembang-digital.herokuapp.com/admin/events/create
+            https://palembang-digital.fly.dev/
+            https://palembang-digital.fly.dev/patal-team
+            https://palembang-digital.fly.dev/admin/events
+            https://palembang-digital.fly.dev/admin/events/create
           budgetPath: ./lighthouse-budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
