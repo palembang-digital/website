@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
 import { useRequest } from "ahooks";
 import { Col, Row, Skeleton, Typography } from "antd";
+import React, { useContext } from "react";
 
+import SiteContext from "../../providers/site/SiteContext";
 import AboutPatal from "../about/AboutPatal";
+import UpcomingEvents from "../events/UpcomingEvents";
 import Banner from "./Banner";
 import Medias from "./Medias";
-import SiteContext from "../../providers/site/SiteContext";
 import Sponsors from "./Sponsors";
 import Statistics from "./Statistics";
-import UpcomingEvents from "../events/UpcomingEvents";
 
 const { Title } = Typography;
 
@@ -23,7 +23,11 @@ const Landing = () => {
     <>
       <Banner />
 
-      <Statistics events={events} startups={startups} organizations={organizations} />
+      <Statistics
+        events={events}
+        startups={startups}
+        organizations={organizations}
+      />
 
       <Row
         align="middle"
@@ -33,7 +37,8 @@ const Landing = () => {
           paddingBottom: 80,
           paddingTop: 120,
           zIndex: 1,
-        }}>
+        }}
+      >
         <Col className="container">
           <Row align="bottom" justify="space-between">
             <Col>
@@ -56,15 +61,16 @@ const Landing = () => {
         className="container"
         align="middle"
         justify="center"
-        style={{ marginBottom: 70, marginTop: 80 }}>
+        style={{ marginBottom: 70, marginTop: 80 }}
+      >
         <Col span={isMobile ? 24 : 12}>
           <AboutPatal />
         </Col>
       </Row>
 
-      <Medias />
-
       <Sponsors />
+
+      <Medias />
     </>
   );
 };

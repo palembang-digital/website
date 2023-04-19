@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
 import { Col, Row, Typography } from "antd";
+import React, { useContext } from "react";
 
 import SiteContext from "../../providers/site/SiteContext";
 
@@ -24,8 +24,7 @@ const Medias = () => {
   ];
 
   return (
-    <div
-      style={{ backgroundColor: "white", paddingBottom: 80, paddingTop: 80 }}>
+    <div style={{ paddingBottom: 80, paddingTop: 80 }}>
       <div className="container center">
         <Title level={3} style={{ marginBottom: 40 }}>
           Liputan Media
