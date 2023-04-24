@@ -45,4 +45,5 @@ type Startup struct {
 	OneLiner    string    `db:"one_liner" json:"one_liner"`
 	Description string    `db:"description" json:"description"`
 	Website     string    `db:"website" json:"website"`
+	Category    string    `db:"category" json:"category"`
 }

@@ -15,8 +15,9 @@ INSERT INTO startups (
     , one_liner
     , description
     , website
+    , category
 )
-VALUES ($1, $2, $3, $4, $5, $6)
+VALUES ($1, $2, $3, $4, $5, $6, $7)
 RETURNING id
 `
 
@@ -27,6 +28,7 @@ type CreateStartupParams struct {
 	OneLiner    string `db:"one_liner" json:"one_liner"`
 	Description string `db:"description" json:"description"`
 	Website     string `db:"website" json:"website"`
+	Category    string `db:"category" json:"category"`
 }
 
 func (q *Queries) CreateStartup(ctx context.Context, arg CreateStartupParams) (int64, error) {
@@ -37,6 +39,7 @@ func (q *Queries) CreateStartup(ctx context.Context, arg CreateStartupParams) (i
 		arg.OneLiner,
 		arg.Description,
 		arg.Website,
+		arg.Category,
 	)
 	var id int64
 	err := row.Scan(&id)
@@ -63,6 +66,7 @@ SELECT
     , one_liner
     , description
     , website
+    , category
 FROM startups
 WHERE id = $1
 `
@@ -80,6 +84,7 @@ func (q *Queries) GetStartupByID(ctx context.Context, id int64) (Startup, error)
 		&i.OneLiner,
 		&i.Description,
 		&i.Website,
+		&i.Category,
 	)
 	return i, err
 }
@@ -95,6 +100,7 @@ SELECT
     , one_liner
     , description
     , website
+    , category
 FROM startups
 WHERE slug = $1
 `
@@ -112,6 +118,7 @@ func (q *Queries) GetStartupBySlug(ctx context.Context, slug string) (Startup, e
 		&i.OneLiner,
 		&i.Description,
 		&i.Website,
+		&i.Category,
 	)
 	return i, err
 }
@@ -127,6 +134,7 @@ SELECT
     , one_liner
     , description
     , website
+    , category
 FROM startups
 `
 
@@ -149,6 +157,7 @@ func (q *Queries) ListStartups(ctx context.Context) ([]Startup, error) {
 			&i.OneLiner,
 			&i.Description,
 			&i.Website,
+			&i.Category,
 		); err != nil {
 			return nil, err
 		}

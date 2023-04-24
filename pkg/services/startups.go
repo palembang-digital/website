@@ -9,7 +9,7 @@ import (
 
 // StartupsService service interface.
 type StartupsService interface {
-	ListStartups(ctx context.Context) ([]db.Startup, error)
+	ListStartups(ctx context.Context, category string) ([]db.Startup, error)
 	GetStartupByID(ctx context.Context, id int64) (db.Startup, error)
 	GetStartupBySlug(ctx context.Context, slug string) (db.Startup, error)
 	CreateStartup(ctx context.Context, startup db.Startup) (db.Startup, error)
@@ -25,13 +25,22 @@ func NewStartupsService(db db.Querier) StartupsService {
 	return &startupsService{db: db}
 }
 
-func (s *startupsService) ListStartups(ctx context.Context) ([]db.Startup, error) {
+func (s *startupsService) ListStartups(ctx context.Context, category string) ([]db.Startup, error) {
 	startups, err := s.db.ListStartups(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("get the list of startups: %s", err)
 	}
 
-	return startups, nil
+	if category == "" {
+		return startups, nil
+	}
+	startupsFiltered := []db.Startup{}
+	for _, startup := range startups {
+		if startup.Category == category {
+			startupsFiltered = append(startupsFiltered, startup)
+		}
+	}
+	return startupsFiltered, nil
 }
 
 func (s *startupsService) GetStartupByID(ctx context.Context, id int64) (db.Startup, error) {
@@ -60,6 +69,7 @@ func (s *startupsService) CreateStartup(ctx context.Context, startup db.Startup)
 		OneLiner:    startup.OneLiner,
 		Description: startup.Description,
 		Website:     startup.Website,
+		Category:    startup.Category,
 	})
 	if err != nil {
 		return db.Startup{}, fmt.Errorf("insert new startup: %s", err)

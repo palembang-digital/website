@@ -9,6 +9,7 @@ SELECT
     , one_liner
     , description
     , website
+    , category
 FROM startups;
 
 -- name: GetStartupByID :one
@@ -22,6 +23,7 @@ SELECT
     , one_liner
     , description
     , website
+    , category
 FROM startups
 WHERE id = $1;
 
@@ -36,6 +38,7 @@ SELECT
     , one_liner
     , description
     , website
+    , category
 FROM startups
 WHERE slug = $1;
 
@@ -47,8 +50,9 @@ INSERT INTO startups (
     , one_liner
     , description
     , website
+    , category
 )
-VALUES ($1, $2, $3, $4, $5, $6)
+VALUES ($1, $2, $3, $4, $5, $6, $7)
 RETURNING id;
 
 -- name: DeleteStartup :exec
