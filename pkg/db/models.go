@@ -46,3 +46,21 @@ type Startup struct {
 	Description string    `db:"description" json:"description"`
 	Website     string    `db:"website" json:"website"`
 }
+
+type User struct {
+	Uid               string    `db:"uid" json:"uid"`
+	Email             string    `db:"email" json:"email"`
+	Name              string    `db:"name" json:"name"`
+	Residence         string    `db:"residence" json:"residence"`
+	JobProfession     string    `db:"job_profession" json:"job_profession"`
+	SchoolName        string    `db:"school_name" json:"school_name"`
+	SchoolMajor       string    `db:"school_major" json:"school_major"`
+	SchoolSemester    int32     `db:"school_semester" json:"school_semester"`
+	FindJobProfession string    `db:"find_job_profession" json:"find_job_profession"`
+	WhatsappNumber    string    `db:"whatsapp_number" json:"whatsapp_number"`
+	TelegramNumber    string    `db:"telegram_number" json:"telegram_number"`
+	Motivation        string    `db:"motivation" json:"motivation"`
+	InformationSource []string  `db:"information_source" json:"information_source"`
+	CreatedAt         time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt         time.Time `db:"updated_at" json:"updated_at"`
+}

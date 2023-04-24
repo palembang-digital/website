@@ -14,4 +14,5 @@ FROM alpine:3.12
 COPY --from=node-builder /src/ui/build ./ui/build
 COPY --from=go-builder /src/bin/patal .
 COPY sql sql
+COPY sqlc.yaml firebase_secret_admin_key.* .
 CMD ["./patal"]

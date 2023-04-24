@@ -257,3 +257,4 @@ $RECYCLE.BIN/
 
 bin
 pkged.go
+firebase_secret_admin_key.json

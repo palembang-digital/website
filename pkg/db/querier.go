@@ -11,15 +11,18 @@ type Querier interface {
 	CreateEvent(ctx context.Context, arg CreateEventParams) (int64, error)
 	CreateOrganization(ctx context.Context, arg CreateOrganizationParams) (int64, error)
 	CreateStartup(ctx context.Context, arg CreateStartupParams) (int64, error)
+	CreateUser(ctx context.Context, arg CreateUserParams) (string, error)
 	DeleteBanner(ctx context.Context, id int64) error
 	DeleteEvent(ctx context.Context, id int64) error
 	DeleteOrganization(ctx context.Context, id int64) error
 	DeleteStartup(ctx context.Context, id int64) error
+	DeleteUser(ctx context.Context, uid string) error
 	GetBanner(ctx context.Context, id int64) (Banner, error)
 	GetEvent(ctx context.Context, id int64) (Event, error)
 	GetOrganization(ctx context.Context, id int64) (Organization, error)
 	GetStartupByID(ctx context.Context, id int64) (Startup, error)
 	GetStartupBySlug(ctx context.Context, slug string) (Startup, error)
+	GetUser(ctx context.Context, uid string) (User, error)
 	ListBanners(ctx context.Context) ([]Banner, error)
 	ListEvents(ctx context.Context) ([]Event, error)
 	ListOrganizations(ctx context.Context) ([]Organization, error)

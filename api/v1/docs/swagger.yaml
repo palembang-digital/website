@@ -70,6 +70,41 @@ definitions:
       website:
         type: string
     type: object
+  db.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      find_job_profession:
+        type: string
+      information_source:
+        items:
+          type: string
+        type: array
+      job_profession:
+        type: string
+      motivation:
+        type: string
+      name:
+        type: string
+      residence:
+        type: string
+      school_major:
+        type: string
+      school_name:
+        type: string
+      school_semester:
+        type: integer
+      telegram_number:
+        type: string
+      uid:
+        type: string
+      updated_at:
+        type: string
+      whatsapp_number:
+        type: string
+    type: object
 info:
   contact:
     email: support@palembangdigital.org
@@ -408,4 +443,64 @@ paths:
       summary: Get an startup by slug
       tags:
       - startups
+  /users:
+    post:
+      description: Create a new user
+      operationId: create-user
+      parameters:
+      - description: Create user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/db.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/db.User'
+      summary: Create a new user
+      tags:
+      - users
+  /users/{uid}:
+    delete:
+      description: Delete an user by id
+      operationId: delete-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+      summary: Delete an user
+      tags:
+      - users
+    get:
+      description: Get an user by id
+      operationId: get-user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/db.User'
+      summary: Get an user
+      tags:
+      - users
 swagger: "2.0"

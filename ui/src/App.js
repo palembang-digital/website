@@ -14,7 +14,11 @@ import {
   Organizations,
   Startups,
   StartupDetails,
+  Registration,
+  SignIn,
+  SignUp
 } from "./pages";
+import { withFirebase } from "./providers/firebase/FirebaseContext";
 
 const Admin = loadable(() => import("./pages").then((c) => c.Admin));
 
@@ -56,6 +60,10 @@ const App = () => {
 
           <PublicRoute path="/about" render={PublicLayout(About)} />
 
+          <PublicRoute path="/registration" render={PublicLayout(Registration)} />
+          <PublicRoute path="/login" render={PublicLayout(SignIn)} />
+          <PublicRoute path="/register" render={PublicLayout(SignUp)} />
+
           <Admin path="/admin/*" />
         </Router>
       </LocationProvider>
@@ -63,4 +71,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withFirebase(App);
