@@ -1,0 +1,60 @@
+-- Create a library database
+CREATE DATABASE Library;
+
+-- Use the library database
+USE Library;
+
+-- Create a table for authors
+CREATE TABLE Authors (
+    AuthorID INT PRIMARY KEY,
+    AuthorName VARCHAR(100)
+);
+
+-- Create a table for books
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY,
+    Title VARCHAR(255),
+    AuthorID INT,
+    PublicationYear INT,
+    ISBN VARCHAR(13),
+    FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
+);
+
+-- Create a table for customers
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100)
+);
+
+-- Insert data into the Authors table
+INSERT INTO Authors (AuthorID, AuthorName)
+VALUES
+    (1, 'Jane Austen'),
+    (2, 'George Orwell'),
+    (3, 'J.K. Rowling');
+
+-- Insert data into the Books table
+INSERT INTO Books (BookID, Title, AuthorID, PublicationYear, ISBN)
+VALUES
+    (1, 'Pride and Prejudice', 1, 1813, '9780141439518'),
+    (2, '1984', 2, 1949, '9780451524935'),
+    (3, 'Harry Potter and the Sorcerer''s Stone', 3, 1997, '9780439708180');
+
+-- Insert data into the Customers table
+INSERT INTO Customers (CustomerID, FirstName, LastName, Email)
+VALUES
+    (1, 'John', 'Doe', 'johndoe@email.com'),
+    (2, 'Alice', 'Smith', 'alicesmith@email.com');
+
+-- Query to find books by a specific author
+SELECT Title, PublicationYear
+FROM Books
+WHERE AuthorID = 1;
+
+-- Query to find customers who have borrowed a book
+SELECT c.FirstName, c.LastName, b.Title
+FROM Customers c
+JOIN BorrowedBooks bb ON c.CustomerID = bb.CustomerID
+JOIN Books b ON bb.BookID = b.BookID;
